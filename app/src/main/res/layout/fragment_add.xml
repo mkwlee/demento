@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.add.AddFragment"
     android:background="@color/teal_700"
+    android:id="@+id/add_container"
     >
 
     <TextView
@@ -13,8 +14,7 @@
         android:text="Add"
         android:textColor="@color/white"
         android:layout_gravity="center"
-        android:textSize="20dp"
-
+        android:textSize="25dp"
         />
 
 </FrameLayout>

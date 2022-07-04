@@ -9,16 +9,25 @@
 package com.company.dementiacare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.company.dementiacare.databinding.ActivityMainBinding;
+import com.company.dementiacare.ui.add.AddFragment;
 import com.company.dementiacare.ui.home.HomeFragment;
 import com.company.dementiacare.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         // Disable the add button from menu
         bottomNavigationView.getMenu().getItem(1).setEnabled(false);
+
+        // Add button
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                AddFragment addFragment = new AddFragment();
+                addFragment.show(fragmentTransaction, "txn_tag");
+            }
+        });
     }
 
     // Display Screens (Fragments)
