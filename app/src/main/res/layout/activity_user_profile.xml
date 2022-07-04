@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="172dp"
-            android:background="#66BFBF"
+            android:background="#371b58"
             android:padding="20dp">
 
             <ImageView
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="#66BFBF"/>
+                android:backgroundTint="#371b58"/>
 
         </LinearLayout>
     </LinearLayout>

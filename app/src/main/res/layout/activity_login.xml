@@ -31,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In to continue"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:transitionName="logo_desc"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +44,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="username_tran"
             android:id="@+id/username"
             android:hint="Username"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -64,7 +66,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:transitionName="password_tran"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,15 +82,18 @@
             android:layout_margin="5dp"/>
 
         <Button
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="GO"
             android:backgroundTint="#000"
             android:textColor="#fff"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:transitionName="button_tran"/>
 
         <Button
+            android:id="@+id/signup_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -95,7 +101,8 @@
             android:textColor="#000"
             android:layout_gravity="right"
             android:elevation="0dp"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:transitionName="login_signup_tran"/>
 
     </LinearLayout>
 
