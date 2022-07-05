@@ -66,7 +66,7 @@ public class SignUp extends AppCompatActivity {
         }
         else{
             regUsername.setError(null);
-            regName.setErrorEnabled(false);
+            regUsername.setErrorEnabled(false);
             return true;
         }
     }
@@ -84,6 +84,7 @@ public class SignUp extends AppCompatActivity {
         }
         else{
             regEmail.setError(null);
+            regEmail.setErrorEnabled(false);
             return true;
         }
     }
@@ -96,6 +97,7 @@ public class SignUp extends AppCompatActivity {
             return false;
         }else{
             regPhone.setError(null);
+            regPhone.setErrorEnabled(false);
             return true;
         }
     }
@@ -112,6 +114,7 @@ public class SignUp extends AppCompatActivity {
         }
         else{
             regPassword.setError(null);
+            regPassword.setErrorEnabled(false);
             return true;
         }
     }
