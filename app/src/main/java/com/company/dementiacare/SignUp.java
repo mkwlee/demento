@@ -35,29 +35,107 @@ public class SignUp extends AppCompatActivity {
         regBtn = findViewById(R.id.reg_btn);
         regToLoginBtn = findViewById(R.id.reg_login_btn);
 
-        //Save data
-         regBtn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("users");
-
-                //Get all the value
-                String name = regName.getEditText().getText().toString();
-                String username = regUsername.getEditText().getText().toString();
-                String email = regEmail.getEditText().getText().toString();
-                String phone = regPhone.getEditText().getText().toString();
-                String password = regPassword.getEditText().getText().toString();
-
-                UserHelper helper = new UserHelper(name ,username, email, phone, password);
-
-                reference.child(phone).setValue(helper);
-
-            }
-        });
     }
 
-    //Save
+    private Boolean validateName(){
+        String val = regName.getEditText().getText().toString();
+
+        if (val.isEmpty()){
+            regName.setError("Field cannot be empty");
+            return false;
+        }else{
+            regName.setError(null);
+            regName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateUsername(){
+        String val = regUsername.getEditText().getText().toString();
+        String noWhiteSpace = "\\A\\w{4,20}\\z";
+
+        if (val.isEmpty()){
+            regUsername.setError("Field cannot be empty");
+            return false;
+        }else if(val.length() >= 15){
+            regUsername.setError("Username too long");
+            return false;
+        }else if(!val.matches(noWhiteSpace)){
+            regUsername.setError("White Spaces are not allowed");
+            return false;
+        }
+        else{
+            regUsername.setError(null);
+            regName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateEmail(){
+        String val = regEmail.getEditText().getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        if (val.isEmpty()){
+            regEmail.setError("Field cannot be empty");
+            return false;
+        }else if(!val.matches(emailPattern)){
+            regEmail.setError("Invalid email address");
+            return false;
+        }
+        else{
+            regEmail.setError(null);
+            return true;
+        }
+    }
+
+    private Boolean validatePhone(){
+        String val = regPhone.getEditText().getText().toString();
+
+        if (val.isEmpty()){
+            regPhone.setError("Field cannot be empty");
+            return false;
+        }else{
+            regPhone.setError(null);
+            return true;
+        }
+    }
+
+    private Boolean validatePassword(){
+        String val = regPassword.getEditText().getText().toString();
+
+        if (val.isEmpty()){
+            regPassword.setError("Field cannot be empty");
+            return false;
+        }else if(val.length() <= 6){
+            regPassword.setError("Password is too weak");
+            return false;
+        }
+        else{
+            regPassword.setError(null);
+            return true;
+        }
+    }
+
+    //Save data in firebase on button click
+    public void registerUser(View view){
+
+        if (!validateName() | !validateUsername() | !validatePhone()
+                | !validatePassword() | !validateEmail()){
+            return;
+        }
+
+        //Get all the value
+        String name = regName.getEditText().getText().toString();
+        String username = regUsername.getEditText().getText().toString();
+        String email = regEmail.getEditText().getText().toString();
+        String phone = regPhone.getEditText().getText().toString();
+        String password = regPassword.getEditText().getText().toString();
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+
+        UserHelper helper = new UserHelper(name ,username, email, phone, password);
+        reference.child(username).setValue(helper);
+
+    }
 }
