@@ -4,17 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.add.AddFragment"
-    android:background="@color/teal_700"
+    android:background="@drawable/add_background"
     android:id="@+id/add_container"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textSize="25dp"
-        />
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:paddingVertical="20dp"
+        >
+        <ImageButton
+            android:id="@+id/add_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_close_24"
+            android:background="@android:color/transparent"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add Medicine"
+            android:textSize="20dp"
+            android:textStyle="normal"
+            android:textAlignment="center"
+            android:layout_marginEnd="35dp"
+            android:textColor="@color/black"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+
 
 </FrameLayout>
