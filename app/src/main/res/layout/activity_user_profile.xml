@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="172dp"
-            android:background="#66bfbf"
+            android:background="@drawable/gradient_drawable"
             android:padding="20dp">
 
             <ImageView

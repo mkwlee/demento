@@ -2,9 +2,14 @@ package com.company.dementiacare;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +30,8 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Hooks
         regName = findViewById(R.id.reg_name);
@@ -35,6 +42,15 @@ public class SignUp extends AppCompatActivity {
         regBtn = findViewById(R.id.reg_btn);
         regToLoginBtn = findViewById(R.id.reg_login_btn);
 
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("users");
+
+        regToLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private Boolean validateName(){
@@ -134,11 +150,17 @@ public class SignUp extends AppCompatActivity {
         String phone = regPhone.getEditText().getText().toString();
         String password = regPassword.getEditText().getText().toString();
 
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
 
+        //Storing Data in firebase
         UserHelper helper = new UserHelper(name ,username, email, phone, password);
         reference.child(username).setValue(helper);
 
+
+        Toast.makeText(this, "Your Account has been created successfully!",
+                Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
+        finish();
     }
 }
