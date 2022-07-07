@@ -1,3 +1,16 @@
+/*
+ * 
+ *      Login Activity
+ *  
+ *  Description:
+ *  This activity is used to login the user.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+ * 
+*/
+
 package com.company.dementiacare;
 
 import android.app.ActivityOptions;
@@ -78,6 +91,7 @@ public class Login extends AppCompatActivity {
     }
 
 
+    //This method is to validate the user login username
     private Boolean validateUsername(){
         String val = username.getEditText().getText().toString();
         if (val.isEmpty()){
@@ -90,6 +104,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    //This method is to validate the user login password
     private Boolean validatePassword(){
         String val = password.getEditText().getText().toString();
 
@@ -103,6 +118,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    //This method is to login the user
     public void loginUser(View view){
         //Validate Login Info
         if (!validateUsername() | !validatePassword()){
@@ -112,6 +128,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    //This method is to check if the user is registered or not
     private void isUser(){
 
         final String userEnteredUsername = username.getEditText().getText().toString().trim();

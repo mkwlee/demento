@@ -1,3 +1,11 @@
+/*
+ * 
+ *      One time password (OTP) is a digital code that is sent to a user to verify that the user is the owner of the account.
+ * 
+ * Updated:
+ * July 07, 2022
+*/
+
 package com.company.dementiacare;
 
 import androidx.appcompat.app.ActionBar;
@@ -24,6 +32,7 @@ public class VerifyOTP extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //Hooks
         pinFromUser = findViewById(R.id.forget_password_email);
         verifyCodeBtn = findViewById(R.id.forget_password_next_btn);
 

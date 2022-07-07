@@ -1,3 +1,15 @@
+/*
+ * 
+ *      User Profile Class
+ *  
+ *  Description: This class is used to display the user's profile.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+ * 
+*/
+
 package com.company.dementiacare;
 
 import androidx.appcompat.app.ActionBar;
@@ -74,6 +86,7 @@ public class UserProfile extends AppCompatActivity {
         showAllUserData();
     }
 
+    // show all data from firebase
     private void showAllUserData(){
 
         Intent intent = getIntent();

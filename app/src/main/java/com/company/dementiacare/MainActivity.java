@@ -1,3 +1,16 @@
+/*
+ * 
+ *      Main Activity
+ * 
+ *  Description:
+ *  This activity is used to display the main screen of the app.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+ * 
+*/
+
 package com.company.dementiacare;
 
 import androidx.appcompat.app.ActionBar;
@@ -49,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         new Handler().postDelayed(new Runnable(){
             @Override
+
+            // animations
             public void run(){
                 Intent intent = new Intent(MainActivity.this,Login.class);
 

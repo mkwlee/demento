@@ -1,3 +1,16 @@
+/*
+ * 
+ *  Forgot Password Activity
+ * 
+ *  Description:
+ *  This activity is used to reset the password of the user.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+ * 
+*/
+
 package com.company.dementiacare;
 
 import androidx.annotation.NonNull;
@@ -47,6 +60,7 @@ public class ForgetPassword extends AppCompatActivity {
 
     }
 
+    // This method is used to check if the email is valid or not.
     private Boolean validateEmail(){
         String val = emailTextField.getEditText().getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -65,8 +79,8 @@ public class ForgetPassword extends AppCompatActivity {
         }
     }
 
+    //This method will be called when the use should verify their email address
     public void verifyEmail(View view){
-
 
         if (!validateEmail()){
             return;
@@ -76,7 +90,6 @@ public class ForgetPassword extends AppCompatActivity {
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("email")
                 .equalTo(email);
-
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

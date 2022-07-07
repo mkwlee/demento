@@ -1,3 +1,15 @@
+/*
+ * 
+ *   SuccessForgetPasswordMessage
+ * 
+ *  Description:
+ *  This activity is used to display the success message after the user has successfully reset the password.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+*/
+
 package com.company.dementiacare;
 
 import androidx.appcompat.app.AppCompatActivity;

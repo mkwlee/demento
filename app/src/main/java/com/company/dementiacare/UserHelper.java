@@ -1,3 +1,14 @@
+/*
+ *      User Helper Class
+ * 
+ *   Description: This class is used to help the user to login and register.
+ * 
+ *  Updated:
+ *  July 07, 2022
+ * 
+ * 
+*/
+
 package com.company.dementiacare;
 
 public class UserHelper {
@@ -6,6 +17,7 @@ public class UserHelper {
     public UserHelper(){
     }
 
+    // get the user's details
     public UserHelper(String name, String username, String email, String phone, String password) {
         this.username = username;
         this.name = name;

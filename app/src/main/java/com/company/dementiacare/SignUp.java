@@ -1,3 +1,12 @@
+/*
+ * 
+ *      This is the sign up activity. It allows the user to create an account.
+ * 
+ *  Updated:
+ * July 07, 2022
+ * 
+*/
+
 package com.company.dementiacare;
 
 import androidx.appcompat.app.ActionBar;
@@ -53,6 +62,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    // validate the user input
     private Boolean validateName(){
         String val = regName.getEditText().getText().toString();
 
