@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
-    Button callSignUp, login_btn;
+    Button callSignUp, login_btn, forget_btn;
     ImageView image;
     TextView logoText, sloganText;
     TextInputLayout username, password;
@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login_btn = findViewById(R.id.login_button);
+        forget_btn = findViewById(R.id.forget_password_btn);
 
         callSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,5 +167,9 @@ public class Login extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void callForgetPassword(View view){
+        startActivity(new Intent(getApplicationContext(), ForgetPassword.class));
     }
 }
