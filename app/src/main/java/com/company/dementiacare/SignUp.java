@@ -1,5 +1,6 @@
 package com.company.dementiacare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +12,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,6 +28,7 @@ public class SignUp extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,30 +150,51 @@ public class SignUp extends AppCompatActivity {
         }
 
         //Get all the value
-        String name = regName.getEditText().getText().toString();
-        String username = regUsername.getEditText().getText().toString();
-        String email = regEmail.getEditText().getText().toString();
-        String phone = regPhone.getEditText().getText().toString();
-        String password = regPassword.getEditText().getText().toString();
-
+        String name = regName.getEditText().getText().toString().trim();
+        String username = regUsername.getEditText().getText().toString().trim();
+        String email = regEmail.getEditText().getText().toString().trim();
+        String phone = regPhone.getEditText().getText().toString().trim();
+        String password = regPassword.getEditText().getText().toString().trim();
 
         //Storing Data in firebase
         UserHelper helper = new UserHelper(name ,username, email, phone, password);
         reference.child(username).setValue(helper);
 
+        //Create User by EMAIL and PASSWORD
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    firebaseAuth.getCurrentUser().sendEmailVerification()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
 
-        Toast.makeText(this, "Your Account has been created successfully!",
-                Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(getApplicationContext(), UserProfile.class);
+                                Intent intent = new Intent(getApplicationContext(), VerifyEmail.class);
 
-        intent.putExtra("name", name);
-        intent.putExtra("username", username);
-        intent.putExtra("phone", phone);
-        intent.putExtra("email", email);
-        intent.putExtra("password", password);
+                                intent.putExtra("name", name);
+                                intent.putExtra("username", username);
+                                intent.putExtra("phone", phone);
+                                intent.putExtra("email", email);
+                                intent.putExtra("password", password);
 
-        startActivity(intent);
-        finish();
+                                startActivity(intent);
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

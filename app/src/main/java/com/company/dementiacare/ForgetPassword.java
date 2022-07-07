@@ -86,7 +86,7 @@ public class ForgetPassword extends AppCompatActivity {
                     emailTextField.setError(null);
                     emailTextField.setErrorEnabled(false);
 
-                    Intent intent = new Intent(getApplicationContext(), VerifyOTP.class);
+                    Intent intent = new Intent(getApplicationContext(), VerifyEmail.class);
                     intent.putExtra("email", email);
                     intent.putExtra("whatToDo", "updateData");
                     startActivity(intent);

@@ -95,6 +95,7 @@
             android:fontFamily="@font/bungee"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:onClick="loginUser"
             android:transitionName="button_tran"/>
 
         <Button

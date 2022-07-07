@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,10 @@ public class Login extends AppCompatActivity {
     ImageView image;
     TextView logoText, sloganText;
     TextInputLayout username, password;
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +74,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser(v);
-            }
-        });
+
     }
 
 
@@ -116,6 +116,8 @@ public class Login extends AppCompatActivity {
 
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
         final String userEnteredPassword = password.getEditText().getText().toString().trim();
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
