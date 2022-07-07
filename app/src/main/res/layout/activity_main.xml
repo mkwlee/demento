@@ -8,13 +8,12 @@
     android:background="@drawable/gradient_drawable">
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="384dp"
-        android:layout_height="385dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
         android:transitionName="logo_image"
-        android:src="@drawable/user_profile_image"
+        android:src="@drawable/logo_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/bungee"
-        android:text="Dementia Care"
+        android:text="Demento"
         android:transitionName="logo_text"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -43,7 +42,7 @@
         android:text="Thinking Inside The Box"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

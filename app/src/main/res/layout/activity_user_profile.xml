@@ -62,13 +62,16 @@
                 android:id="@+id/name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Full Name">
+                android:hint="Full Name"
+                android:enabled="false"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/username_small_icon"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="10dp"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,13 +79,17 @@
                 android:id="@+id/phone_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone">
+                android:hint="Phone"
+                android:enabled="false"
+                android:layout_marginTop="10dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/phone_small_icon"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="10dp"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +97,10 @@
                 android:id="@+id/email_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email">
+                android:hint="Email"
+                android:enabled="false"
+                android:layout_marginTop="10dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -103,7 +113,10 @@
                 android:id="@+id/password_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password">
+                android:hint="Password"
+                android:enabled="false"
+                android:layout_marginTop="10dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -114,11 +127,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/edit_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:text="edit"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="#66bfbf"/>
+                android:layout_marginTop="15dp"
+                />
 
         </LinearLayout>
     </LinearLayout>
