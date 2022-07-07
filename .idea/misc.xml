@@ -4,14 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/dementia-care/app/src/main/res/drawable/add_background.xml" value="0.2585" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/avatar_layer.xml" value="0.2" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/avatar_shape.xml" value="0.248" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/circular_avatar.xml" value="0.248" />
         <entry key="..\:/dementia-care/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2475" />
         <entry key="..\:/dementia-care/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2475" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/ic_baseline_person_25.xml" value="0.248" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/ic_baseline_person_50.xml" value="0.248" />
+        <entry key="..\:/dementia-care/app/src/main/res/drawable/layout_background.xml" value="0.248" />
         <entry key="..\:/dementia-care/app/src/main/res/drawable/transparent_background.xml" value="0.245" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_login.xml" value="0.15457842248413417" />
         <entry key="..\:/dementia-care/app/src/main/res/layout/activity_main.xml" value="0.20863616930312098" />
         <entry key="..\:/dementia-care/app/src/main/res/layout/activity_user_profile.xml" value="0.2" />
         <entry key="..\:/dementia-care/app/src/main/res/layout/fragment_add.xml" value="0.264" />
         <entry key="..\:/dementia-care/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/dementia-care/app/src/main/res/layout/fragment_profile.xml" value="0.19709277469003847" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/fragment_profile.xml" value="0.20398912058023572" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/layout_background.xml" value="0.15457842248413417" />
         <entry key="..\:/dementia-care/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34556159420289856" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34556159420289856" />

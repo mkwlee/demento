@@ -19,6 +19,9 @@ import android.widget.ImageButton;
 import com.company.dementiacare.R;
 
 public class AddFragment extends DialogFragment {
+
+    ImageButton closeButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,4 +45,18 @@ public class AddFragment extends DialogFragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        closeButton = getView().findViewById(R.id.add_close);
+        
+        //go back when close button is clicked
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+    }
 }
