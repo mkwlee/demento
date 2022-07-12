@@ -160,39 +160,15 @@ public class SignUp extends AppCompatActivity {
         UserHelper helper = new UserHelper(name ,username, email, phone, password);
         reference.child(username).setValue(helper);
 
-        //Create User by EMAIL and PASSWORD
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    firebaseAuth.getCurrentUser().sendEmailVerification()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Intent intent = new Intent(getApplicationContext(), VerifyEmail.class);
+        Intent intent = new Intent(getApplicationContext(), SuccessForgetPasswordMessage.class);
 
-                                intent.putExtra("name", name);
-                                intent.putExtra("username", username);
-                                intent.putExtra("phone", phone);
-                                intent.putExtra("email", email);
-                                intent.putExtra("password", password);
+        intent.putExtra("name", name);
+        intent.putExtra("username", username);
+        intent.putExtra("phone", phone);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
 
-                                startActivity(intent);
-                                finish();
-                            }
-                            else{
-                                Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+        startActivity(intent);
+        finish();
     }
 }

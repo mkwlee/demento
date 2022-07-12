@@ -117,7 +117,6 @@ public class Login extends AppCompatActivity {
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
         final String userEnteredPassword = password.getEditText().getText().toString().trim();
 
-        firebaseAuth = FirebaseAuth.getInstance();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -134,6 +133,7 @@ public class Login extends AppCompatActivity {
 
                     String passwordFromDB =
                             snapshot.child(userEnteredUsername).child("password").getValue(String.class);
+
                     if(passwordFromDB.equals(userEnteredPassword)){
 
                         password.setError(null);
@@ -149,7 +149,7 @@ public class Login extends AppCompatActivity {
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("username", usernameFromDB);
                         intent.putExtra("phone", phoneFromDB);
-                        intent.putExtra("email", nameFromDB);
+                        intent.putExtra("email", emailFromDB);
                         intent.putExtra("password", passwordFromDB);
 
                         startActivity(intent);

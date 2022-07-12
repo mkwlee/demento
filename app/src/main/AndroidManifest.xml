@@ -14,9 +14,6 @@
         android:theme="@style/Theme.DementiaCare"
         tools:targetApi="31">
         <activity
-            android:name=".VerifyEmail"
-            android:exported="false" />
-        <activity
             android:name=".SuccessForgetPasswordMessage"
             android:exported="false" />
         <activity

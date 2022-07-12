@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.appsearch.SetSchemaRequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ForgetPassword extends AppCompatActivity {
 
     private Button nextBtn;
-    private TextInputLayout usernameTextField;
+    private TextInputLayout usernameTextField, emailTextField;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -46,6 +47,7 @@ public class ForgetPassword extends AppCompatActivity {
 
         //Hooks
         usernameTextField = findViewById(R.id.forget_password_username);
+        emailTextField = findViewById(R.id.forget_password_email);
         nextBtn = findViewById(R.id.forget_password_next_btn);
 
 
@@ -72,14 +74,33 @@ public class ForgetPassword extends AppCompatActivity {
         }
     }
 
+    private Boolean validateEmail(){
+        String val = emailTextField.getEditText().getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        if (val.isEmpty()){
+            emailTextField.setError("Field cannot be empty");
+            return false;
+        }else if(!val.matches(emailPattern)){
+            emailTextField.setError("Invalid email address");
+            return false;
+        }
+        else{
+            emailTextField.setError(null);
+            emailTextField.setErrorEnabled(false);
+            return true;
+        }
+    }
+
 
     public void verifyUsername(View view){
 
-        if (!validateUsername()){
+        if (!validateUsername() | !validateEmail()){
             return;
         }
 
         final String username = usernameTextField.getEditText().getText().toString().trim();
+        final String email = emailTextField.getEditText().getText().toString().trim();
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
@@ -94,27 +115,26 @@ public class ForgetPassword extends AppCompatActivity {
                 if(snapshot.exists()){
                     usernameTextField.setError(null);
                     usernameTextField.setErrorEnabled(false);
+                    emailTextField.setError(null);
+                    emailTextField.setErrorEnabled(false);
 
+                    String emailFromDB =
+                            snapshot.child(username).child("email").getValue(String.class);
 
-                    firebaseAuth.getCurrentUser().sendEmailVerification()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                    if(emailFromDB.equals(email)){
 
-                                        Intent intent = new Intent(getApplicationContext(), VerifyEmail.class);
+                        emailTextField.setError(null);
+                        emailTextField.setErrorEnabled(false);
 
-                                        intent.putExtra("username", username);
+                        Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
 
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                    else{
-                                        Toast.makeText(ForgetPassword.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                        intent.putExtra("username", username);
 
-                            });
+                        startActivity(intent);
+                    }else{
+                        emailTextField.setError("Wrong Email");
+                        emailTextField.requestFocus();
+                    }
                 }
                 else{
                     usernameTextField.setError("No such User exist");
