@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:transitionName="logo_image"
-        android:src="@drawable/user_profile_image"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,11 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/bungee"
-        android:text="Dementia Care"
+        android:text="Demento"
         android:transitionName="logo_text"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

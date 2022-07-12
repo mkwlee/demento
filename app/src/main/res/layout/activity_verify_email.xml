@@ -13,18 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/back_small_icon"
-            android:padding="5dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/mail_big_icon"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="100dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,6 +31,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="40sp"/>
+
 
 
     </LinearLayout>

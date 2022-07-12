@@ -118,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="#66bfbf"/>
+                android:backgroundTint="#66bfbf"
+                android:layout_marginTop="30dp"/>
 
         </LinearLayout>
     </LinearLayout>

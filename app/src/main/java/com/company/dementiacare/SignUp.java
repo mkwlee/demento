@@ -171,8 +171,6 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-
-
                                 Intent intent = new Intent(getApplicationContext(), VerifyEmail.class);
 
                                 intent.putExtra("name", name);

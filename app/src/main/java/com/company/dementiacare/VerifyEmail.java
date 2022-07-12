@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class VerifyEmail extends AppCompatActivity {
 
-    String name, username, email, phone ,password;
-
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
 
@@ -34,22 +32,19 @@ public class VerifyEmail extends AppCompatActivity {
         actionBar.hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         //Hooks
-        name  = getIntent().getStringExtra("name");
-        username  = getIntent().getStringExtra("username");
-        email  = getIntent().getStringExtra("email");
-        phone  = getIntent().getStringExtra("phone");
-        password  = getIntent().getStringExtra("password");
 
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
         final Handler handler = new Handler();
         final int delay = 5000;
 
+        String username = getIntent().getStringExtra("username");
+
         handler.postDelayed(new Runnable() {
+            private Boolean check = false;
             @Override
             public void run() {
                 user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -57,15 +52,17 @@ public class VerifyEmail extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             if (user.isEmailVerified()){
-                                Intent intent = new Intent(getApplicationContext(), UserProfile.class);
+                                if (check){
+                                    check = true;
+                                }else{
+                                    handler.removeMessages(0);
+                                }
+                                Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
 
-                                intent.putExtra("name", name);
                                 intent.putExtra("username", username);
-                                intent.putExtra("phone", phone);
-                                intent.putExtra("email", email);
-                                intent.putExtra("password", password);
 
                                 startActivity(intent);
+                                finish();
                             }
                         }
                         else{
