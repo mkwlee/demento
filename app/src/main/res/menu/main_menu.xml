@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/baseline_home_black_24dp"/>
+        <item
+            android:id="@+id/nav_meds"
+            android:title="Medications"
+            android:icon="@drawable/baseline_favorite_black_24dp"/>
+        <item
+            android:id="@+id/nav_reports"
+            android:title="Reports"
+            android:icon="@drawable/baseline_note_add_black_24dp"/>
+
+
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_login"
+                    android:title="Login"
+                    android:icon="@drawable/baseline_login_black_24dp"/>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title="Profile"
+                    android:icon="@drawable/baseline_face_black_24dp"/>
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title="Log out"
+                    android:icon="@drawable/baseline_logout_black_24dp"/>
+
+
+            </group>
+
+        </menu>
+    </item>
+
+</menu>
