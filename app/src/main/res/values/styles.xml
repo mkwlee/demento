@@ -6,6 +6,6 @@
 
     <!-- Menu Style -->
     <style name="navigationTheme">
-        <item name="colorPrimary">#362706</item>
+        <item name="colorPrimary">#d3d3d3</item>
     </style>
 </resources>

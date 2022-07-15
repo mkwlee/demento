@@ -5,15 +5,23 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -21,6 +29,11 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
     ImageView menuIcon;
     LinearLayout contentView;
+    TextView helloText;
+    private RecyclerView recyclerView;
+    private StaticRVAdapter staticRVAdapter;
+    private ArrayList<StaticRVModel> item = new ArrayList<>();
+
 
     static final float END_SCALE = 0.7f;
 
@@ -39,8 +52,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.content);
-        
+        helloText = findViewById(R.id.helloText);
+        recyclerView = findViewById(R.id.reminder_recycle);
 
+        setItemInfo();
+        setAdapter();
+
+
+        String name = getIntent().getStringExtra("name");
+        helloText.setText("Hello " + name + "!");
+        
         navigationDrawer();
 
     }
@@ -103,6 +124,34 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.nav_logout:
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                break;
+            case R.id.nav_profile:
+                Intent intent = new Intent(getApplicationContext(), UserProfile.class);
+
+                String username = getIntent().getStringExtra("username");
+                intent.putExtra("username", username);
+                startActivity(intent);
+                break;
+        }
         return true;
+    }
+
+    private void setItemInfo(){
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 3"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 4"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 5"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 6"));
+    }
+
+    private void setAdapter(){
+        staticRVAdapter = new StaticRVAdapter(item);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(staticRVAdapter);
     }
 }

@@ -15,19 +15,18 @@
             android:id="@+id/nav_reports"
             android:title="Reports"
             android:icon="@drawable/baseline_note_add_black_24dp"/>
+        <item
+            android:id="@+id/nav_documentation"
+            android:title="Documentation"
+            android:icon="@drawable/baseline_assignment_return_black_24dp" />
+
 
 
     </group>
 
     <item android:title="Profile">
         <menu>
-
             <group android:checkableBehavior="single">
-
-                <item
-                    android:id="@+id/nav_login"
-                    android:title="Login"
-                    android:icon="@drawable/baseline_login_black_24dp"/>
                 <item
                     android:id="@+id/nav_profile"
                     android:title="Profile"
@@ -36,10 +35,7 @@
                     android:id="@+id/nav_logout"
                     android:title="Log out"
                     android:icon="@drawable/baseline_logout_black_24dp"/>
-
-
             </group>
-
         </menu>
     </item>
 
