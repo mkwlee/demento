@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_set_new_password.xml" value="0.32864583333333336" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_success_forget_password_message.xml" value="0.32864583333333336" />
+        <entry key="app/src/main/res/layout/activity_success_sign_up.xml" value="0.34556159420289856" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34556159420289856" />
         <entry key="app/src/main/res/layout/activity_verify_email.xml" value="0.32864583333333336" />
         <entry key="app/src/main/res/layout/activity_verify_otp.xml" value="0.32864583333333336" />

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@drawable/gradient_drawable"
+    android:background="#d9f8c4"
     android:paddingLeft="15dp"
     android:paddingBottom="15dp">
 
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:fontFamily="@font/antic"
         android:text="Thinking Inside The Box" />
 
@@ -23,7 +23,7 @@
         android:layout_above="@id/menu_slogan"
         android:fontFamily="@font/bungee"
         android:text="Demento"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="24sp" />
     
     <ImageView
