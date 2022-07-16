@@ -160,13 +160,8 @@ public class SignUp extends AppCompatActivity {
         UserHelper helper = new UserHelper(name ,username, email, phone, password);
         reference.child(username).setValue(helper);
 
-        Intent intent = new Intent(getApplicationContext(), SuccessForgetPasswordMessage.class);
+        Intent intent = new Intent(getApplicationContext(), SuccessSignUp.class);
 
-        intent.putExtra("name", name);
-        intent.putExtra("username", username);
-        intent.putExtra("phone", phone);
-        intent.putExtra("email", email);
-        intent.putExtra("password", password);
 
         startActivity(intent);
         finish();

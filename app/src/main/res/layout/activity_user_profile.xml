@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/content_profile">
+        android:id="@+id/content_profile"
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -69,7 +70,7 @@
                 android:includeFontPadding="false"
                 android:text="John Wick"
                 android:textColor="#000"
-                android:textSize="40dp" />
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/username_profile"
@@ -154,7 +155,9 @@
                 android:fontFamily="@font/righteous"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="#fff"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:id="@+id/update_button"
+                android:onClick="update"/>
 
         </LinearLayout>
     </LinearLayout>

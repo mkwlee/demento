@@ -69,6 +69,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         viewReminder();
     }
 
+    // Function show all or less the user's schedule
     private void viewReminder() {
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +156,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         switch (item.getItemId()){
             case R.id.nav_logout:
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
                 break;
             case R.id.nav_profile:
                 Intent intent = new Intent(getApplicationContext(), UserProfile.class);
@@ -162,11 +164,13 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 String username = getIntent().getStringExtra("username");
                 intent.putExtra("username", username);
                 startActivity(intent);
+                finish();
                 break;
         }
         return true;
     }
 
+    // Set Schedule medicines from User's Database into an array item
     private void setItemInfo(){
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
@@ -174,8 +178,12 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 4"));
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 5"));
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 6"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 7"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 8"));
+        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 9"));
     }
 
+    // Set all Info from User's Database into Adapter
     private void setAdapter(){
         staticRVAdapter = new StaticRVAdapter(item);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
