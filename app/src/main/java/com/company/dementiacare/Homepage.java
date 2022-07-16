@@ -50,11 +50,11 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Menu Hooks
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout_homepage);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         viewAll = findViewById(R.id.viewAll);
-        contentView = findViewById(R.id.content);
+        contentView = findViewById(R.id.content_homepage);
         helloText = findViewById(R.id.helloText);
         recyclerView = findViewById(R.id.reminder_recycle);
 
@@ -62,7 +62,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         setAdapter();
 
 
-        String name = getIntent().getStringExtra("name");
+        String name = getIntent().getStringExtra("username");
         helloText.setText("Hello " + name + "!");
         
         navigationDrawer();
