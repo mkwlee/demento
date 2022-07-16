@@ -22,7 +22,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/user_profile_image" />
+                android:src="@drawable/baseline_face_black_24dp" />
 
             <TextView
                 android:id="@+id/full_name_profile"
@@ -34,7 +34,7 @@
                 android:fontFamily="@font/righteous"
                 android:includeFontPadding="false"
                 android:text="John Wick"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="40dp" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:fontFamily="@font/righteous"
                 android:includeFontPadding="false"
                 android:text="johnwick123"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="15sp" />
 
         </RelativeLayout>
@@ -118,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="#66bfbf"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="#fff"
                 android:layout_marginTop="30dp"/>
 
         </LinearLayout>

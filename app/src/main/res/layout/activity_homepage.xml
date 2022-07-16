@@ -39,7 +39,7 @@
 
         </RelativeLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
@@ -109,14 +109,15 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="View All" />
+                            android:text="View All"
+                            android:id="@+id/viewAll"/>
 
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:id="@+id/reminder_recycle"/>
+                        android:layout_height="300dp"
+                        android:id="@+id/reminder_recycle" />
 
                 </LinearLayout>
                 <Button
@@ -131,7 +132,7 @@
             </LinearLayout>
 
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,11 +26,12 @@ import java.util.List;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    Boolean checkViewAll = false;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageView menuIcon;
     LinearLayout contentView;
-    TextView helloText;
+    TextView helloText, viewAll;
     private RecyclerView recyclerView;
     private StaticRVAdapter staticRVAdapter;
     private ArrayList<StaticRVModel> item = new ArrayList<>();
@@ -51,6 +53,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
+        viewAll = findViewById(R.id.viewAll);
         contentView = findViewById(R.id.content);
         helloText = findViewById(R.id.helloText);
         recyclerView = findViewById(R.id.reminder_recycle);
@@ -63,7 +66,31 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         helloText.setText("Hello " + name + "!");
         
         navigationDrawer();
+        viewReminder();
+    }
 
+    private void viewReminder() {
+        viewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkViewAll) {
+                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    recyclerView.setLayoutParams(params);
+                    viewAll.setText("View Less");
+                    checkViewAll = true;
+                }
+                else{
+                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                    params.height = 800;
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    recyclerView.setLayoutParams(params);
+                    viewAll.setText("View All");
+                    checkViewAll = false;
+                }
+            }
+        });
     }
 
     private void navigationDrawer() {
@@ -151,7 +178,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void setAdapter(){
         staticRVAdapter = new StaticRVAdapter(item);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(staticRVAdapter);
     }
 }

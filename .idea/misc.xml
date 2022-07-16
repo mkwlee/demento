@@ -5,7 +5,13 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.13370332996972756" />
         <entry key="app/src/main/res/drawable/baseline_face_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_favorite_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_home_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_home_work_black_48dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_login_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_logout_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_menu_black_48dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_note_add_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/dynamic_rv_bg.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/gradient_drawable.xml" value="0.171" />
         <entry key="app/src/main/res/drawable/static_rv_bg.xml" value="0.1865" />
