@@ -3,6 +3,8 @@ package com.company.dementiacare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -11,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +40,6 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     private RecyclerView recyclerView;
     private StaticRVAdapter staticRVAdapter;
     private ArrayList<StaticRVModel> item = new ArrayList<>();
-
 
     static final float END_SCALE = 0.7f;
 
@@ -189,4 +193,5 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(staticRVAdapter);
     }
+
 }
