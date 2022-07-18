@@ -16,10 +16,10 @@
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038"
+        app:layout_constraintVertical_bias="0.056"
         app:layout_constraintWidth_percent=".9">
 
         <TextView
@@ -89,6 +89,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/finishedBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/baseline_check_circle_black_24dp"
@@ -100,6 +101,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
+            android:id="@+id/unfinishedBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/baseline_dangerous_black_24dp"

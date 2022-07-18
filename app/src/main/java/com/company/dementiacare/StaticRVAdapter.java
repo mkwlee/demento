@@ -36,24 +36,47 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StaticRVViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        StaticRVModel currentItem = items.get(position);
+    public void onBindViewHolder(@NonNull StaticRVViewHolder holder,final int position) {
+        StaticRVModel currentItem = items.get(getItemViewType(position));
         holder.imageView.setImageResource(currentItem.getImage());
         holder.textView.setText(currentItem.getText());
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentItem.setVisibility(!currentItem.visibility);
-                holder.expandedLayout.setVisibility(currentItem.isVisible() ? View.VISIBLE : View.GONE);
+                row_index = getItemViewType(position);
                 notifyDataSetChanged();
             }
         });
+        if (row_index == getItemViewType(position)){
+            currentItem.setVisibility(!currentItem.visibility);
+            holder.expandedLayout.setVisibility(currentItem.isVisible() ?  View.VISIBLE : View.GONE);
+            if (currentItem.isVisible()) {
+                holder.finishedBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentItem.setVisibility(!currentItem.visibility);
+                        holder.expandedLayout.setVisibility(currentItem.isVisible() ? View.VISIBLE : View.GONE);
+                        holder.constraintLayout.setBackgroundResource(R.drawable.dynamic_rv_selected_bg);
+                        holder.checkImage.setVisibility(View.VISIBLE);
+                    }
+                });
+                holder.unfinishedBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentItem.setVisibility(!currentItem.visibility);
+                        holder.expandedLayout.setVisibility(currentItem.isVisible() ? View.VISIBLE : View.GONE);
+                        holder.constraintLayout.setBackgroundResource(R.drawable.dynamic_rv_bg);
+                        holder.checkImage.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }
+    }
 
-//        if (row_index == position){
-//            holder.constraintLayout.setBackgroundResource(R.drawable.dynamic_rv_selected_bg);
-//            holder.checkImage.setVisibility(View.VISIBLE);
-//        }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -64,7 +87,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
     public static class StaticRVViewHolder extends RecyclerView.ViewHolder{
 
         TextView textView;
-        ImageView imageView, checkImage;
+        ImageView imageView, checkImage, finishedBtn, unfinishedBtn;
         ConstraintLayout constraintLayout, expandedLayout;
 
         public StaticRVViewHolder(@NonNull View itemView) {
@@ -74,6 +97,8 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
             checkImage = itemView.findViewById(R.id.checkImage);
             constraintLayout = itemView.findViewById(R.id.constraintLayout2);
             expandedLayout = itemView.findViewById(R.id.expandedLayout);
+            finishedBtn = itemView.findViewById(R.id.finishedBtn);
+            unfinishedBtn = itemView.findViewById(R.id.unfinishedBtn);
         }
     }
 
