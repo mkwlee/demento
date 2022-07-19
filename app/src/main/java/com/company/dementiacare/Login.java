@@ -54,6 +54,8 @@ public class Login extends AppCompatActivity {
         login_btn = findViewById(R.id.login_button);
         forget_btn = findViewById(R.id.forget_password_btn);
 
+
+        // Call some animation when translate from login page to sign up page
         callSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +79,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-
+    // Some validation information when sign up
     private Boolean validateUsername(){
         String val = username.getEditText().getText().toString();
         if (val.isEmpty()){
@@ -112,6 +114,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    // Function check that is the user existed and if it is then check password correctness
     private void isUser(){
 
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
@@ -120,6 +123,7 @@ public class Login extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
+        //Take the user from database by username's texting in the login page
         Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -134,6 +138,7 @@ public class Login extends AppCompatActivity {
                     String passwordFromDB =
                             snapshot.child(userEnteredUsername).child("password").getValue(String.class);
 
+                    //Check password correctness
                     if(passwordFromDB.equals(userEnteredPassword)){
 
                         password.setError(null);
@@ -172,6 +177,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+    // Call forget password activity
     public void callForgetPassword(View view){
         startActivity(new Intent(getApplicationContext(), ForgetPassword.class));
     }

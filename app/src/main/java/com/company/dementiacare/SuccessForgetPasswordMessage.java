@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+// The activity when you success to change the password
 public class SuccessForgetPasswordMessage extends AppCompatActivity {
 
     Button loginBtn;

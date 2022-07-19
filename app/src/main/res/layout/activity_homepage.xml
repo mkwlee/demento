@@ -7,7 +7,6 @@
     tools:context=".Homepage"
     android:id="@+id/drawer_layout_homepage">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -118,17 +117,27 @@
                         android:layout_height="300dp"
                         android:id="@+id/reminder_recycle" />
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/add_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#4f4f4f"
+                            android:text="Add medicine"
+                            android:layout_marginLeft="200dp"
+                            android:fontFamily="@font/bungee"
+                            android:textSize="12dp"/>
+                    </RelativeLayout>
+
+
                 </LinearLayout>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#4f4f4f"
-                    android:text="Add medicine"
-                    android:layout_marginLeft="200dp"
-                    android:fontFamily="@font/bungee"
-                    android:textSize="12dp"/>
+
 
             </LinearLayout>
+
 
 
         </androidx.core.widget.NestedScrollView>

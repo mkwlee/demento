@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    //Variables
     TextInputLayout fullname, email, phone, password;
     TextView fullNameLabel, usernameLabel;
     ImageView menuIcon;
@@ -67,6 +68,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
         Query checkUser = reference.orderByChild("username").equalTo(username);
 
+        //Take all data from the username's database
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -104,9 +106,11 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
             }
         });
 
+        //CALL the vertical navigation
         navigationDrawer();
     }
 
+    // show all the data in the text
     public void showAllUserData(String user_username, String user_name, String user_email, String user_phone, String user_password) {
 
         fullNameLabel.setText(user_name);
@@ -138,6 +142,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         animateNavigationDrawer();
     }
 
+    //Some animation when you call or slide the vertical navigation
     private void animateNavigationDrawer() {
 
         drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
@@ -162,6 +167,8 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
     }
 
+    // The function when you click back pressed on the navigaiton drawer it will go back to the
+    // Profile instead of closing the apps
     @Override
     public void onBackPressed() {
 
@@ -173,6 +180,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    // set new activity based on the click pages from the navigation
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -193,12 +201,14 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
+    // Send the Toast message when you success updating the data
     public void update(View view){
         if (isNameChanged() | isPasswordChanged() | isPhoneChanged() | isEmailChanged()){
             Toast.makeText(this, "Data has been updated", Toast.LENGTH_LONG).show();
         }
     }
 
+    // some checking functions that is your data changed
     private boolean isPasswordChanged() {
         if (!_PASSWORD.equals(password.getEditText().getText().toString())){
 

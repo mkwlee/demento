@@ -36,6 +36,7 @@ public class SetNewPassword extends AppCompatActivity {
 
     }
 
+    // Some Validation for setting new password
     private Boolean validatePassword(){
         String val = newPassword.getEditText().getText().toString();
 
@@ -72,6 +73,8 @@ public class SetNewPassword extends AppCompatActivity {
     }
 
     public void setNewPasswordBtn(View view){
+
+        //Check the validation are correct if not send the errors
         if (!validatePassword() | !validateConfirmPassword()){
             return;
         }

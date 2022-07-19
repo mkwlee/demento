@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(botAnim);
         slogan.setAnimation(botAnim);
 
+
+        // Set some animation when translate from splash screen to login page
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){

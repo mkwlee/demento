@@ -3,25 +3,22 @@ package com.company.dementiacare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.ChangeBounds;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +28,7 @@ import java.util.List;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    //Variables
     Boolean checkViewAll = false;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -43,11 +41,14 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     static final float END_SCALE = 0.7f;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         ActionBar actionBar = getSupportActionBar();
+
+
         actionBar.hide();
         //This line will hide the status bar from the screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -98,6 +99,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         });
     }
 
+    // Set the vertical navigation in the homepage
     private void navigationDrawer() {
         //Navigation Drawer
         navigationView.bringToFront();
@@ -119,6 +121,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         animateNavigationDrawer();
     }
 
+    // Animation when you click to the vertical navigation view
     private void animateNavigationDrawer() {
 
         drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
@@ -143,6 +146,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     }
 
+    // set back pressed to the homepage instead of log out to the application
     @Override
     public void onBackPressed() {
 
@@ -154,6 +158,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
     }
 
+    // Set new activity based on the page selected in the navigation
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -164,7 +169,6 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 break;
             case R.id.nav_profile:
                 Intent intent = new Intent(getApplicationContext(), UserProfile.class);
-
                 String username = getIntent().getStringExtra("username");
                 intent.putExtra("username", username);
                 startActivity(intent);
@@ -174,7 +178,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
-    // Set Schedule medicines from User's Database into an array item
+    // Set Schedule medicines from User's Database into an array item (For now we just testing the
+    // by the random Model item
     private void setItemInfo(){
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));

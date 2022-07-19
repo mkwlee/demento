@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+//The activity when you success to sign up a new account
 public class SuccessSignUp extends AppCompatActivity {
 
     Button loginBtn;

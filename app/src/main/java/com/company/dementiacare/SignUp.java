@@ -51,6 +51,7 @@ public class SignUp extends AppCompatActivity {
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
 
+        // Go back to login view when the user realize they already have account
         regToLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +60,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
+    // Some validation informations of user's data
     private Boolean validateName(){
         String val = regName.getEditText().getText().toString();
 
@@ -144,6 +146,7 @@ public class SignUp extends AppCompatActivity {
     //Save data in firebase on button click
     public void registerUser(View view){
 
+        //Check all the information are validated
         if (!validateName() | !validateUsername() | !validatePhone()
                 | !validatePassword() | !validateEmail()){
             return;

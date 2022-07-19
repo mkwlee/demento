@@ -4,17 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.appsearch.SetSchemaRequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+//The idea is the user put in the username and the email which is register in the username's data if all correct then
+//Send the access to setting new password
 
 public class ForgetPassword extends AppCompatActivity {
 
@@ -53,6 +51,7 @@ public class ForgetPassword extends AppCompatActivity {
 
     }
 
+    // Some validation for the info
     private Boolean validateUsername(){
         String val = usernameTextField.getEditText().getText().toString();
         String noWhiteSpace = "\\A\\w{4,20}\\z";
@@ -95,6 +94,7 @@ public class ForgetPassword extends AppCompatActivity {
 
     public void verifyUsername(View view){
 
+        //Validate all the info
         if (!validateUsername() | !validateEmail()){
             return;
         }
@@ -106,12 +106,14 @@ public class ForgetPassword extends AppCompatActivity {
         reference = rootNode.getReference("users");
         firebaseAuth = FirebaseAuth.getInstance();
 
+        // Take the username's database for comparison
         Query checkUser = reference.orderByChild("username").equalTo(username);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                //If the users exist in the database
                 if(snapshot.exists()){
                     usernameTextField.setError(null);
                     usernameTextField.setErrorEnabled(false);
@@ -121,6 +123,7 @@ public class ForgetPassword extends AppCompatActivity {
                     String emailFromDB =
                             snapshot.child(username).child("email").getValue(String.class);
 
+                    //Check email if it's correct with the email in the user's database
                     if(emailFromDB.equals(email)){
 
                         emailTextField.setError(null);
