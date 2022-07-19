@@ -6,34 +6,31 @@
 *
 * */
 
-package com.company.dementiacare;
+package com.company.dementiacare.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.animation.Animation;
 
+import com.company.dementiacare.R;
 import com.company.dementiacare.databinding.ActivityMainBinding;
-import com.company.dementiacare.ui.add.AddFragment;
+import com.company.dementiacare.ui.add.AddActivity;
 import com.company.dementiacare.ui.home.HomeFragment;
 import com.company.dementiacare.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    Animation slideInAnim;
+    View addFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                AddFragment addFragment = new AddFragment();
-                addFragment.show(fragmentTransaction, "txn_tag");
+                // navigate to add activity screen
+                Intent i = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
             }
         });
     }
