@@ -28,6 +28,17 @@ public class EmailPasswordActivity extends Activity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            String action = extras.getString("action");
+//            //The key argument here must match that used in the other activity
+//            if (action == "create account"){
+//                String email = extras.getString("email");
+//                String password = extras.getString("password");
+//                createAccount(email, password);
+//            }
+//        }
     }
 
     // [START on_start_check_user]

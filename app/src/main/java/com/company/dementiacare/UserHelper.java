@@ -21,12 +21,22 @@ public class UserHelper {
         this.address = address;
     }
 
-    // constructor for updating profile
-    public UserHelper(String username, String name, String email, String phone, String address) {
+    // constructor without password
+    public UserHelper(String name, String username,  String email, String phone, String address) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.password = "Not to be saved in database";
+        this.address = address;
+    }
+
+    // constructor without username and  password
+    public UserHelper(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = "Not to be saved in database";
         this.address = address;
     }
 
