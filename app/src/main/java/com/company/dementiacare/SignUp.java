@@ -69,21 +69,21 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SignUp.this, UserProfile.class);
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SignUp.this).toBundle());
+//                Intent intent = new Intent(SignUp.this, UserProfile.class);
+//                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SignUp.this).toBundle());
 
 
-//                // register the account into Fireauth
-//                String email = regEmail.getEditText().getText().toString();
-//                String password = regPassword.getEditText().getText().toString();
-//                createAccount(email, password);
-//
-//                // register the user
-//                registerUser(v);
-//
-//                // register info to Firebase database Successful
-//                Toast.makeText(SignUp.this, "Sign Up Successfully!",
-//                        Toast.LENGTH_LONG).show();
+                // register the account into Fireauth
+                String email = regEmail.getEditText().getText().toString();
+                String password = regPassword.getEditText().getText().toString();
+                createAccount(email, password);
+
+                // register the user
+                registerUser(v);
+
+                // register info to Firebase database Successful
+                Toast.makeText(SignUp.this, "Sign Up Successfully!",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
