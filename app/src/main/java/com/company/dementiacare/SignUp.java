@@ -12,6 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
+    private static final String TAG = "EmailPassword";
+
     //Variables
     TextInputLayout regName, regUsername, regEmail, regPhone, regPassword;
     Button regBtn, regToLoginBtn;
@@ -26,6 +28,7 @@ public class SignUp extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        // Initialize Firebase Auth
         //Hooks
         regName = findViewById(R.id.reg_name);
         regUsername = findViewById(R.id.reg_username);
@@ -34,6 +37,9 @@ public class SignUp extends AppCompatActivity {
         regPassword = findViewById(R.id.reg_password);
         regBtn = findViewById(R.id.reg_btn);
         regToLoginBtn = findViewById(R.id.reg_login_btn);
+
+
+
 
     }
 
