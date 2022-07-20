@@ -130,11 +130,12 @@ public class SignUp extends AppCompatActivity {
         String email = regEmail.getEditText().getText().toString();
         String phone = regPhone.getEditText().getText().toString();
         String password = regPassword.getEditText().getText().toString();
+        String address = "To be filled";
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
 
-        UserHelper helper = new UserHelper(name ,username, email, phone, password);
+        UserHelper helper = new UserHelper(name ,username, email, phone, password, address);
         reference.child(username).setValue(helper);
 
     }

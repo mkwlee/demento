@@ -38,6 +38,7 @@
                 android:textSize="40dp" />
 
             <TextView
+                android:id="@+id/user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/full_name"
@@ -58,6 +59,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name">
@@ -65,15 +67,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/username_small_icon"
+                    android:background="#fff"
 
+                    android:drawableStart="@drawable/username_small_icon"
                     android:drawablePadding="10dp"
-                    android:text="John Wick"
                     android:fontFamily="@font/righteous"
-                    android:background="#fff"/>
+                    android:text="John Wick" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone">
@@ -81,15 +84,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/phone_small_icon"
+                    android:background="#fff"
 
+                    android:drawableStart="@drawable/phone_small_icon"
                     android:drawablePadding="10dp"
-                    android:text="+1 (123) 456 7890"
                     android:fontFamily="@font/righteous"
-                    android:background="#fff"/>
+                    android:text="+1 (123) 456 7890" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address">
@@ -97,15 +101,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/address_small_icon"
+                    android:background="#fff"
 
+                    android:drawableStart="@drawable/address_small_icon"
                     android:drawablePadding="10dp"
-                    android:text="8888 University Drive W"
                     android:fontFamily="@font/righteous"
-                    android:background="#fff"/>
+                    android:text="8888 University Drive W" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mail">
@@ -113,20 +118,21 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/mail_small_icon"
+                    android:background="#fff"
 
+                    android:drawableStart="@drawable/mail_small_icon"
                     android:drawablePadding="10dp"
-                    android:text="johnwick123@gmail.com"
                     android:fontFamily="@font/righteous"
-                    android:background="#fff"/>
+                    android:text="johnwick123@gmail.com" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/update_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:backgroundTint="#371b58"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="#371b58"/>
+                android:text="Update" />
 
         </LinearLayout>
     </LinearLayout>
