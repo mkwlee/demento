@@ -12,7 +12,6 @@ public class TimeEntry implements Comparable<TimeEntry>{
     public int getHour() {return hourOfDay;}
     public int getMinute() {return minute;}
 
-    // source : https://dzone.com/articles/sorting-java-arraylist
     @Override
     public int compareTo(TimeEntry timeEntry) {
         if(this.hourOfDay > timeEntry.hourOfDay) {

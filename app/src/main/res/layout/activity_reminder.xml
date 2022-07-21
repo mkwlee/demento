@@ -59,27 +59,34 @@
 
                 <View
                     android:layout_width="40dp"
-                    android:layout_height="1dp"
-                    android:background="@android:color/black" />
+                    android:layout_height="2dp"
+                    android:background="@android:color/black"
+                    android:layout_marginHorizontal="5dp"
+                    />
 
                 <ImageView
                     android:id="@+id/add_stepTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
-                    android:src="@drawable/outline_alarm_add_black_24dp" />
+                    android:src="@drawable/outline_alarm_add_white_24dp"
+                    android:background="@drawable/selected_add"
+                    android:padding="5dp"
+                    />
 
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="1dp"
-                    android:background="@android:color/black" />
+<!--                <View-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@android:color/black"-->
+<!--                    android:layout_marginHorizontal="5dp"-->
+<!--                    />-->
 
-                <ImageView
-                    android:id="@+id/add_stepThree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="2dp"
-                    android:src="@drawable/outline_check_circle_black_24dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/add_stepThree"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="2dp"-->
+<!--                    android:src="@drawable/outline_check_circle_black_24dp" />-->
             </LinearLayout>
         </RelativeLayout>
         <LinearLayout
@@ -103,21 +110,32 @@
             android:gravity="center"
             android:paddingVertical="15dp"
             >
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/recurring_button"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:text="Recurring"
+                android:textColor="@color/black"
                 android:padding="15dp"
                 android:layout_marginHorizontal="15dp"
-                />
-            <Button
+                android:backgroundTint="@color/teal_200"
+                app:strokeColor="@android:color/darker_gray"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp"
+                 />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/oneTime_button"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:text="One-Time"
+                android:textColor="@color/black"
+                android:elevation="0dp"
+                app:cornerRadius="8dp"
+                app:strokeColor="@android:color/darker_gray"
+                app:strokeWidth="1dp"
                 android:padding="15dp"
                 android:layout_marginHorizontal="15dp"
+                android:backgroundTint="@color/light_blue_button"
                 />
         </LinearLayout>
         <ScrollView
@@ -174,7 +192,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <View
                     android:layout_width="15dp"
-                    android:layout_height="3dp"
+                    android:layout_height="1.85dp"
                     android:background="@android:color/black"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -255,7 +273,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:elevation="0dp"
                                 android:text="Mon"
                                 android:textColor="@color/black"
@@ -270,7 +288,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:elevation="0dp"
                                 android:text="Tue"
                                 android:textColor="@color/black"
@@ -285,7 +303,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:elevation="0dp"
                                 android:text="Wed"
                                 android:textColor="@color/black"
@@ -300,7 +318,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:elevation="0dp"
                                 android:text="Thu"
                                 android:textColor="@color/black"
@@ -315,7 +333,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:elevation="0dp"
                                 android:text="Fri"
                                 android:textColor="@color/black"
@@ -330,7 +348,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:text="Sat"
                                 android:textColor="@color/black"
                                 android:textSize="16dp"
@@ -344,7 +362,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/white"
+                                android:background="@drawable/day_button"
                                 android:text="Sun"
                                 android:textColor="@color/black"
                                 android:textSize="16dp"
@@ -380,12 +398,6 @@
                             android:layout_centerInParent="true"
                             android:gravity="center"
                             android:paddingVertical="10dp">
-                            <ImageButton
-                                android:id="@+id/decrease_button"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/baseline_remove_black_24dp"
-                                />
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -397,28 +409,36 @@
                                 android:gravity="center"
                                 >
                                 <TextView
-                                    android:id="@+id/dayTimes_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1"
-                                    android:textSize="18dp"
-                                    android:textColor="@color/black"
-                                    />
-                                <TextView
-                                    android:id="@+id/times_text"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" time"
+                                    android:text="Add time"
                                     android:textColor="@color/black"
                                     android:textSize="18dp"
                                     />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" a day"
-                                    android:textColor="@color/black"
-                                    android:textSize="18dp"
-                                    />
+<!--                                <TextView-->
+<!--                                    android:id="@+id/dayTimes_text"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text="0"-->
+<!--                                    android:textSize="18dp"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    />-->
+<!--                                <TextView-->
+<!--                                    android:id="@+id/times_text"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text=" time"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:textSize="18dp"-->
+<!--                                    />-->
+<!--                                <TextView-->
+<!--                                    android:id="@+id/day_text"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text=" a day"-->
+<!--                                    android:textColor="@color/black"-->
+<!--                                    android:textSize="18dp"-->
+<!--                                    />-->
                             </LinearLayout>
                             <ImageButton
                                 android:id="@+id/increase_button"
@@ -430,46 +450,45 @@
                     </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/AddAndSaveButtonsLayout">
-                        <ListView
-                            android:id="@+id/timeEntriesListView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="2sp"
-                            android:layout_marginEnd="2sp"
-                            android:layout_marginBottom="5sp"
-                            android:divider="@null"
-                            android:dividerHeight="0dp" />
+                        android:layout_height="wrap_content">
+
+                            <ListView
+                                android:id="@+id/timeEntriesListView"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginStart="2sp"
+                                android:layout_marginEnd="2sp"
+                                android:layout_marginBottom="5sp"
+                                android:divider="@null"
+                                android:dividerHeight="10dp" />
                     </RelativeLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="25dp"
-                        android:orientation="horizontal"
-                        android:background="@color/teal_200"
-                        android:layout_marginBottom="50dp"
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@color/teal_200"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center"
-                        android:id="@+id/next_button"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Next"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="16dp"
-                            android:layout_marginEnd="5dp"
-                            />
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/baseline_arrow_right_alt_black_24dp"
-                            />
-                    </LinearLayout>
+                        android:text="Save reminder"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+<!--                    <ImageView-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/baseline_arrow_right_alt_black_24dp"-->
+<!--                        />-->
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

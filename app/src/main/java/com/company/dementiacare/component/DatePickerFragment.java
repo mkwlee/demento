@@ -14,13 +14,8 @@ import com.company.dementiacare.ui.add.ReminderActivity;
 
 import java.util.Calendar;
 
-public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-    DatePickerListener mListener;
-
-    public interface DatePickerListener{
-        void OnDateSet(DatePicker dataPicker, int year, int month, int day);
-    }
+public class DatePickerFragment extends DialogFragment {
+    // source : http://www.zoftino.com/android-timepicker-example
 
     ReminderActivity addNewMedicineActivityObj;
 
@@ -29,28 +24,24 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        try {
-            mListener = (DatePickerListener) context;
-        } catch (Exception e){
-            throw new ClassCastException(getActivity().toString()+ "Implement DatePickerListener");
-        }
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(c.YEAR);
+        int month = c.get(c.MONTH);
+        int day = c.get(c.DAY_OF_MONTH);
+
+        return new DatePickerDialog(getActivity(), dateSetListener, year, month, day);
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get((Calendar.DAY_OF_MONTH));
-        return new DatePickerDialog(getActivity(), this, year,month,day);
-    }
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        mListener.OnDateSet(datePicker, i, i1, i2);
-    }
+    private DatePickerDialog.OnDateSetListener dateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    String date = String.format("%02d",month+1) + "/" +
+                            String.format("%02d",day) + "/" + String.format("%04d",year);
+                    addNewMedicineActivityObj.setDateToMedicineSchedule(date);
+                }
+            };
 }
+
