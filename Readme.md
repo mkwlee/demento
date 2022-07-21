@@ -3,6 +3,7 @@
 ## Requirements
 
 ```
+
 // Please make sure you have an android device connected to your computer
 // or an android emulator.
 
@@ -13,11 +14,13 @@
 ## Starting the Application
 
 ```
+
 // To run the app on your mobile device please install and build the app
 // through the android studio.
 
 // To run the app on your emulator please install and build the app
 // through the android studio.
+
 ```
 
 ## Notes and comments about version 0.2 of the app
@@ -29,9 +32,9 @@
 
 - **New Home screen** - The app now has a new home screen. The home screen has a new design and a new background. Users can now see their reminders about the day. Users can also see a calendar with the reminders. (Will be implemented in Sprint 3)
 
--**New Reminder screen** - The app now has a new reminder screen. User can now add a new reminder through the Home screen. Reminder screen will give this ability to user to scan the name the medicine with their phone! they can pick type of the medicine and color of the medicine. Set the reminder time based on the time they want to take the medicine.
+- **New Reminder screen** - The app now has a new reminder screen. User can now add a new reminder through the Home screen. Reminder screen will give this ability to user to scan the name the medicine with their phone! they can pick type of the medicine and color of the medicine. Set the reminder time based on the time they want to take the medicine.
 
--**New Profile screen** - The profile screen has a new design and a new background. User can now see their profile and update them in real time.
+- **New Profile screen** - The profile screen has a new design and a new background. User can now see their profile and update them in real time.
 
 ## PostPonded Features
 
