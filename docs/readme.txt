@@ -61,3 +61,8 @@
 - **Android Users**: If you are looking for a way to run the app on an emulator I would suggest to use Android emulator from [Android Studio](https://developer.android.com/studio/index.html), otherwise you can use [Genymotion](https://www.genymotion.com/) as well or any Android emulator.
 
 - Please make sure that your git commits summary are **_minimized_** and **_short_** and commits descriptions are **_clear_** and **_consistent_**. -->
+
+
+// Comments of TA about this version:
+
+-
