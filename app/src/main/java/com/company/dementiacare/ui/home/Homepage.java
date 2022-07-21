@@ -132,7 +132,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 if (!checkViewAll) {
                     // if the user clicks on view all, show all the reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = 150;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     recyclerView.setLayoutParams(params);
                     viewAll.setText("View Less");

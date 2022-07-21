@@ -19,6 +19,10 @@
 // through the android studio.
 ```
 
+## bugs and issues
+
+- **The daily reminder feature is not working properly.** user has to first pick a specific day to set the reminder.
+
 ## Notes and comments about version 0.2 of the app
 
 - **New design and more user friendly** - The app is now more user friendly and has a new design. New colors and fonts have been added.

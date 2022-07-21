@@ -35,6 +35,7 @@ import com.company.dementiacare.component.DatePickerFragment;
 import com.company.dementiacare.component.TimeListAdapter;
 import com.company.dementiacare.component.TimePickerFragment;
 import com.company.dementiacare.component.WeekDay;
+import com.company.dementiacare.ui.home.Homepage;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -284,7 +285,7 @@ public class ReminderActivity extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), "Save function will be implemented in Sprint 3", Toast.LENGTH_LONG).show();
 
                 // navigate to the main activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Homepage.class);
                 startActivity(intent);
             }
         });
