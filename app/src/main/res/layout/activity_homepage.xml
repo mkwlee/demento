@@ -4,8 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Homepage"
+    tools:context=".ui.home.Homepage"
     android:id="@+id/drawer_layout_homepage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:translationZ="1000dp"
+        android:gravity="bottom|right"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_200"
+            android:fontFamily="@font/arimo_bold"
+            android:text="Add medicine"
+            android:textSize="12dp"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="20dp"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +35,11 @@
         android:padding="10dp"
         android:id="@+id/content_homepage">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            >
 
             <ImageView
                 android:id="@+id/menu_icon"
@@ -31,14 +52,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/bungee"
+                android:fontFamily="@font/arimo_bold"
                 android:text="Demento"
                 android:textColor="#000"
                 android:textSize="24sp" />
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
@@ -51,7 +72,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="15dp"
+                    >
 
                     <TextView
                         android:id="@+id/helloText"
@@ -60,15 +83,14 @@
                         android:text="Hello!"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:fontFamily="@font/bungee"/>
+                        android:fontFamily="@font/arimo_bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Here are your logs for today."
                         android:textSize="14sp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/bungee"/>
+                        android:textColor="#000"/>
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
@@ -81,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/calendarView"
-                        android:background="@color/colorPrimary" />
+                        android:background="@color/light_blue_op30" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -98,50 +120,27 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/bungee"
+                            android:fontFamily="@font/arimo_bold"
                             android:text="Today's Reminders"
                             android:textColor="#000" />
 
                         <TextView
+                            android:id="@+id/viewAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="View All"
-                            android:id="@+id/viewAll"/>
+                            android:text="View All" />
 
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="150dp"
                         android:id="@+id/reminder_recycle" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <Button
-                            android:id="@+id/add_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="#4f4f4f"
-                            android:text="Add medicine"
-                            android:layout_marginLeft="200dp"
-                            android:fontFamily="@font/bungee"
-                            android:textSize="12dp"/>
-                    </RelativeLayout>
-
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
-
-        </androidx.core.widget.NestedScrollView>
-
+        </ScrollView>
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

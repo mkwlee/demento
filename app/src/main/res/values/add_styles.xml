@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AddDialogTheme" parent="Theme.Design">
+        <item name="bottomSheetStyle">
+            @style/AddStyle
+        </item>
+    </style>
+    <style name="AddStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>

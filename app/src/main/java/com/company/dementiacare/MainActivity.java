@@ -1,6 +1,15 @@
+/*
+ * 
+ *          Main Activity
+ * 
+ *  Description: This activity is used to display the main menu.
+ *  
+ *  updated: July 21, 2022
+*/
+
+
 package com.company.dementiacare;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -14,6 +23,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.company.dementiacare.ui.auth.Login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,16 +40,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //Animations
+        //Animations for the logo and slogan
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         botAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
 
-        //Hooks
+        //Hooks and variables
         image = findViewById(R.id.imageView);
         logo = findViewById(R.id.textView1);
         slogan = findViewById(R.id.textView2);
@@ -52,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent intent = new Intent(MainActivity.this,Login.class);
+                Intent intent = new Intent(MainActivity.this, Login.class);
 
+                // Create the Pair for the image and the text
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<View, String>(image, "logo_image");
                 pairs[1] = new Pair<View, String>(logo, "logo_text");
-
+                // make the animation for the image and the text to be smooth
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
                 startActivity(intent, options.toBundle());
                 finish();

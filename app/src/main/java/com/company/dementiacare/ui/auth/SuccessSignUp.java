@@ -1,4 +1,4 @@
-package com.company.dementiacare;
+package com.company.dementiacare.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+
+import com.company.dementiacare.R;
 
 //The activity when you success to sign up a new account
 public class SuccessSignUp extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class SuccessSignUp extends AppCompatActivity {
 
         loginBtn = findViewById(R.id.success_signup_loginBtn);
 
+        // navigate to login page
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

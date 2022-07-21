@@ -4,6 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.13370332996972756" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_add.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_forget_password.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_homepage.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_main.xml" value="0.185856754306437" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_reminder.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_set_new_password.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_sign_up.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_success_forget_password_message.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_success_sign_up.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/activity_user_profile.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/dynamic_rv_item_layout.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/fragment_home.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/menu_header.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/patient_spinner_item.xml" value="0.20863616930312098" />
+        <entry key="..\:/dementia-care/app/src/main/res/layout/type_list_view_item.xml" value="0.20863616930312098" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_check_circle_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_face_black_24dp.xml" value="0.1865" />

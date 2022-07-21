@@ -1,7 +1,6 @@
-package com.company.dementiacare;
+package com.company.dementiacare.ui.profile;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.company.dementiacare.R;
+import com.company.dementiacare.ui.auth.Login;
+import com.company.dementiacare.ui.home.Homepage;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -46,15 +48,15 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
         //This line will hide the status bar from the screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         final String username = getIntent().getStringExtra("username");
 
-        //Hooks
+        //Hooks and variables
         drawerLayout = findViewById(R.id.drawer_layout_profile);
         navigationView = findViewById(R.id.navigation_view);
         fullname = findViewById(R.id.name_profile);
@@ -73,8 +75,10 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                // if the username is not found in the database
                 if(snapshot.exists()){
 
+                    //Take all data from the username's database
                     String passwordFromDB =
                             snapshot.child(username).child("password").getValue(String.class);
                     _PASSWORD = passwordFromDB;
@@ -186,12 +190,13 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
         switch (item.getItemId()){
             case R.id.nav_logout:
+            // navigate to the login page
                 startActivity(new Intent(getApplicationContext(), Login.class));
                 finish();
                 break;
             case R.id.nav_home:
+            // navigate to the home page
                 Intent intent = new Intent(getApplicationContext(), Homepage.class);
-
                 String username = getIntent().getStringExtra("username");
                 intent.putExtra("username", username);
                 startActivity(intent);
@@ -221,6 +226,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    // some checking functions that name is changed
     private boolean isNameChanged() {
         if (!_NAME.equals(fullname.getEditText().getText().toString())){
 
@@ -234,6 +240,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    // some checking functions that email is changed
     private boolean isEmailChanged() {
         if (!_EMAIL.equals(email.getEditText().getText().toString())){
 
@@ -246,6 +253,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    // some checking functions that phone is changed
     private boolean isPhoneChanged() {
         if (!_PHONE.equals(phone.getEditText().getText().toString())){
 

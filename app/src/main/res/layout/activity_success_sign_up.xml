@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuccessSignUp"
+    tools:context=".ui.auth.SuccessSignUp"
     android:orientation="vertical"
     android:padding="30dp">
 
@@ -17,10 +17,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome to our journey"
+            android:text="Let's start your journey"
             android:textColor="#000"
             android:textSize="40sp"
-            android:fontFamily="@font/bungee"
+            android:fontFamily="@font/arimo_bold"
             android:textAlignment="center"
             android:gravity="center"
             android:layout_marginTop="-100dp"
@@ -39,7 +39,6 @@
             android:text="Click the button to login"
             android:textColor="#000"
             android:textSize="20sp"
-            android:fontFamily="@font/antic"
             android:textAlignment="center"
             android:gravity="center"
             android:layout_gravity="center" />
@@ -48,9 +47,9 @@
             android:id="@+id/success_signup_loginBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="GO"
-            android:backgroundTint="#000"
-            android:fontFamily="@font/bungee"
+            android:text="Login"
+            android:backgroundTint="@color/teal_200"
+            android:fontFamily="@font/arimo_bold"
             android:layout_marginTop="20dp"/>
 
 

@@ -1,7 +1,16 @@
-package com.company.dementiacare;
+/*
+ *      Homepage class
+ * 
+ *  Description: This class is used to display the homepage of the user.
+ * 
+ * 
+ * updated: July 21, 2022
+*/
+
+
+package com.company.dementiacare.ui.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,16 +24,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.company.dementiacare.ui.auth.Login;
+import com.company.dementiacare.R;
+import com.company.dementiacare.StaticRVAdapter;
+import com.company.dementiacare.StaticRVModel;
+import com.company.dementiacare.ui.profile.UserProfile;
+import com.company.dementiacare.ui.add.AddActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -38,7 +53,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     private RecyclerView recyclerView;
     private StaticRVAdapter staticRVAdapter;
     private ArrayList<StaticRVModel> item = new ArrayList<>();
+    MaterialButton addButton;
 
+    // End scale of drawer layout
     static final float END_SCALE = 0.7f;
 
     @SuppressLint("ResourceType")
@@ -46,10 +63,10 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-        ActionBar actionBar = getSupportActionBar();
-
-
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//
+//
+//        actionBar.hide();
         //This line will hide the status bar from the screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -63,15 +80,48 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         helloText = findViewById(R.id.helloText);
         recyclerView = findViewById(R.id.reminder_recycle);
 
+        // navigate to add page
+        addButton = findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Homepage.this, AddActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+
+            }
+        });
+
+        // greeting text
+        greetUser();
+
+        // set the item for the recycler view
         setItemInfo();
+        // set the adapter for the recycler view
         setAdapter();
 
-
-        String name = getIntent().getStringExtra("username");
-        helloText.setText("Hello " + name + "!");
-        
+        // navigation drawer
         navigationDrawer();
         viewReminder();
+    }
+
+    // greeting user based on the time
+    private void greetUser() {
+        String name = getIntent().getStringExtra("name");
+        // get the users current time
+        Calendar calendar = Calendar.getInstance();
+        // get the hour of the day
+        int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
+        // if the time is between 6am and 12pm, say good morning
+        if (currentTime < 12) {
+            helloText.setText("Good morning, " + name + "!");
+            // if the time is between 12pm and 6pm, say good afternoon
+        } else if (currentTime >= 12 && currentTime < 18) {
+            helloText.setText("Good afternoon, " + name + "!");
+        } else {
+            // if the time is between 6pm and 12am, say good evening
+            helloText.setText("Good evening, " + name + "!");
+        }
     }
 
     // Function show all or less the user's schedule
@@ -80,14 +130,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onClick(View v) {
                 if (!checkViewAll) {
+                    // if the user clicks on view all, show all the reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.height = 150;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     recyclerView.setLayoutParams(params);
                     viewAll.setText("View Less");
                     checkViewAll = true;
                 }
                 else{
+                    // if the user clicks on view less, show only the first 3 reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
                     params.height = 800;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -106,6 +158,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
+        // Menu show/hide
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,14 +171,17 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
+        // animate the drawer layout
         animateNavigationDrawer();
     }
 
     // Animation when you click to the vertical navigation view
     private void animateNavigationDrawer() {
 
+        // get the action bar and set the icon to be a hamburger
         drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
 
+        // add a listener to the drawer layout
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -150,6 +206,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public void onBackPressed() {
 
+        // if the drawer is open, close it
         if(drawerLayout.isDrawerVisible(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
@@ -179,7 +236,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     // Set Schedule medicines from User's Database into an array item (For now we just testing the
-    // by the random Model item
+    // by the random Model item will be done fully in Sprint 3
     private void setItemInfo(){
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
         item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
@@ -194,6 +251,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     // Set all Info from User's Database into Adapter
     private void setAdapter(){
+        // set the adapter for the recycler view
         staticRVAdapter = new StaticRVAdapter(item);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(staticRVAdapter);
