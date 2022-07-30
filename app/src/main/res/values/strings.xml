@@ -18,7 +18,8 @@
         <item>Tablet</item>
         <item>Capsule</item>
         <item>Syrup</item>
-<!--        <item>Injection</item>-->
-<!--        <item>Inhaler</item>-->
+        <!--        <item>Injection</item>-->
+        <!--        <item>Inhaler</item>-->
     </string-array>
+    <string name="title_activity_check">CheckActivity</string>
 </resources>

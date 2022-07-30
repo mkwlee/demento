@@ -171,7 +171,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
 
     }
 
-    // The function when you click back pressed on the navigaiton drawer it will go back to the
+    // The function when you click back pressed on the navigation drawer it will go back to the
     // Profile instead of closing the apps
     @Override
     public void onBackPressed() {

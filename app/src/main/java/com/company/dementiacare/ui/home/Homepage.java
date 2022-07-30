@@ -54,6 +54,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     private StaticRVAdapter staticRVAdapter;
     private ArrayList<StaticRVModel> item = new ArrayList<>();
     MaterialButton addButton;
+    TextView userName;
 
     // End scale of drawer layout
     static final float END_SCALE = 0.7f;
@@ -92,6 +93,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
+        userName = findViewById(R.id.user_name);
+        userName.setText(getIntent().getStringExtra("username"));
+
         // greeting text
         greetUser();
 
@@ -107,20 +111,19 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     // greeting user based on the time
     private void greetUser() {
-        String name = getIntent().getStringExtra("name");
         // get the users current time
         Calendar calendar = Calendar.getInstance();
         // get the hour of the day
         int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
         // if the time is between 6am and 12pm, say good morning
         if (currentTime < 12) {
-            helloText.setText("Good morning, " + name + "!");
+            helloText.setText("Good morning, ");
             // if the time is between 12pm and 6pm, say good afternoon
         } else if (currentTime >= 12 && currentTime < 18) {
-            helloText.setText("Good afternoon, " + name + "!");
+            helloText.setText("Good afternoon, ");
         } else {
             // if the time is between 6pm and 12am, say good evening
-            helloText.setText("Good evening, " + name + "!");
+            helloText.setText("Good evening, ");
         }
     }
 

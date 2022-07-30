@@ -1,3 +1,5 @@
+package com.company.dementiacare.component;
+
 /*
  *          TimeEntry class component
  * 
@@ -5,8 +7,6 @@
  * 
  *  Update History: July 21, 2022
 */
-
-package com.company.dementiacare.component;
 
 public class TimeEntry implements Comparable<TimeEntry>{
 

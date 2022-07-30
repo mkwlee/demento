@@ -12,10 +12,17 @@ package com.company.dementiacare.ui.add;
 import android.annotation.SuppressLint;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,12 +39,15 @@ import android.widget.Toast;
 import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.R;
 import com.company.dementiacare.component.DatePickerFragment;
+import com.company.dementiacare.component.MedicineReminder;
+import com.company.dementiacare.component.TimeEntry;
 import com.company.dementiacare.component.TimeListAdapter;
 import com.company.dementiacare.component.TimePickerFragment;
 import com.company.dementiacare.component.WeekDay;
 import com.company.dementiacare.ui.home.Homepage;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,14 +55,23 @@ import java.util.HashMap;
 public class ReminderActivity extends AppCompatActivity{
 
     // Variables
-    
+
+    // call the medicineReminder to save reminder data
+    private MedicineReminder medicineReminder;
+
     // text input fields
     private TextInputEditText startDate, endDate;
+
+    TextInputLayout startDateLayout, endDateLayout;
 
     // call the time picker fragment
     private TimePickerFragment timePickerFragment;
     // call the date picker fragment 
     private DatePickerFragment datePickerFragment;
+    //a boolean to check if the day is selected or not
+    boolean isSettingStartDate;
+
+    String currentRadio;
 
     // list view for the date buttons
     public static MaterialButton[] weekDayButtons = new MaterialButton[7];
@@ -76,17 +95,18 @@ public class ReminderActivity extends AppCompatActivity{
     private WeekDay currentDay;
     // button
     private MaterialButton currentDayButton;
-    //a boolean to check if the day is selected or not
-    boolean isSettingStartDate;
 
     // relative layout for the days
     private RelativeLayout daysRelativeLayout;
     // linear layout for the duration, schedule and save button
-    private LinearLayout durationLayout, scheduleLayout, saveButton;
+    private LinearLayout durationLayout, scheduleLayout;
+
+    MaterialButton saveButton;
 
     // radio group for the schedule
     private RadioGroup scheduleRadioGroup;
-    private ImageButton removeButton, addButton, backButton;
+    private ImageButton removeButton, backButton;
+    MaterialButton addButton;
     private TextView dayTimesText, timesText, daysText;
 
     private MaterialButton recurringButton, oneTimeButton;
@@ -96,6 +116,15 @@ public class ReminderActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+        addButton = findViewById(R.id.add_button);
+        addButton.setEnabled(false);
+        // disable save button
+        saveButton = findViewById(R.id.save_button);
+//        saveButton.setEnabled(false);
+        currentRadio = "daily";
+
+        medicineReminder = new MedicineReminder();
+
 //        dayTimesText = findViewById(R.id.dayTimes_text);
 //        dayTimesText.setText("Please add frequency");
 //        timesText = findViewById(R.id.times_text);
@@ -129,20 +158,38 @@ public class ReminderActivity extends AppCompatActivity{
         recurringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addButton.setEnabled(true);
+                currentDay = new WeekDay("AllDays");
                 enableOneTime(false);
                 // change the button color
                 recurringButton.setBackgroundTintList(getResources().getColorStateList(R.color.teal_200));
                 oneTimeButton.setBackgroundTintList(getResources().getColorStateList(R.color.light_blue_button));
+                clearCurrentSchedule();
+                // set the days layout to not visible
+                enableDays(false);
+                // set the current day to all days to null
+                ReminderActivity.this.currentDayButton = null;
+                // set the list adapter to the current day
+                setListViewAdapter(currentDay);
             }
         });
         // disable the schedule and the duration section when one time and change the button
         oneTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentDay = new WeekDay("AllDays");
                 enableOneTime(true);
+                addButton.setEnabled(true);
                 // change the button color
                 oneTimeButton.setBackgroundTintList(getResources().getColorStateList(R.color.teal_200));
                 recurringButton.setBackgroundTintList(getResources().getColorStateList(R.color.light_blue_button));
+                clearCurrentSchedule();
+                // set the days layout to not visible
+                enableDays(false);
+                // set the current day to all days to null
+                ReminderActivity.this.currentDayButton = null;
+                // set the list adapter to the current day
+                setListViewAdapter(currentDay);
             }
         });
 
@@ -212,6 +259,7 @@ public class ReminderActivity extends AppCompatActivity{
                             ReminderActivity.this.currentDayButton = currentDayButton;
                             // Add Time button should be active only when week mode selected
                             // or specific day selected
+                            addButton.setEnabled(true);
                             int buttonId = currentDayButton.getId();
                             currentDay = buttonIdStrToWeekDayMap.get(Integer.toString(buttonId));
                             setListViewAdapter(currentDay);
@@ -232,6 +280,8 @@ public class ReminderActivity extends AppCompatActivity{
                 currentDay = new WeekDay("AllDays");
                 // set the days layout to visible
                 if (i == R.id.daily_button) {
+                    currentRadio = "daily";
+                    addButton.setEnabled(true);
                     // clear the list view
                     clearCurrentSchedule();
                     // set the days layout to not visible
@@ -241,6 +291,8 @@ public class ReminderActivity extends AppCompatActivity{
                     // set the list adapter to the current day
                     setListViewAdapter(currentDay);
                 } else {
+                    currentRadio = "days";
+                    addButton.setEnabled(false);
                     // clear the list view
                     clearCurrentSchedule();
                     // set the days layout to visible
@@ -250,10 +302,6 @@ public class ReminderActivity extends AppCompatActivity{
                 }
             }
         });
-
-        // find the add and remove buttons
-        addButton = findViewById(R.id.increase_button);
-
         // set the on click listener for the add button to add a day to the days layout
         addButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -274,20 +322,89 @@ public class ReminderActivity extends AppCompatActivity{
             }
         });
 
-        // find the save button
-        saveButton = findViewById(R.id.save_button);
-        
-        // when the save button is clicked, send a tost to the user
+        // when the save button is clicked, send a toast to the user
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // make a toast and let them know this is for sprint 3!
-                Toast.makeText(getApplicationContext(), "Save function will be implemented in Sprint 3", Toast.LENGTH_LONG).show();
+                String radioOption = currentRadio;
+                boolean startDateIsSet = (null != medicineReminder.getStartDate());
+                boolean endDateIsSet = (null != medicineReminder.getEndDate());
 
-                // navigate to the main activity
-                Intent intent = new Intent(getApplicationContext(), Homepage.class);
-                startActivity(intent);
-            }
+                // check if no time was scheduled. In this case SAVE button will not perform saving
+                boolean administrationTimeIsScheduled = false;
+
+                if (radioOption == "daily"){
+                    administrationTimeIsScheduled = !currentDay.getTimeEntriesList().isEmpty();
+                }else {
+                    for (WeekDay weekDay : buttonIdStrToWeekDayMap.values()) {
+                        if (!weekDay.getTimeEntriesList().isEmpty()) {
+                            administrationTimeIsScheduled = true;
+                            break;
+                        }
+                    }
+                }
+
+                boolean scheduleDataIsValidForSaving =
+                        startDateIsSet &&
+                        endDateIsSet &&
+                        administrationTimeIsScheduled;
+                if (!scheduleDataIsValidForSaving){
+                    if (!startDateIsSet){
+                        Toast.makeText(getApplicationContext(), "Please set start date", Toast.LENGTH_SHORT).show();
+                    }
+                    if (!endDateIsSet){
+                        Toast.makeText(getApplicationContext(), "Please set end date", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (!administrationTimeIsScheduled){
+                        Toast.makeText(getApplicationContext(), "Please schedule time for medicine", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                    if (radioOption == "daily") {
+                        for (WeekDay weekDay : buttonIdStrToWeekDayMap.values()) {
+                            ArrayList<TimeEntry> timeEntriesList = weekDay.getTimeEntriesList();
+                            for (TimeEntry timeEntry : currentDay.getTimeEntriesList())
+                                timeEntriesList.add(new TimeEntry(timeEntry.getHour(), timeEntry.getMinute()));
+                        }
+                    }
+
+                    if (radioOption == "daily") {
+                        medicineReminder.setIsDaily(1);
+                    } else {
+                        medicineReminder.setIsDaily(0);
+                    }
+
+                    for (int weekDayIndex = 0; weekDayIndex < weekDaysArr.length; ++weekDayIndex) {
+                        int weekDayId = getResources().getIdentifier(weekDaysArr[weekDayIndex], "id",
+                                getApplicationContext().getPackageName());
+                        timeEntriesStrings = new ArrayList<>();
+
+                        for (TimeEntry timeEntry : buttonIdStrToWeekDayMap.get(Integer.toString(weekDayId)).getTimeEntriesList()) {
+                            String time = String.format("%02d", timeEntry.getHour()) + ":" +
+                                    String.format("%02d", timeEntry.getMinute());
+                            timeEntriesStrings.add(time);
+                        }
+                        medicineReminder.getWeekSchedule().add(timeEntriesStrings); //ArrayList<Arraylist<Strings>> builds here.
+                    }
+                    String savingMessage = "Saving";
+                    SpannableString spannableString = new SpannableString(savingMessage);
+                    spannableString.setSpan(new RelativeSizeSpan(2f), 0, spannableString.length(), 0);
+                    spannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, spannableString.length(), 0);
+
+                    ProgressDialog progressWheelDialog = new ProgressDialog(ReminderActivity.this);
+                    progressWheelDialog.setMessage(spannableString);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(ReminderActivity.this, Homepage.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+                        }
+                    }, 1500);
+                }
         });
 
     }
@@ -303,9 +420,29 @@ public class ReminderActivity extends AppCompatActivity{
     // set the data to medication object
     public void setDateToMedicineSchedule(String date) {
         if (isSettingStartDate) {
-            startDate.setText(date);
+            if (null !=medicineReminder.getEndDate()){
+                if(date.compareTo(medicineReminder.getEndDate()) < 0){
+                    medicineReminder.setStartDate(date);
+                    startDate.setText(date);
+                } else{
+                    Toast.makeText(getApplicationContext(), "Date can not be set - start day must occur before end date", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                medicineReminder.setStartDate(date);
+                startDate.setText(date);
+            }
         } else {
-            endDate.setText(date);
+            if (null != medicineReminder.getStartDate()) {
+                if (date.compareTo(medicineReminder.getStartDate()) > 0) {
+                    medicineReminder.setEndDate(date);
+                    endDate.setText(date);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Date can not be set - end day must occur after start date", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                medicineReminder.setEndDate(date);
+                endDate.setText(date);
+            }
         }
     }
 
@@ -341,6 +478,7 @@ public class ReminderActivity extends AppCompatActivity{
         for (MaterialButton weekDayButton : weekDayButtons) {
             weekDayButton.setEnabled(isEnabled);
             if (isEnabled) {
+                weekDayButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.light_blue));
                 weekDayButton.setTextColor(getResources().getColor(R.color.black));
             }
         }
@@ -429,19 +567,6 @@ public class ReminderActivity extends AppCompatActivity{
                 weekDayButton.setBackgroundResource(R.drawable.day_button);
             }
         }
-    }
-
-    // custom toast
-    private Toast getToastDialog() {
-        // create a toast
-        Toast toast = Toast.makeText(ReminderActivity.this, ""
-                , Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP, 0, 250);
-        // set the toast background color
-        ViewGroup group = (ViewGroup) toast.getView();
-        TextView messageTextView = (TextView) group.getChildAt(0);
-        messageTextView.setTextSize(25);
-        return toast;
     }
 
     // check if the button is selected

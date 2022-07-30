@@ -69,9 +69,9 @@ public class TimePickerFragment extends DialogFragment {
                     for(TimeEntry timeEntry : addNewMedicineActivityObj.getCurrentDay().getTimeEntriesList()) {
                         // if the time entry is already in the list of time entries
                         if(selectedTime.compareTo(timeEntry) == 0) {
-                            Toast.makeText(getActivity(), "Not added - attempt to add existing time" +
+                            Toast.makeText(getActivity(), "Could not add/change - time"+
                                             String.format("%02d",hourOfDay) + ":" +
-                                            String.format("%02d",minute)
+                                            String.format("%02d",minute) + "is already existed!"
                                     , Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -87,7 +87,7 @@ public class TimePickerFragment extends DialogFragment {
                     MaterialButton currentButton = addNewMedicineActivityObj.getCurrentDayButton();
                     if(null != currentButton) {
                         currentButton.setTextColor(
-                                addNewMedicineActivityObj.getResources().getColor(R.color.teal_200));
+                                addNewMedicineActivityObj.getResources().getColor(R.color.green));
                     }
 
                     // sort the list of time entries

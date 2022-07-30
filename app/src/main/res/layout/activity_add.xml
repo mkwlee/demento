@@ -147,19 +147,20 @@
                             android:gravity="center"
                             android:spinnerMode="dropdown"
                             />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="right"
-                            >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="change"
-                            android:textSize="14dp"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            />
+                            android:gravity="right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="change"
+                                android:textColor="@color/black"
+                                android:textSize="14dp" />
+
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -210,7 +211,7 @@
                         android:id="@+id/scanner"
                         android:backgroundTint="@android:color/transparent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="20dp"
                         android:src="@drawable/baseline_qr_code_scanner_black_24dp"
                         />
@@ -523,7 +524,7 @@
                     android:layout_marginTop="25dp"
                     >
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="125dp"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:id="@+id/medicine_dosage"
@@ -542,12 +543,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
                     <RelativeLayout
                         android:layout_gravity="center"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:background="@drawable/unit_picker_background"
                         android:orientation="horizontal">
-
                         <Spinner
                             android:id="@+id/unit_picker"
                             android:layout_width="match_parent"
@@ -585,33 +585,23 @@
                         android:textColor="@color/black"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_200"
+                    android:text="Next"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal"
-                    android:background="@color/teal_200"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
+                    android:layout_marginVertical="30dp"
+                    app:cornerRadius="8dp"
                     android:id="@+id/next_button"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Next"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"
-                        android:layout_marginEnd="5dp"
-                        />
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/baseline_arrow_right_alt_black_24dp"
-                        />
-                </LinearLayout>
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:icon="@drawable/baseline_arrow_right_alt_black_24dp"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="8dp"
+                    />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
