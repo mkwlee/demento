@@ -8,14 +8,6 @@
             android:title="Home"
             android:icon="@drawable/baseline_home_black_24dp"/>
         <item
-            android:id="@+id/nav_meds"
-            android:title="Medications"
-            android:icon="@drawable/baseline_favorite_black_24dp"/>
-        <item
-            android:id="@+id/nav_reports"
-            android:title="Reports"
-            android:icon="@drawable/baseline_note_add_black_24dp"/>
-        <item
             android:id="@+id/nav_documentation"
             android:title="Documentation"
             android:icon="@drawable/baseline_assignment_return_black_24dp" />
@@ -30,6 +22,10 @@
                 <item
                     android:id="@+id/nav_profile"
                     android:title="Profile"
+                    android:icon="@drawable/baseline_face_black_24dp"/>
+                <item
+                    android:id="@+id/nav_client_profile"
+                    android:title="Client Profile"
                     android:icon="@drawable/baseline_face_black_24dp"/>
                 <item
                     android:id="@+id/nav_logout"

@@ -28,10 +28,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.StaticRVModel;
+import com.company.dementiacare.ui.profile.ClientProfile;
 import com.company.dementiacare.ui.profile.UserProfile;
 import com.company.dementiacare.ui.add.AddActivity;
 import com.google.android.material.button.MaterialButton;
@@ -39,7 +41,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -218,17 +219,22 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     // Set new activity based on the page selected in the navigation
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        String username = getIntent().getStringExtra("username");
         switch (item.getItemId()){
             case R.id.nav_logout:
                 startActivity(new Intent(getApplicationContext(), Login.class));
                 finish();
                 break;
             case R.id.nav_profile:
-                Intent intent = new Intent(getApplicationContext(), UserProfile.class);
-                String username = getIntent().getStringExtra("username");
-                intent.putExtra("username", username);
-                startActivity(intent);
+                Intent intent1 = new Intent(getApplicationContext(), UserProfile.class);
+                intent1.putExtra("username", username);
+                startActivity(intent1);
+                finish();
+                break;
+            case R.id.nav_client_profile:
+                Intent intent2 = new Intent(getApplicationContext(), ClientProfile.class);
+                intent2.putExtra("username", username);
+                startActivity(intent2);
                 finish();
                 break;
         }
