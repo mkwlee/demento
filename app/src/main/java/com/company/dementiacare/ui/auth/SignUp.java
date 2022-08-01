@@ -19,6 +19,7 @@ import android.widget.Button;
 
 import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
+import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.ui.home.Homepage;
 import com.google.android.material.textfield.TextInputLayout;
@@ -207,8 +208,10 @@ public class SignUp extends AppCompatActivity {
 
                     ClientHelper client = new ClientHelper();
 
+                    StaticRVAdapter medicine = new StaticRVAdapter();
+
                     //Storing Data in firebase
-                    UserHelper helper = new UserHelper(name ,username, email, phone, password, client);
+                    UserHelper helper = new UserHelper(name ,username, email, phone, password, client, medicine);
                     reference.child(username).setValue(helper);
 
                     // navigate to success page

@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -80,18 +80,28 @@
                         android:id="@+id/helloText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/arimo_bold"
                         android:text="Hello!"
                         android:textColor="#000"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/arimo_bold"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/helloText"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="84dp"
                         android:text="Here are your logs for today."
-                        android:textSize="14sp"
-                        android:textColor="#000"/>
-                </LinearLayout>
+                        android:textColor="#000"
+                        android:textSize="18sp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_width="111dp"
+                        android:layout_height="71dp"
+                        android:src="@drawable/ambulance"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"

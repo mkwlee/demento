@@ -15,21 +15,28 @@ import com.company.dementiacare.ui.profile.ClientProfile;
 public class UserHelper {
     // variables
     String name, username, email, phone, password;
+
+
+    StaticRVAdapter medicines;
     ClientHelper client;
 
     public UserHelper(){
     }
 
     // constructor
-    public UserHelper(String name, String username, String email, String phone, String password, ClientHelper client) {
+    public UserHelper(String name, String username, String email, String phone, String password, ClientHelper client, StaticRVAdapter medicines) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.client = client;
+        this.medicines = medicines;
     }
 
+    public StaticRVAdapter getMedicines() {
+        return medicines;
+    }
     // get the name
     public String getName() {
         return name;

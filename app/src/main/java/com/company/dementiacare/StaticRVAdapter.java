@@ -9,21 +9,15 @@
 
 package com.company.dementiacare;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -31,13 +25,23 @@ import java.util.ArrayList;
 // The class for array of item (Adapter)
 public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.StaticRVViewHolder> {
 
+
     // The array of item
     private ArrayList<StaticRVModel> items;
     int row_index = -1;  //Check the item selected or not
 
     // The constructor for the adapter
+    public StaticRVAdapter(){
+        items = new ArrayList<StaticRVModel>();
+        items.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
+        items.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
+    }
     public StaticRVAdapter(ArrayList<StaticRVModel> items) {
         this.items = items;
+    }
+
+    public ArrayList<StaticRVModel> getItems() {
+        return items;
     }
 
     @NonNull

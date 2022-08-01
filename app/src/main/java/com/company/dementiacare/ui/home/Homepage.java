@@ -28,16 +28,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.MainActivity;
+import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.StaticRVModel;
+import com.company.dementiacare.ui.auth.SuccessSignUp;
 import com.company.dementiacare.ui.profile.ClientProfile;
 import com.company.dementiacare.ui.profile.UserProfile;
 import com.company.dementiacare.ui.add.AddActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -244,15 +253,31 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     // Set Schedule medicines from User's Database into an array item (For now we just testing the
     // by the random Model item will be done fully in Sprint 3
     private void setItemInfo(){
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 3"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 4"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 5"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 6"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 7"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 8"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 9"));
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        String username = getIntent().getStringExtra("username");
+
+        Query checkUser = reference.orderByChild("username").equalTo(username);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    StaticRVAdapter medFromDB =
+                            snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
+
+                    for (int i = 0; i < medFromDB.getItemCount(); i++){
+                        item.add(medFromDB.getItems().get(i));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     // Set all Info from User's Database into Adapter

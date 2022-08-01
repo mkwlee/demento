@@ -9,14 +9,26 @@
     android:background="#fff"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="140dp"
-        android:layout_height="150dp"
-        android:transitionName="logo_image"
-        android:scaleX="1.85"
-        android:scaleY="1.85"
-        android:src="@drawable/logo3"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="152dp"
+            android:layout_height="168dp"
+            android:layout_marginStart="109dp"
+            android:layout_toEndOf="@+id/logo_image"
+            android:src="@drawable/sun" />
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:scaleX="1.85"
+            android:scaleY="1.85"
+            android:src="@drawable/logo3"
+            android:transitionName="logo_image" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/logo_name"
