@@ -12,14 +12,16 @@ package com.company.dementiacare.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.company.dementiacare.applayer.MedicineBusinessLayer;
+import com.company.dementiacare.database.Med;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
@@ -37,9 +41,13 @@ import com.company.dementiacare.ui.add.AddActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -55,6 +63,11 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     private ArrayList<StaticRVModel> item = new ArrayList<>();
     MaterialButton addButton;
     TextView userName;
+
+    // medication list
+    private LinearLayout medicineLayout;
+    private Context mContext;
+
 
     // End scale of drawer layout
     static final float END_SCALE = 0.7f;
@@ -76,10 +89,12 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         drawerLayout = findViewById(R.id.drawer_layout_homepage);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
-        viewAll = findViewById(R.id.viewAll);
+//        viewAll = findViewById(R.id.viewAll);
         contentView = findViewById(R.id.content_homepage);
         helloText = findViewById(R.id.helloText);
-        recyclerView = findViewById(R.id.reminder_recycle);
+        medicineLayout = findViewById(R.id.medicationList);
+
+        mContext = getApplicationContext();
 
         // navigate to add page
         addButton = findViewById(R.id.add_button);
@@ -99,14 +114,230 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         // greeting text
         greetUser();
 
-        // set the item for the recycler view
-        setItemInfo();
-        // set the adapter for the recycler view
-        setAdapter();
+        try{
+            populateMedication();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+//        // set the item for the recycler view
+//        setItemInfo();
+//        // set the adapter for the recycler view
+//        setAdapter();
 
         // navigation drawer
         navigationDrawer();
-        viewReminder();
+//        viewReminder();
+    }
+
+    private void populateMedication() throws ParseException {
+        // get the upcoming medicine details
+        MedicineBusinessLayer MedicineObj = new MedicineBusinessLayer();
+
+        List<Med> MedicineList = MedicineObj.getAllMedicine(mContext);
+        System.out.println("medicine list size is: "+ MedicineList.size());
+
+        // sort medicine alphabetically
+        Collections.sort(MedicineList, new Comparator<Med>() {
+            @Override
+            public int compare(Med medicine1, Med medicine2) {
+                return medicine1.medName.compareTo(medicine2.medName);
+            }
+        });
+
+        if (MedicineList != null) {
+            if (MedicineList.size() != 0) {
+                showMedicineOnScreen(MedicineList, medicineLayout);
+            } else {
+                showNoMedicationAvailable(medicineLayout, "NO MEDICATIONS ADDED");
+            }
+        } else {
+            showNoMedicationAvailable(medicineLayout, "NO MEDICATIONS ADDED");
+        }
+    }
+
+    private void showMedicineOnScreen(List<Med> MedicineArrayList, LinearLayout linearLayout) {
+        for (int i = 0; i < MedicineArrayList.size(); i++) {
+
+            CardView CardViewObj = new CardView(mContext);
+
+            // set the layout params
+            LinearLayout.LayoutParams ParamsObj = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDPI(100));
+
+            // set the weight
+            ParamsObj.weight = 1.0f;
+
+            // set the parameters
+            CardViewObj.setLayoutParams(ParamsObj);
+
+            CardViewObj.setBackgroundColor(getResources().getColor(R.color.white));
+
+            // add margins
+            ViewGroup.MarginLayoutParams cardViewMarginParams = (ViewGroup.MarginLayoutParams) CardViewObj.getLayoutParams();
+            cardViewMarginParams.setMargins(getDPI(5), getDPI(5), getDPI(5), getDPI(5));
+
+            // create a linear layout
+            LinearLayout Parent = new LinearLayout(mContext);
+
+            // set the linear layout params
+            ParamsObj = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            // set the weight
+            ParamsObj.weight = 1.0f;
+
+            // set the orientation
+            Parent.setOrientation(LinearLayout.HORIZONTAL);
+
+            // set the padding
+            Parent.setPadding(getDPI(5), getDPI(5), getDPI(5), getDPI(5));
+
+            // set the layout
+            Parent.setLayoutParams(ParamsObj);
+
+            // Create the imageview object
+            ImageView ChildImageObj = new ImageView(mContext);
+
+            // set the linear layout params
+            ParamsObj = new LinearLayout.LayoutParams(getDPI(180), ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            // set the weight for the image
+            ParamsObj.weight = 1.0f;
+
+            ChildImageObj.setLayoutParams(ParamsObj);
+
+            // set the padding
+            ChildImageObj.setPadding(getDPI(20), getDPI(20), getDPI(10), getDPI(20));
+
+            // set the image ID
+            int ImageID = R.drawable.outline_medication_black_24dp;
+
+            // set the imageID
+            ChildImageObj.setImageResource(ImageID);
+
+            // add the image to the linear layout
+            Parent.addView(ChildImageObj);
+
+            LinearLayout ChildLinearLayout = new LinearLayout(mContext);
+
+            // set the linear layout params
+            ParamsObj = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            // set the weight
+            ParamsObj.weight = 1.0f;
+
+            // set the orientation
+            ChildLinearLayout.setOrientation(ChildLinearLayout.VERTICAL);
+
+            // add the params
+            ChildLinearLayout.setLayoutParams(ParamsObj);
+
+
+            // set the linear layout params
+            ParamsObj = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            // set the weight
+            ParamsObj.weight = 1.0f;
+
+            // Start of ChildTextView1
+            // create a child textview object
+            TextView ChildTextView1 = new TextView(mContext);
+
+            // set the padding
+            ChildTextView1.setPadding(getDPI(5), getDPI(5), getDPI(0), getDPI(0));
+
+            // set the text
+            ChildTextView1.setText(MedicineArrayList.get(i).medName);
+
+            // set the background color
+            ChildTextView1.setBackgroundColor(getResources().getColor(R.color.white));
+
+            // set the text size
+            ChildTextView1.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+
+            ChildTextView1.setTextColor(getResources().getColor(R.color.black));
+
+            // now since we have all the textview parameters
+            // now add the values to the linearLayout
+            ChildLinearLayout.addView(ChildTextView1);
+            // End of ChildTextView1
+
+            // Start of ChildTextView2
+            // create a child textview object
+            TextView ChildTextView2 = new TextView(mContext);
+
+            // set the padding
+            ChildTextView2.setPadding(getDPI(5), getDPI(5), getDPI(0), getDPI(0));
+
+            // set the text
+            ChildTextView2.setText(MedicineArrayList.get(i).dosage);
+
+            // set the text size
+            ChildTextView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+
+            ChildTextView2.setTextColor(getResources().getColor(R.color.light_gray));
+
+            // now since we have all the textview parameters
+            // now add the values to the linearLayout
+            ChildLinearLayout.addView(ChildTextView2);
+            // End of ChildTextView1
+
+            // Start of ChildTextView3
+            // create a child textview object
+            TextView ChildTextView3 = new TextView(mContext);
+
+            // set the padding
+            ChildTextView3.setPadding(getDPI(5), getDPI(5), getDPI(0), getDPI(0));
+
+            // set the text
+            ChildTextView3.setText(MedicineArrayList.get(i).startDate.toString());
+
+            // set the text size
+            ChildTextView3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+
+            ChildTextView3.setTextColor(getResources().getColor(R.color.light_gray));
+
+            // now since we have all the textview parameters
+            // now add the values to the linearLayout
+            ChildLinearLayout.addView(ChildTextView3);
+            // End of ChildTextView1
+
+
+            // add to the parent
+            Parent.addView(ChildLinearLayout);
+
+            // add the linear layout to the cardview
+            CardViewObj.addView(Parent);
+
+            CardViewObj.requestLayout();
+
+            linearLayout.addView(CardViewObj);
+        }
+
+    }
+
+    private void showNoMedicationAvailable(LinearLayout linearLayout, String TextID){
+        TextView ChildTextView2 = new TextView(mContext);
+
+        // set the padding
+        ChildTextView2.setPadding(getDPI(5), getDPI(5), getDPI(0), getDPI(0));
+
+        // set the text
+        ChildTextView2.setText(TextID);
+
+        // set the text size
+        ChildTextView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+
+        ChildTextView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        ChildTextView2.setTextColor(getResources().getColor(R.color.light_gray));
+
+        // now since we have all the textview parameters
+        // now add the values to the linearLayout
+        linearLayout.addView(ChildTextView2);
+    }
+
+    public int getDPI(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 
     // greeting user based on the time
@@ -128,31 +359,31 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     // Function show all or less the user's schedule
-    private void viewReminder() {
-        viewAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkViewAll) {
-                    // if the user clicks on view all, show all the reminders
-                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    recyclerView.setLayoutParams(params);
-                    viewAll.setText("View Less");
-                    checkViewAll = true;
-                }
-                else{
-                    // if the user clicks on view less, show only the first 3 reminders
-                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = 800;
-                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                    recyclerView.setLayoutParams(params);
-                    viewAll.setText("View All");
-                    checkViewAll = false;
-                }
-            }
-        });
-    }
+//    private void viewReminder() {
+//        viewAll.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!checkViewAll) {
+//                    // if the user clicks on view all, show all the reminders
+//                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+//                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//                    recyclerView.setLayoutParams(params);
+//                    viewAll.setText("View Less");
+//                    checkViewAll = true;
+//                }
+//                else{
+//                    // if the user clicks on view less, show only the first 3 reminders
+//                    ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+//                    params.height = 800;
+//                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//                    recyclerView.setLayoutParams(params);
+//                    viewAll.setText("View All");
+//                    checkViewAll = false;
+//                }
+//            }
+//        });
+//    }
 
     // Set the vertical navigation in the homepage
     private void navigationDrawer() {
@@ -238,26 +469,26 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
-    // Set Schedule medicines from User's Database into an array item (For now we just testing the
-    // by the random Model item will be done fully in Sprint 3
-    private void setItemInfo(){
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 3"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 4"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 5"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 6"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 7"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 8"));
-        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 9"));
-    }
-
-    // Set all Info from User's Database into Adapter
-    private void setAdapter(){
-        // set the adapter for the recycler view
-        staticRVAdapter = new StaticRVAdapter(item);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(staticRVAdapter);
-    }
+//    // Set Schedule medicines from User's Database into an array item (For now we just testing the
+//    // by the random Model item will be done fully in Sprint 3
+//    private void setItemInfo(){
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 2"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 3"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 4"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 5"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 6"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 7"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 8"));
+//        item.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 9"));
+//    }
+//
+//    // Set all Info from User's Database into Adapter
+//    private void setAdapter(){
+//        // set the adapter for the recycler view
+//        staticRVAdapter = new StaticRVAdapter(item);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        recyclerView.setAdapter(staticRVAdapter);
+//    }
 
 }

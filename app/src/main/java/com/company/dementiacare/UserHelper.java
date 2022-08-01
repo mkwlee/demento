@@ -10,12 +10,16 @@
 
 package com.company.dementiacare;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(primaryKeys = {"name", "username", "email", "phone", "password"})
 public class UserHelper {
     // variables
+    @NonNull
     String name, username, email, phone, password;
-
-    public UserHelper(){
-    }
+    public boolean userPresent;
 
     // constructor
     public UserHelper(String name, String username, String email, String phone, String password) {

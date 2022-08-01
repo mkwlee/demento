@@ -11,9 +11,9 @@ public class MedicineReminder {
     static private String unit;
     static private String type;
     static private String color;
+    static private String des;
     static private String startDate;
     static private String endDate;
-    static private String path;
     static private int isDaily;
 
     public MedicineReminder() {
@@ -36,6 +36,8 @@ public class MedicineReminder {
 
     public void setUnit(String unit){ this.unit = unit;}
 
+    public void setDes(String des){this.des = des;}
+
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
@@ -48,13 +50,11 @@ public class MedicineReminder {
         this.isDaily = isDaily;
     }
 
-    public void setDrugBoxImagePath(String path) {
-        this.path = path;
-    }
-
     public String getPatient(){
         return this.patient;
     }
+
+    public String getDes() {return this.des;}
 
     public String getName() {
         return this.name;
@@ -68,8 +68,8 @@ public class MedicineReminder {
         return this.dosage;
     }
 
-    public static String getUnit() {
-        return unit;
+    public String getUnit() {
+        return this.unit;
     }
 
     public String getStartDate() {
@@ -83,11 +83,7 @@ public class MedicineReminder {
     public int getIsDaily() {
         return this.isDaily;
     }
-
-    public String getDrugBoxImagePath() {
-        return this.path;
-    }
-
+    
     public ArrayList<ArrayList<String>> getWeekSchedule() {
         return this.weekSchedule;
     }

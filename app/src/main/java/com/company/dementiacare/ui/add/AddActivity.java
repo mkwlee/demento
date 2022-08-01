@@ -319,6 +319,7 @@ public class AddActivity extends AppCompatActivity {
                     medicineReminder.setColor(selectedColor);
                     medicineReminder.setDosage(dosage);
                     medicineReminder.setUnit(selectedUnit);
+                    medicineReminder.setDes(description);
                     Intent i = new Intent(AddActivity.this, ReminderActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
