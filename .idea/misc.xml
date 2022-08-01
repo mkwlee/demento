@@ -21,7 +21,19 @@
         <entry key="..\:/dementia-care/app/src/main/res/layout/patient_spinner_item.xml" value="0.20863616930312098" />
         <entry key="..\:/dementia-care/app/src/main/res/layout/type_list_view_item.xml" value="0.20863616930312098" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/add_background.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_add_task_black_48dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_alarm_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_arrow_back_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_arrow_drop_down_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_arrow_drop_down_black_36dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_arrow_right_alt_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_assignment_return_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_calendar_month_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_check_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_check_circle_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_close_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_dangerous_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_face_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_favorite_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_home_black_24dp.xml" value="0.1865" />
@@ -30,11 +42,28 @@
         <entry key="app/src/main/res/drawable/baseline_logout_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_menu_black_48dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/baseline_note_add_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_person_outline_black_36dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/baseline_qr_code_scanner_black_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/dynamic_rv_bg.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/dynamic_rv_selected_bg.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/gradient_drawable.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_email_35.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_local_phone_35.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_35.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_alarm_add_black_36dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_alarm_add_white_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_check_circle_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_check_circle_white_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_medication_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_medication_liquid_white_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_medication_white_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_mode_edit_black_24dp.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/outline_water_drop_white_24dp.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/static_rv_bg.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/static_rv_item.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/static_rv_selected_bg.xml" value="0.1865" />

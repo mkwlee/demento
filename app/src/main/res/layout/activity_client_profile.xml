@@ -59,7 +59,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/baseline_face_black_24dp" />
+                android:src="@drawable/client_small_icon" />
 
             <TextView
                 android:id="@+id/client_profile_full_name"
@@ -112,7 +112,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/phone_small_icon"
+                        android:drawableStart="@drawable/age_small_icon"
                         android:drawablePadding="10dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +127,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/mail_small_icon"
+                        android:drawableStart="@drawable/gender_small_icon"
                         android:drawablePadding="10dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +141,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/password_small_icon"
+                        android:drawableStart="@drawable/stage_small_icon"
                         android:drawablePadding="10dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -156,7 +156,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/password_small_icon"
+                        android:drawableStart="@drawable/height_small_icon"
                         android:drawablePadding="10dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -171,7 +171,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/password_small_icon"
+                        android:drawableStart="@drawable/weight_small_icon"
                         android:drawablePadding="10dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>

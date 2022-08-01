@@ -26,7 +26,7 @@
                 <item
                     android:id="@+id/nav_client_profile"
                     android:title="Client Profile"
-                    android:icon="@drawable/baseline_face_black_24dp"/>
+                    android:icon="@drawable/client_small_icon"/>
                 <item
                     android:id="@+id/nav_logout"
                     android:title="Log out"
