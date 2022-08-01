@@ -150,7 +150,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/password_small_icon"
-                    android:drawablePadding="10dp" />
+                    android:drawablePadding="10dp"
+                    android:inputType="textPassword"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
