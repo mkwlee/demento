@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
 import com.company.dementiacare.UserHelper;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,7 +33,6 @@ public class SignUp extends AppCompatActivity {
     // Firebase variables
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,8 +183,10 @@ public class SignUp extends AppCompatActivity {
         String phone = regPhone.getEditText().getText().toString().trim();
         String password = regPassword.getEditText().getText().toString().trim();
 
+        ClientHelper client = new ClientHelper();
+
         //Storing Data in firebase
-        UserHelper helper = new UserHelper(name ,username, email, phone, password);
+        UserHelper helper = new UserHelper(name ,username, email, phone, password, client);
         reference.child(username).setValue(helper);
 
         // navigate to success page

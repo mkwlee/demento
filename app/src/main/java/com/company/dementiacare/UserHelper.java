@@ -10,20 +10,24 @@
 
 package com.company.dementiacare;
 
+import com.company.dementiacare.ui.profile.ClientProfile;
+
 public class UserHelper {
     // variables
     String name, username, email, phone, password;
+    ClientHelper client;
 
     public UserHelper(){
     }
 
     // constructor
-    public UserHelper(String name, String username, String email, String phone, String password) {
+    public UserHelper(String name, String username, String email, String phone, String password, ClientHelper client) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.client = client;
     }
 
     // get the name
@@ -49,5 +53,9 @@ public class UserHelper {
     // get the password
     public String getPassword() {
         return password;
+    }
+
+    public ClientHelper getClient(){
+        return client;
     }
 }
