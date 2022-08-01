@@ -188,6 +188,7 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        String username = getIntent().getStringExtra("username");
         switch (item.getItemId()){
             case R.id.nav_logout:
             // navigate to the login page
@@ -196,10 +197,16 @@ public class UserProfile extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.nav_home:
             // navigate to the home page
-                Intent intent = new Intent(getApplicationContext(), Homepage.class);
-                String username = getIntent().getStringExtra("username");
-                intent.putExtra("username", username);
-                startActivity(intent);
+                Intent intent1 = new Intent(getApplicationContext(), Homepage.class);
+                intent1.putExtra("username", username);
+                startActivity(intent1);
+                finish();
+                break;
+            case R.id.nav_client_profile:
+                // navigate to the client profile page
+                Intent intent2 = new Intent(getApplicationContext(), ClientProfile.class);
+                intent2.putExtra("username", username);
+                startActivity(intent2);
                 finish();
                 break;
         }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity$ClientProfile">
+    tools:context=".MainActivity$ClientProfile"
+    android:id="@+id/drawer_layout_client_profile">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -20,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/content_profile"
+        android:id="@+id/content_client_profile"
         android:padding="10dp">
 
         <RelativeLayout
