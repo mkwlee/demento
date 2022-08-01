@@ -99,7 +99,6 @@
                 android:id="@+id/name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="lay"
                 android:hint="Full Name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
