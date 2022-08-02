@@ -10,14 +10,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
 import com.company.dementiacare.UserHelper;
+import com.company.dementiacare.ui.add.AddClient;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.ui.auth.SuccessSignUp;
 import com.company.dementiacare.ui.home.Homepage;
@@ -30,10 +34,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class ClientProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextInputLayout name, age, gender, height, weight, stage;
-    TextView clientTextView;
+    Spinner clientSpinner;
 
     static final float END_SCALE = 0.7f;
 
@@ -45,6 +51,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     NavigationView navigationView;
     LinearLayout contentView;
     ImageView menuIcon;
+
+    ArrayList<String> clientNameList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +71,7 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
         height = findViewById(R.id.client_height);
         weight = findViewById(R.id.client_weight);
         stage = findViewById(R.id.client_stage);
-        clientTextView = findViewById(R.id.client_profile_full_name);
+        clientSpinner = findViewById(R.id.client_picker);
         contentView = findViewById(R.id.content_client_profile);
         menuIcon = findViewById(R.id.menu_icon);
 
@@ -77,37 +85,78 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // if the username is not found in the database
-                if(snapshot.exists()){
+                UserHelper user =
+                        snapshot.child(username).getValue(UserHelper.class);
+                if (user.getClient() != null){
+                    for (int i = 0; i < user.getClient().size(); i++){
+                        clientNameList.add(user.getClient().get(i).getName());
+                    }
+                    ArrayAdapter<String> clientAdapter = new ArrayAdapter<String>(ClientProfile.this,R.layout.patient_spinner_item,
+                            clientNameList);
+                    clientSpinner.setAdapter(clientAdapter);
+                    clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+                        //Take all data from the username's database
+                        String clientNameFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("name").getValue(String.class);
 
-                    //Take all data from the username's database
-                    String clientNameFromDB =
-                            snapshot.child(username).child("client").child("name").getValue(String.class);
-                    _NAME = clientNameFromDB;
+                        String clientAgeFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("age").getValue(String.class);
+                        _AGE = clientAgeFromDB;
 
-                    String clientAgeFromDB =
-                            snapshot.child(username).child("client").child("age").getValue(String.class);
-                    _AGE = clientAgeFromDB;
+                        String clientGenderFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("gender").getValue(String.class);
+                        _GENDER = clientGenderFromDB;
 
-                    String clientGenderFromDB =
-                            snapshot.child(username).child("client").child("gender").getValue(String.class);
-                    _GENDER = clientGenderFromDB;
+                        String clientHeightFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("height").getValue(String.class);
+                        _HEIGHT = clientHeightFromDB;
 
-                    String clientHeightFromDB =
-                            snapshot.child(username).child("client").child("height").getValue(String.class);
-                    _HEIGHT = clientHeightFromDB;
+                        String clientWeightFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("weight").getValue(String.class);
+                        _WEIGHT = clientWeightFromDB;
 
-                    String clientWeightFromDB =
-                            snapshot.child(username).child("client").child("weight").getValue(String.class);
-                    _WEIGHT = clientWeightFromDB;
+                        String clientStageFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(index)).child("stage").getValue(String.class);
+                        _STAGE = clientStageFromDB;
 
-                    String clientStageFromDB =
-                            snapshot.child(username).child("client").child("stage").getValue(String.class);
-                    _STAGE = clientStageFromDB;
+                        //Show all client data
+                        showAllClientData(clientNameFromDB, clientAgeFromDB, clientGenderFromDB, clientHeightFromDB,
+                        clientWeightFromDB, clientStageFromDB);
+                    }
 
-                    //Show all client data
-                    showAllClientData(clientNameFromDB, clientAgeFromDB, clientGenderFromDB, clientHeightFromDB, clientWeightFromDB, clientStageFromDB);
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        String clientNameFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("name").getValue(String.class);
+                        _NAME = clientNameFromDB;
 
+                        String clientAgeFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("age").getValue(String.class);
+                        _AGE = clientAgeFromDB;
+
+                        String clientGenderFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("gender").getValue(String.class);
+                        _GENDER = clientGenderFromDB;
+
+                        String clientHeightFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("height").getValue(String.class);
+                        _HEIGHT = clientHeightFromDB;
+
+                        String clientWeightFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("weight").getValue(String.class);
+                        _WEIGHT = clientWeightFromDB;
+
+                        String clientStageFromDB =
+                                snapshot.child(username).child("client").child(String.valueOf(0)).child("stage").getValue(String.class);
+                        _STAGE = clientStageFromDB;
+
+                        //Show all client data
+                        showAllClientData(clientNameFromDB, clientAgeFromDB, clientGenderFromDB, clientHeightFromDB,
+                                clientWeightFromDB, clientStageFromDB);
+                    }
+                });
                 }
             }
 
@@ -204,6 +253,14 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
                 startActivity(intent2);
                 finish();
                 break;
+            case R.id.nav_add_client_profile:
+                // navigate to the profile page
+                Intent intent3 = new Intent(getApplicationContext(), AddClient.class);
+                intent3.putExtra("username", username);
+                startActivity(intent3);
+                finish();
+                break;
+
         }
         return true;
     }
@@ -215,7 +272,6 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
         height.getEditText().setText(clientHeightFromDB);
         weight.getEditText().setText(clientWeightFromDB);
         stage.getEditText().setText(clientStageFromDB);
-        clientTextView.setText(clientNameFromDB);
     }
 
     // Send the Toast message when you success updating the data
@@ -229,9 +285,10 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isNameChanged() {
         if (!_NAME.equals(name.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("name").setValue(name.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("name")
+                    .setValue(name.getEditText().getText().toString());
             _NAME = name.getEditText().getText().toString();
-            clientTextView.setText(_NAME);
+            clientNameList.set(clientSpinner.getSelectedItemPosition(), _NAME);
             return true;
         }
         else{
@@ -243,7 +300,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isAgeChanged() {
         if (!_AGE.equals(age.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("age").setValue(age.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("age")
+                    .setValue(age.getEditText().getText().toString());
             _AGE = age.getEditText().getText().toString();
             return true;
         }
@@ -256,7 +314,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isGenderChanged() {
         if (!_GENDER.equals(gender.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("gender").setValue(gender.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("gender")
+                    .setValue(gender.getEditText().getText().toString());
             _GENDER = gender.getEditText().getText().toString();
             return true;
         }
@@ -269,7 +328,7 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isHeightChanged() {
         if (!_HEIGHT.equals(height.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("height").setValue(height.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("height").setValue(height.getEditText().getText().toString());
             _HEIGHT = height.getEditText().getText().toString();
             return true;
         }
@@ -281,7 +340,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isWeightChanged() {
         if (!_WEIGHT.equals(weight.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("weight").setValue(weight.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("weight")
+                    .setValue(weight.getEditText().getText().toString());
             _WEIGHT = weight.getEditText().getText().toString();
             return true;
         }
@@ -293,7 +353,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     private boolean isStageChanged() {
         if (!_STAGE.equals(stage.getEditText().getText().toString())){
 
-            reference.child(_USERNAME).child("client").child("stage").setValue(stage.getEditText().getText().toString());
+            reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("stage")
+                    .setValue(stage.getEditText().getText().toString());
             _STAGE = stage.getEditText().getText().toString();
             return true;
         }

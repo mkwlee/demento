@@ -31,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class SignUp extends AppCompatActivity {
 
     //Variables
@@ -206,7 +208,7 @@ public class SignUp extends AppCompatActivity {
                     String phone = regPhone.getEditText().getText().toString().trim();
                     String password = regPassword.getEditText().getText().toString().trim();
 
-                    ClientHelper client = new ClientHelper();
+                    ArrayList<ClientHelper> client = new ArrayList<ClientHelper>();
 
                     StaticRVAdapter medicine = new StaticRVAdapter();
 

@@ -15,6 +15,9 @@ public class StaticRVModel {
         this.visibility = false;
     }
 
+    public StaticRVModel() {
+    }
+
 
     // get the image
     public int getImage() {

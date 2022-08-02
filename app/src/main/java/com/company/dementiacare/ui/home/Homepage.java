@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.UserHelper;
+import com.company.dementiacare.ui.add.AddClient;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
@@ -246,6 +247,13 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(intent2);
                 finish();
                 break;
+            case R.id.nav_add_client_profile:
+                Intent intent3 = new Intent(getApplicationContext(), AddClient.class);
+                intent3.putExtra("username", username);
+                startActivity(intent3);
+                finish();
+                break;
+
         }
         return true;
     }

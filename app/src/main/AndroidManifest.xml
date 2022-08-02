@@ -63,6 +63,9 @@
             android:name=".ui.profile.ClientProfile"
             android:exported="false" />
         <activity
+            android:name=".ui.add.AddClient"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

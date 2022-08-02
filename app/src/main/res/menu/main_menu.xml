@@ -28,6 +28,10 @@
                     android:title="Client Profile"
                     android:icon="@drawable/client_small_icon"/>
                 <item
+                    android:id="@+id/nav_add_client_profile"
+                    android:title="Add Client"
+                    android:icon="@drawable/client_small_icon"/>
+                <item
                     android:id="@+id/nav_logout"
                     android:title="Log out"
                     android:icon="@drawable/baseline_logout_black_24dp"/>

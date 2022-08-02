@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity$ClientProfile"
-    android:id="@+id/drawer_layout_client_profile">
+    tools:context=".ui.add.AddClient"
+    android:id="@+id/drawer_layout_add_client_profile">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -54,20 +54,24 @@
             android:background="@drawable/layout_bg"
             android:padding="20dp">
 
-            <ImageView
-                android:id="@+id/client_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/client_small_icon" />
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/add_client"/>
 
-            <Spinner
-                android:id="@+id/client_picker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/client_profile_image"
-                android:gravity="center"/>
+            <TextView
+                android:id="@+id/client_profile_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/righteous"
+                android:includeFontPadding="false"
+                android:text="Add new Client"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
 
         </RelativeLayout>
@@ -83,7 +87,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_name"
+                    android:id="@+id/add_client_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Full Name"
@@ -98,7 +102,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_age"
+                    android:id="@+id/add_client_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Age"
@@ -113,7 +117,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_gender"
+                    android:id="@+id/add_client_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Gender"
@@ -127,7 +131,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_stage"
+                    android:id="@+id/add_client_stage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Stage"
@@ -142,7 +146,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_height"
+                    android:id="@+id/add_client_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Height"
@@ -157,7 +161,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/client_weight"
+                    android:id="@+id/add_client_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Weight"
@@ -174,13 +178,12 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Update"
+                    android:text="Add"
                     android:fontFamily="@font/righteous"
                     android:backgroundTint="@color/colorPrimary"
                     android:textColor="#fff"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/client_update_button"
-                    android:onClick="updateClientData"/>
+                    android:id="@+id/add_client_update_button" />
 
 
             </LinearLayout>

@@ -12,19 +12,22 @@ package com.company.dementiacare;
 
 import com.company.dementiacare.ui.profile.ClientProfile;
 
+import java.util.ArrayList;
+
 public class UserHelper {
     // variables
     String name, username, email, phone, password;
 
 
+    ArrayList<ClientHelper> client;
+
     StaticRVAdapter medicines;
-    ClientHelper client;
 
     public UserHelper(){
     }
 
     // constructor
-    public UserHelper(String name, String username, String email, String phone, String password, ClientHelper client, StaticRVAdapter medicines) {
+    public UserHelper(String name, String username, String email, String phone, String password, ArrayList<ClientHelper> client, StaticRVAdapter medicines) {
         this.username = username;
         this.name = name;
         this.email = email;
@@ -62,7 +65,11 @@ public class UserHelper {
         return password;
     }
 
-    public ClientHelper getClient(){
+    public ArrayList<ClientHelper> getClient(){
         return client;
     }
+    public void setClient(ArrayList<ClientHelper> client) {
+        this.client = client;
+    }
+
 }
