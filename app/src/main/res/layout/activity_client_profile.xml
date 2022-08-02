@@ -67,7 +67,8 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/client_profile_image"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginLeft="20dp"/>
 
 
         </RelativeLayout>

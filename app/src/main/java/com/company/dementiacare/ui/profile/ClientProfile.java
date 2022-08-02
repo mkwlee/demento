@@ -100,6 +100,7 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
                         //Take all data from the username's database
                         String clientNameFromDB =
                                 snapshot.child(username).child("client").child(String.valueOf(index)).child("name").getValue(String.class);
+                        _NAME = clientNameFromDB;
 
                         String clientAgeFromDB =
                                 snapshot.child(username).child("client").child(String.valueOf(index)).child("age").getValue(String.class);
@@ -278,6 +279,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
     public void updateClientData(View view){
         if (isNameChanged() | isAgeChanged() | isGenderChanged() | isHeightChanged() | isWeightChanged() | isStageChanged()){
             Toast.makeText(this, "Client Data has been updated", Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(getIntent());
         }
     }
 
@@ -288,7 +291,8 @@ public class ClientProfile extends AppCompatActivity implements NavigationView.O
             reference.child(_USERNAME).child("client").child(String.valueOf(clientSpinner.getSelectedItemPosition())).child("name")
                     .setValue(name.getEditText().getText().toString());
             _NAME = name.getEditText().getText().toString();
-            clientNameList.set(clientSpinner.getSelectedItemPosition(), _NAME);
+            int pos = clientSpinner.getSelectedItemPosition();
+            clientNameList.set(pos, _NAME);
             return true;
         }
         else{
