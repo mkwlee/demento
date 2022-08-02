@@ -31,13 +31,23 @@ import java.util.ArrayList;
 // The class for array of item (Adapter)
 public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.StaticRVViewHolder> {
 
+
     // The array of item
     private ArrayList<StaticRVModel> items;
     int row_index = -1;  //Check the item selected or not
 
+    public StaticRVAdapter(){
+        items = new ArrayList<StaticRVModel>();
+        items.add(new StaticRVModel(R.drawable.outline_medication_black_24dp, "Reminder 1"));
+    }
+
     // The constructor for the adapter
     public StaticRVAdapter(ArrayList<StaticRVModel> items) {
         this.items = items;
+    }
+
+    public ArrayList<StaticRVModel> getItems() {
+        return items;
     }
 
     @NonNull

@@ -17,7 +17,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.company.dementiacare.R;
+import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.UserHelper;
+import com.company.dementiacare.ui.add.MedicineFire;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -183,8 +185,11 @@ public class SignUp extends AppCompatActivity {
         String phone = regPhone.getEditText().getText().toString().trim();
         String password = regPassword.getEditText().getText().toString().trim();
 
+        MedicineFire medicineFire = new MedicineFire();
+        StaticRVAdapter medicines = new StaticRVAdapter();
+
         //Storing Data in firebase
-        UserHelper helper = new UserHelper(name ,username, email, phone, password);
+        UserHelper helper = new UserHelper(name ,username, email, phone, password, medicines);
         reference.child(username).setValue(helper);
 
         // navigate to success page

@@ -43,6 +43,8 @@ import android.widget.Toast;
 
 import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.R;
+import com.company.dementiacare.StaticRVAdapter;
+import com.company.dementiacare.StaticRVModel;
 import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.applayer.AddNewMedicineLayer;
 import com.company.dementiacare.component.DatePickerFragment;
@@ -388,6 +390,7 @@ public class ReminderActivity extends AppCompatActivity{
             }
         });
 
+
         // when the save button is clicked, send a toast to the user and save entered data
         saveButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -511,7 +514,29 @@ public class ReminderActivity extends AppCompatActivity{
                             }
 
                             // Add medicine data into internal database
-                            AddNewMedicineLayer.AddMedicine(appData, tagDaily, medName, medDosage, medColor, medUnit, patient, medType, medDes, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
+//                            AddNewMedicineLayer.AddMedicine(appData, tagDaily, medName, medDosage, medColor, medUnit, patient, medType, medDes, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
+                            StaticRVModel newMed = new StaticRVModel(R.drawable.outline_medication_black_24dp, medName);
+
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+                            String username = getIntent().getStringExtra("username");
+
+                            Query checkUser = reference.orderByChild("username").equalTo(username);
+
+                            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        StaticRVAdapter medFromDB = snapshot.child("medicines").getValue(StaticRVAdapter.class);
+                                        medFromDB.getItems().add(newMed);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
 
                             //Parsing data into a particular format.
                             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");

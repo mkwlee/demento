@@ -19,15 +19,17 @@ public class UserHelper {
     // variables
     @NonNull
     String name, username, email, phone, password;
+    StaticRVAdapter medicines;
     public boolean userPresent;
 
     // constructor
-    public UserHelper(String name, String username, String email, String phone, String password) {
+    public UserHelper(String name, String username, String email, String phone, String password, StaticRVAdapter medicines) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.medicines = medicines;
     }
 
     // get the name
