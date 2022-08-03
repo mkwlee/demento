@@ -22,7 +22,7 @@ public class Type {
     }
 
     // get the type's name
-    public String getDayString() {
+    public String getTypeString() {
         return typeString;
     }
 }

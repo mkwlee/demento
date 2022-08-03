@@ -37,6 +37,7 @@ import android.widget.Toast;
 import com.company.dementiacare.R;
 import com.company.dementiacare.TM_RecyclerViewAdaptor;
 import com.company.dementiacare.component.Colors;
+import com.company.dementiacare.component.MedicineReminder;
 import com.company.dementiacare.component.Type;
 import com.company.dementiacare.component.TypeModal;
 import com.company.dementiacare.component.WeekDay;
@@ -57,6 +58,8 @@ public class AddActivity extends AppCompatActivity {
 
     // Declare variables
 
+    // call medicineReminder to set the reminder
+    private MedicineReminder medicineReminder;
     // camera variables
     Bitmap bitmap;
     // camera Request code
@@ -65,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
     // Card view list for colors
     public static CardView[] colorCard = new CardView[7];
     // Card view list for types
-    public static CardView[] typeCard = new CardView[3];
+    public static CardView[] typeCard = new CardView[6];
 
     // hash map for colors
     private HashMap<String, Colors> colorIdStrMap = new HashMap<>();
@@ -77,7 +80,7 @@ public class AddActivity extends AppCompatActivity {
     private CardView currentColorCard;
 
     // current type selected
-    private Colors currentType;
+    private Type currentType;
     private CardView currentTypeCard;
 
     // create a list of types of medicine
@@ -87,41 +90,48 @@ public class AddActivity extends AppCompatActivity {
     ImageButton closeButton, scannerButton;
 
     // medicine input
-    TextInputLayout medicineLayout, dosageLayout;
-
-    // text inside the input
-    TextInputEditText medicineName;
+    TextInputLayout medicineLayout, dosageLayout, descriptionLayout;
+    String selectedType, selectedColor;
 
     // dropdown menu for dosage of medicine
     Spinner unitSpinner, patientSpinner;
     // list of dosage of medicine
     private static final String[] units = {"g", "IU", "mcg", "mcg/hr", "mcg/ml", "mEq", "mg", "mg/cm2", "mg/g", "mg/ml", "ml", "%"};
+    String selectedUnit;
 
     // list of patients with random ame
     private static final String[] patients = {"John", "Jane", "Jack", "Jill", "Joe", "Juan", "Jenny", "Juanita", "Juanito", "Juanita", "Juanito"};
+    String selectedPatient;
 
     // list of the colors
     private final String[] colors = {"red", "green", "blue", "white", "black", "orange", "yellow"};
 
-    private final String[] types = {"drop", "tablet", "capsule"};
+    private final String[] types = {"drop", "tablet", "capsule", "liquid", "injection", "inhaler"};
 
 
     // list of the images of the types of medicine
-    int [] typesImages = {R.drawable.outline_medication_black_24dp, R.drawable.outline_medication_black_24dp, R.drawable.outline_water_drop_white_24dp};
+    int [] typesImages = {R.drawable.outline_medication_black_24dp, R.drawable.outline_medication_black_24dp, R.drawable.outline_water_drop_white_24dp
+            , R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp
+    };
 
     // next button
-    View nextButton;
+    MaterialButton nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        medicineReminder = new MedicineReminder();
+
         // find the medicine name input field
         medicineLayout = findViewById(R.id.medicine_name_input);
 
         // find the dosage input field
         dosageLayout = findViewById(R.id.medicine_dosage);
+
+        // find the description layout by id
+        descriptionLayout = findViewById(R.id.medicine_description);
 
         // Camera permissions
         if (ContextCompat.checkSelfPermission(AddActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
@@ -137,7 +147,6 @@ public class AddActivity extends AppCompatActivity {
                 CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(AddActivity.this);
             }
         });
-
         // setup the types modals
 //        RecyclerView recyclerView = findViewById(R.id.medicine_type_list_recyclerView);
 
@@ -161,19 +170,18 @@ public class AddActivity extends AppCompatActivity {
         // set the patient name to the first patient in the list and the patient spinner to the adapter
 //        patientName.setText(patients[0]);
         patientSpinner.setAdapter(patientAdapter);
-        // set the patient name to the patient name in the spinner when the spinner is changed
-//        patientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                patientName.setText(patients[i]);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//                patientName.setText(patients[0]);
-//            }
-//        });
 
+        // set the selected patient to the patient that is selected in the spinner
+        patientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedPatient = patients[i];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                selectedPatient = patients[0];                
+            }
+        });
 
         // Dropdown menu for units picker
         unitSpinner = findViewById(R.id.unit_picker);
@@ -183,35 +191,29 @@ public class AddActivity extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
         unitSpinner.setAdapter(adapter);
 
-        // find the next button by id
-        nextButton = findViewById(R.id.next_button);
-        // handle the next button actions and animations
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        // set the selected unit to the unit that is selected in the spinner
+        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                // validate the medicine name
-                boolean validMedicine = validateMedicineInput();
-                boolean validDosage = validateDosageInput();
-                if (validMedicine && validDosage){
-                    // if the medicine name is valid, then move to the next activity
-                    Intent i = new Intent(AddActivity.this, ReminderActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedUnit = units[i];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                selectedUnit = units[0];
             }
         });
 
         // get the ids from the colors list and add them to the hash map
         for (int colorIndex = 0; colorIndex < colors.length; ++colorIndex) {
-            int weekDayId = getResources().getIdentifier(colors[colorIndex], "id",
+            int colorId = getResources().getIdentifier(colors[colorIndex], "id",
                     getApplicationContext().getPackageName());
-            colorIdStrMap.put(Integer.toString(weekDayId), new Colors(colors[colorIndex]));
+            colorIdStrMap.put(Integer.toString(colorId), new Colors(colors[colorIndex]));
 
             // find the current color button and set the color to the color in the list
-            final CardView currentDayButton = findViewById(weekDayId);
-            colorCard[colorIndex] = currentDayButton;
+            final CardView currentColorButton = findViewById(colorId);
+            colorCard[colorIndex] = currentColorButton;
             // set a listener to the current color button
-            currentDayButton.setOnTouchListener(new View.OnTouchListener() {
+            currentColorButton.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
                     // motion event is a motion event that is triggered by the user touching the screen
@@ -224,12 +226,12 @@ public class AddActivity extends AppCompatActivity {
                                 return false;
                             }
                             // set the color to the color in the list
-                            setCurrentColor(currentDayButton);
+                            setCurrentColor(currentColorButton);
                             // set the color to the color in the list
-                            AddActivity.this.currentColorCard = currentDayButton;
+                            AddActivity.this.currentColorCard = currentColorButton;
                             // Add Time button should be active only when week mode selected
                             // or specific day selected
-                            int buttonId = currentDayButton.getId();
+                            int buttonId = currentColorButton.getId();
                             currentColor = colorIdStrMap.get(Integer.toString(buttonId));
                             return false;
                     }
@@ -240,14 +242,14 @@ public class AddActivity extends AppCompatActivity {
 
         // find the add time button by id and map it to the hash map
         for (int typeIndex = 0; typeIndex < types.length; ++typeIndex) {
-            int weekDayId = getResources().getIdentifier(types[typeIndex], "id",
+            int typeId = getResources().getIdentifier(types[typeIndex], "id",
                     getApplicationContext().getPackageName());
-            typeIdStrMap.put(Integer.toString(weekDayId), new Type(types[typeIndex]));
+            typeIdStrMap.put(Integer.toString(typeId), new Type(types[typeIndex]));
 
             // find the current color button and set the color to the color in the list
-            final CardView currentDayButton = findViewById(weekDayId);
-            typeCard[typeIndex] = currentDayButton;
-            currentDayButton.setOnTouchListener(new View.OnTouchListener() {
+            final CardView currentTypeButton = findViewById(typeId);
+            typeCard[typeIndex] = currentTypeButton;
+            currentTypeButton.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
                     switch (event.getAction()) {
@@ -258,18 +260,76 @@ public class AddActivity extends AppCompatActivity {
                                 return false;
                             }
                             // set the color to the color in the list
-                            setCurrentType(currentDayButton);
-                            AddActivity.this.currentTypeCard = currentDayButton;
+                            setCurrentType(currentTypeButton);
+                            AddActivity.this.currentTypeCard = currentTypeButton;
                             // Add Time button should be active only when week mode selected
                             // or specific day selected
-                            int buttonId = currentDayButton.getId();
-                            currentType = colorIdStrMap.get(Integer.toString(buttonId));
+                            int buttonId = currentTypeButton.getId();
+                            currentType = typeIdStrMap.get(Integer.toString(buttonId));
                             return false;
                     }
                     return false;
                 }
             });
         }
+
+        // find the next button by id
+        nextButton = findViewById(R.id.next_button);
+        // handle the next button actions and animations
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // get all the inputs and boolean that has been entered or checked
+
+                // get the medicine name
+                String medicineName = medicineLayout.getEditText().getText().toString();
+                // validate medicine name
+                boolean validMedicine = validateMedicineInput();
+                // get the dosage amount
+                String dosage = dosageLayout.getEditText().getText().toString();
+
+                // get the description text
+                String description = descriptionLayout.getEditText().getText().toString();
+
+                // validate the dosage amount
+                boolean validDosage = validateDosageInput();
+                // get the type selected
+                if (currentType != null){
+                    selectedType = currentType.getTypeString();
+                }
+                // get the color selected
+                if (currentColor != null) {
+                    selectedColor = currentColor.getColorString();
+                }
+
+                if (!validMedicine){
+                    Toast.makeText(getApplicationContext(), "Please enter medicine name", Toast.LENGTH_LONG).show();
+                }
+                else if (!validDosage){
+                    Toast.makeText(getApplicationContext(), "Please enter dosage", Toast.LENGTH_LONG).show();
+                }
+                else if (selectedType == null){
+                    Toast.makeText(getApplicationContext(), "Please choose a type", Toast.LENGTH_LONG).show();
+                }
+                else if (selectedColor == null){
+                    Toast.makeText(getApplicationContext(), "Please choose a color", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    medicineReminder.setPatient(selectedPatient);
+                    medicineReminder.setName(medicineName);
+                    medicineReminder.setType(selectedType);
+                    medicineReminder.setColor(selectedColor);
+                    medicineReminder.setDosage(dosage);
+                    medicineReminder.setUnit(selectedUnit);
+                    medicineReminder.setDes(description);
+                    Intent i = new Intent(AddActivity.this, ReminderActivity.class);
+                    String username = getIntent().getStringExtra("username");
+                    i.putExtra("username", username);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+        });
     }
 
     // on activity result method for the camera intent
@@ -319,20 +379,21 @@ public class AddActivity extends AppCompatActivity {
                 stringBuilder.append("\n");
             }
             // set the medicine name to the string builder
-            medicineName.setText(stringBuilder.toString());
+//            medicineName.setText(stringBuilder.toString());
+            medicineLayout.getEditText().setText(stringBuilder.toString());
         }
     }
 
-    // Description: This method is used to set up the type of medicine that the user can add.
-    private void setUpTypeModals() {
-        // get the string array of type of medicine
-        String [] typesName = getResources().getStringArray(R.array.medicine_types);
-
-        // for each type of medicine
-        for (int i =0; i < typesName.length; i++) {
-            typeModals.add(new TypeModal(typesName[i], typesImages[i]));
-        }
-    }
+//    // Description: This method is used to set up the type of medicine that the user can add.
+//    private void setUpTypeModals() {
+//        // get the string array of type of medicine
+//        String [] typesName = getResources().getStringArray(R.array.medicine_types);
+//
+//        // for each type of medicine
+//        for (int i =0; i < typesName.length; i++) {
+//            typeModals.add(new TypeModal(typesName[i], typesImages[i]));
+//        }
+//    }
 
     // check if the medicine name input is empty
     private boolean validateMedicineInput (){

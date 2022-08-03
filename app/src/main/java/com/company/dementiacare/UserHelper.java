@@ -1,14 +1,16 @@
 /*
  *          user data
- * 
+ *
  *  Description: This activity is used to register the user.
- * 
- * 
+ *
+ *
  * updated: July 21, 2022
-*/
+ */
 
 
 package com.company.dementiacare;
+//
+//import com.company.dementiacare.ui.profile.ClientProfile;
 
 import com.company.dementiacare.ui.profile.ClientProfile;
 
@@ -17,12 +19,8 @@ import java.util.ArrayList;
 public class UserHelper {
     // variables
     String name, username, email, phone, password;
-
-
     ArrayList<ClientHelper> client;
-
     StaticRVAdapter medicines;
-
     public UserHelper(){
     }
 

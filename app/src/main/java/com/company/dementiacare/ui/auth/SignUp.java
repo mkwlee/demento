@@ -1,11 +1,11 @@
 
 /*
  *      Sign Up Activity
- * 
+ *
  *  Description: This activity is used to register the user.
- * 
+ *
  *  updated: July 21, 2022
-*/
+ */
 package com.company.dementiacare.ui.auth;
 
 import androidx.annotation.NonNull;
@@ -18,10 +18,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.company.dementiacare.ClientHelper;
+//import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.ui.home.Homepage;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,14 +32,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 public class SignUp extends AppCompatActivity {
 
     //Variables
     TextInputLayout regName, regUsername, regEmail, regPhone, regPassword;
-    Button regBtn, regToLoginBtn;
+    MaterialButton regBtn, regToLoginBtn;
 
     // Firebase variables
     FirebaseDatabase rootNode;

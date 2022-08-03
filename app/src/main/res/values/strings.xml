@@ -21,4 +21,7 @@
         <!--        <item>Injection</item>-->
         <!--        <item>Inhaler</item>-->
     </string-array>
+    <string name="title_activity_check">CheckActivity</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
 </resources>

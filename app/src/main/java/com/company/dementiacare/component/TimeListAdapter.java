@@ -77,7 +77,7 @@ public class TimeListAdapter extends ArrayAdapter<TimeEntry> {
                     if(null != timeEntriesList.get(finalPosition)) {
                         timeEntriesList.remove(finalPosition);
                         // subtract 1 the add days int
-                        addNewMedicineActivityObj.subtractAddDays();
+//                        addNewMedicineActivityObj.subtractAddDays();
                         // notify the adapter that the data has changed
                         if((0 == timeEntriesList.size()) &&
                                 (null != addNewMedicineActivityObj.getCurrentDayButton())) {

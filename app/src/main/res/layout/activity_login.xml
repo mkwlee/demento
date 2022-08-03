@@ -87,7 +87,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/forget_password_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             android:textSize="12dp"
             android:onClick="callForgetPassword"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,11 +110,18 @@
             android:textColor="#fff"
             android:fontFamily="@font/arimo_bold"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:onClick="loginUser"
-            android:transitionName="button_tran"/>
+            android:transitionName="button_tran"
+            app:cornerRadius="8dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textEnd"
+            />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/signup_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,8 +131,14 @@
             android:fontFamily="@font/arimo_bold"
             android:layout_gravity="right"
             android:elevation="0dp"
-            android:layout_margin="5dp"
-            android:transitionName="login_signup_tran"/>
+            android:layout_marginTop="5dp"
+            android:transitionName="login_signup_tran"
+            app:cornerRadius="8dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textEnd"/>
 
     </LinearLayout>
 

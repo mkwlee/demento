@@ -18,6 +18,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.card.MaterialCardView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -27,15 +35,55 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 
 
     // The array of item
-    private ArrayList<StaticRVModel> items;
+    public ArrayList<StaticRVModel> items;
     int row_index = -1;  //Check the item selected or not
 
-    // The constructor for the adapter
     public StaticRVAdapter(){
         items = new ArrayList<StaticRVModel>();
-        items.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
-        items.add(new StaticRVModel(R.drawable.drug_small_icon, "Reminder 1"));
+        items.add(new StaticRVModel(R.drawable.outline_medication_black_24dp, 1,
+                "Reminder 1", "Time", "Description", "dosage", "color", "type", "unit",
+                new ArrayList<ArrayList<String>>() {
+                    {
+                        add(new ArrayList<String>() {
+                            {
+                                add("8:00");
+                                add("8:30");
+                                add("9:00");
+                                add("9:30");
+                                add("10:00");
+                                add("10:30");
+                                add("11:00");
+                                add("11:30");
+                                add("12:00");
+                                add("12:30");
+                                add("13:00");
+                                add("13:30");
+                                add("14:00");
+                                add("14:30");
+                                add("15:00");
+                                add("15:30");
+                                add("16:00");
+                                add("16:30");
+                                add("17:00");
+                                add("17:30");
+                                add("18:00");
+                                add("18:30");
+                                add("19:00");
+                                add("19:30");
+                                add("20:00");
+                                add("20:30");
+                                add("21:00");
+                                add("21:30");
+                                add("22:00");
+                                add("22:30");
+                                add("23:00");
+                                add("23:30");
+                            }
+                        });
+                    }}
+        ));
     }
+
     public StaticRVAdapter(ArrayList<StaticRVModel> items) {
         this.items = items;
     }
@@ -60,7 +108,11 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         StaticRVModel currentItem = items.get(getItemViewType(position));
         holder.imageView.setImageResource(currentItem.getImage());
         // Set the text for the item
-        holder.textView.setText(currentItem.getText());
+        holder.textView.setText(currentItem.getName());
+        holder.desView.setText(currentItem.getDescription());
+        holder.timeView.setText(currentItem.getTime());
+        holder.colorView.setText(currentItem.getColor());
+        holder.typeView.setText(currentItem.getType());
 
         // Set the listener for the item
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -124,9 +176,10 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
     public static class StaticRVViewHolder extends RecyclerView.ViewHolder{
 
         //Variables
-        TextView textView;
+        TextView textView, desView, timeView, dosageView, colorView, typeView;
         ImageView imageView, checkImage, finishedBtn, unfinishedBtn;
         ConstraintLayout constraintLayout, expandedLayout;
+        CardView colorViewCard;
 
         // The constructor for the view holder
         public StaticRVViewHolder(@NonNull View itemView) {
@@ -135,6 +188,11 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
             //Hooks
             imageView = itemView.findViewById(R.id.image);
             textView = itemView.findViewById(R.id.name);
+            desView = itemView.findViewById(R.id.item_description);
+            colorView = itemView.findViewById(R.id.item_colorText);
+            typeView = itemView.findViewById(R.id.item_type);
+            colorViewCard = itemView.findViewById(R.id.item_color);
+            timeView = itemView.findViewById(R.id.item_time);
             checkImage = itemView.findViewById(R.id.checkImage);
             constraintLayout = itemView.findViewById(R.id.constraintLayout2);
             expandedLayout = itemView.findViewById(R.id.expandedLayout);

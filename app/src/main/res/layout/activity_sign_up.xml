@@ -119,7 +119,7 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/reg_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,9 +130,15 @@
             android:textColor="#fff"
             android:transitionName="button_tran"
             android:layout_marginBottom="10dp"
+            app:cornerRadius="8dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textEnd"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/reg_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +146,15 @@
             android:text="Already have an account? Login"
             android:background="@drawable/transparent_box"
             android:textColor="#000"
-            android:transitionName="login_signup_tran"/>
+            android:transitionName="login_signup_tran"
+            android:layout_marginTop="5dp"
+            app:cornerRadius="8dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textEnd"
+            />
 
     </LinearLayout>
 </ScrollView>
