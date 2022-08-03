@@ -73,8 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
-                    >
+                    android:layout_marginBottom="15dp">
 
                     <TextView
                         android:id="@+id/helloText"
@@ -85,16 +84,6 @@
                         android:textColor="#000"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/helloText"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="22dp"
-                        android:layout_marginEnd="84dp"
-                        android:text="Here are your logs for today."
-                        android:textColor="#000"
-                        android:textSize="18sp" />
 
                     <pl.droidsonroids.gif.GifImageView
                         android:layout_width="111dp"
@@ -107,13 +96,106 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="50dp"
-                    app:cardElevation="10dp">
+                    app:cardElevation="10dp"
+                    android:id="@+id/card1">
 
-                    <CalendarView
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/calendarView"
-                        android:background="@color/light_blue_op30" />
+                        android:layout_height="150dp"
+                        android:background="@color/colorPrimary">
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="-30dp"
+                            android:padding="20dp"
+                            android:src="@drawable/elderly" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+
+                            android:fontFamily="@font/bungee"
+                            android:padding="10dp"
+                            android:text="What is dementia ?"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/card2">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="#cee5d0">
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="-42dp"
+                            android:layout_marginRight="-30dp"
+                            android:padding="20dp"
+                            android:src="@drawable/elderly_society" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/bungee"
+                            android:padding="10dp"
+                            android:text="Dementia Society"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="10dp"
+                    android:id="@+id/card3">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="#fcf8e8">
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="-30dp"
+                            android:padding="20dp"
+                            android:src="@drawable/care" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/bungee"
+
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Tips for Caregiver"
+                            android:textSize="20sp" />
+
+                    </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
@@ -146,7 +228,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="300dp"
                         android:id="@+id/reminder_recycle" />
                 </LinearLayout>
             </LinearLayout>

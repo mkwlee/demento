@@ -12,6 +12,7 @@ package com.company.dementiacare.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,6 +68,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     private StaticRVAdapter staticRVAdapter;
     private ArrayList<StaticRVModel> item = new ArrayList<>();
     MaterialButton addButton;
+    CardView card1, card2, card3;
+    Animation leftAnim,rightAnim;
 
     // End scale of drawer layout
     static final float END_SCALE = 0.7f;
@@ -90,6 +95,19 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         contentView = findViewById(R.id.content_homepage);
         helloText = findViewById(R.id.helloText);
         recyclerView = findViewById(R.id.reminder_recycle);
+        card1 = findViewById(R.id.card1);
+        card2 = findViewById(R.id.card2);
+        card3 = findViewById(R.id.card3);
+
+
+        //Animations for the logo and slogan
+        leftAnim = AnimationUtils.loadAnimation(this,R.anim.slide_in_left);
+        rightAnim = AnimationUtils.loadAnimation(this,R.anim.slide_in_right);
+
+        card1.setAnimation(leftAnim);
+        card2.setAnimation(rightAnim);
+        card3.setAnimation(leftAnim);
+
 
         // navigate to add page
         addButton = findViewById(R.id.add_button);
