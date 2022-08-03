@@ -113,11 +113,11 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         // Set the text for the item
         holder.textView.setText(currentItem.getName());
         holder.desView.setText(currentItem.getDescription());
-        String time = "";
-        for (String _time:currentItem.getArrTime().get(0)){
-            time +=_time + " ";
-        }
-        holder.timeView.setText(time);
+//        String time = "";
+//        for (String _time:currentItem.getArrTime().get(0)){
+//            time +=_time + " ";
+//        }
+        holder.timeView.setText(currentItem.getTime());
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
         holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());

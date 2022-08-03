@@ -478,9 +478,7 @@ public class ReminderActivity extends AppCompatActivity{
                                         String.format("%02d", timeEntry.getMinute());
                                 timeEntriesStrings.add(time);
                             }
-                            
-                            // add timeEntriesStrings to the medicineReminder weekDays array with the index of the weekDayIndex
-                            medicineReminder.getWeekSchedule().add(weekDayIndex, timeEntriesStrings);
+                            medicineReminder.getWeekSchedule().add(timeEntriesStrings); //ArrayList<Arraylist<Strings>> builds here.
                         }
 //                        String savingMessage = "Saving";
 //                        SpannableString spannableString = new SpannableString(savingMessage);
