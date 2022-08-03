@@ -117,7 +117,16 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 //        for (String _time:currentItem.getArrTime().get(0)){
 //            time +=_time + " ";
 //        }
-        holder.timeView.setText(currentItem.getTime());
+        String time = "";
+        if (currentItem.getTagDaily() == 1 ){
+            for (String _time:currentItem.getArrTime().get(0)){
+                time +=_time + " ";
+            }
+        }
+        else {
+            time = currentItem.getTime();
+        }
+        holder.timeView.setText(time);
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
         holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());
