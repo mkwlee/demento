@@ -28,6 +28,7 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -42,7 +43,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 
     public StaticRVAdapter(){
         items = new ArrayList<StaticRVModel>();
-        items.add(new StaticRVModel(R.drawable.inhaler, 1, R.color.light_blue_600,
+        items.add(new StaticRVModel(R.drawable.inhaler, 1, R.color.light_blue_600, "patient",
                 "Reminder 1", "Time", "Description", "dosage", "color", "type", "unit",
                 new ArrayList<ArrayList<String>>() {
                     {
@@ -112,10 +113,18 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         // Set the text for the item
         holder.textView.setText(currentItem.getName());
         holder.desView.setText(currentItem.getDescription());
-        holder.timeView.setText(currentItem.getTime());
+        String time = "";
+        for (String _time:currentItem.getArrTime().get(0)){
+            time +=_time + " ";
+        }
+        holder.timeView.setText(time);
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
         holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());
+        holder.patient.setText(currentItem.getPatient());
+//        String date = "";
+//        date = new SimpleDateFormat("EEEE dd - MM - yyyy").format(currentItem.getTime()).toString();
+        holder.dateView.setText(currentItem.getTime());
 
         // Set the listener for the item
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -179,10 +188,11 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
     public static class StaticRVViewHolder extends RecyclerView.ViewHolder{
 
         //Variables
-        TextView textView, desView, timeView, dosageView, colorView, typeView;
+        TextView textView, desView, timeView, dosageView, colorView, typeView, patient;
         ImageView imageView, checkImage, finishedBtn, unfinishedBtn;
         ConstraintLayout constraintLayout, expandedLayout;
         CardView colorViewCard;
+        TextView dateView;
 
         // The constructor for the view holder
         public StaticRVViewHolder(@NonNull View itemView) {
@@ -201,6 +211,8 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
             expandedLayout = itemView.findViewById(R.id.expandedLayout);
             finishedBtn = itemView.findViewById(R.id.finishedBtn);
             unfinishedBtn = itemView.findViewById(R.id.unfinishedBtn);
+            patient = itemView.findViewById(R.id.item_patient);
+            dateView = itemView.findViewById(R.id.item_date);
         }
     }
 

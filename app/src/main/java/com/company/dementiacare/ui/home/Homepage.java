@@ -58,6 +58,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -161,7 +163,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         // set the item for the recycler view
         setItemInfo();
         // set the adapter for the recycler view
-        setAdapter();
+//        setAdapter();
 
         // navigation drawer
         navigationDrawer();
@@ -333,35 +335,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 if(snapshot.exists()){
                     StaticRVAdapter medFromDB =
                             snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
-
                     for (int i = 0; i < medFromDB.getItemCount(); i++) {
-                        if(medFromDB.getItems().get(i).getColor() == "red"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.red);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "green"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.green);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "blue"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.light_blue_600);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "yellow"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.yellow);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "orange"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.orange);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "black"){
-                            medFromDB.getItems().get(i).setCardColor(R.color.black_op30);
-                        }
-
-                        else if(medFromDB.getItems().get(i).getColor() == "white") {
-                            medFromDB.getItems().get(i).setCardColor(R.color.white_op30);
-                        }
                         item.add(medFromDB.getItems().get(i));
                     }
                 }
@@ -371,6 +345,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
     }
 
     // Set all Info from User's Database into Adapter

@@ -478,7 +478,9 @@ public class ReminderActivity extends AppCompatActivity{
                                         String.format("%02d", timeEntry.getMinute());
                                 timeEntriesStrings.add(time);
                             }
-                            medicineReminder.getWeekSchedule().add(timeEntriesStrings); //ArrayList<Arraylist<Strings>> builds here.
+                            
+                            // add timeEntriesStrings to the medicineReminder weekDays array with the index of the weekDayIndex
+                            medicineReminder.getWeekSchedule().add(weekDayIndex, timeEntriesStrings);
                         }
 //                        String savingMessage = "Saving";
 //                        SpannableString spannableString = new SpannableString(savingMessage);
@@ -531,7 +533,7 @@ public class ReminderActivity extends AppCompatActivity{
 
                             // Add medicine data into internal database
 //                            AddNewMedicineLayer.AddMedicine(appData, tagDaily, medName, medDosage, medColor, medUnit, patient, medType, medDes, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
-                            StaticRVModel newMed = new StaticRVModel(medImage, tagDaily, medCardColor, medName, medStartDate, medDes, medDosage, medColor, medType, medUnit, medicineReminder.getWeekSchedule());
+                            StaticRVModel newMed = new StaticRVModel(medImage, tagDaily, medCardColor, patient, medName, medStartDate, medDes, medDosage, medColor, medType, medUnit, medicineReminder.getWeekSchedule());
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 

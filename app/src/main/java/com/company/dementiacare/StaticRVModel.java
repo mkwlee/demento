@@ -19,6 +19,8 @@ public class StaticRVModel {
     private String type;
     private String description;
     boolean visibility;
+    private String patient;
+    private boolean isDateVisible;
 
     private ArrayList<ArrayList<String>> arrTime;
 
@@ -26,7 +28,7 @@ public class StaticRVModel {
     }
 
     // constructor
-    public StaticRVModel(int image, int tagDaily, int cardColor, String name, String time, String description, String dosage, String color, String type, String unit, ArrayList<ArrayList<String>> arrTime) {
+    public StaticRVModel(int image, int tagDaily, int cardColor, String patient, String name, String time, String description, String dosage, String color, String type, String unit, ArrayList<ArrayList<String>> arrTime) {
         this.image = image;
         this.tagDaily = tagDaily;
         this.name = name;
@@ -39,6 +41,8 @@ public class StaticRVModel {
         this.arrTime = arrTime;
         this.unit = unit;
         this.cardColor = cardColor;
+        this.patient = patient;
+        this.isDateVisible = false;
     }
     
     // get the image
@@ -75,6 +79,8 @@ public class StaticRVModel {
         return unit;
     }
 
+    public String getPatient() {return patient;}
+
     public ArrayList<ArrayList<String>> getArrTime() {
         return arrTime;
     }
@@ -104,6 +110,10 @@ public class StaticRVModel {
     public void setColor(String color){
         this.color = color;
     }
+
+    public void setPatient(String patient) {this.patient = patient;}
+
+    public void setDateVisible(boolean dateVisible) {this.isDateVisible = dateVisible;}
 
     // set the visibility
     public void setVisibility(boolean visibility){

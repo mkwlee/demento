@@ -25,11 +25,11 @@
                     android:icon="@drawable/baseline_face_black_24dp"/>
                 <item
                     android:id="@+id/nav_client_profile"
-                    android:title="Client Profile"
+                    android:title="Patient Profile"
                     android:icon="@drawable/client_small_icon"/>
                 <item
                     android:id="@+id/nav_add_client_profile"
-                    android:title="Add Client"
+                    android:title="Add Patient"
                     android:icon="@drawable/add_client_small_icon"/>
                 <item
                     android:id="@+id/nav_logout"

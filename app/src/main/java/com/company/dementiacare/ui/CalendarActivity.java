@@ -61,6 +61,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
     ScrollView scrollView;
     ArrayList<StaticRVModel> dailyItems = new ArrayList<>();
     ArrayList<StaticRVModel> nonDailyItems = new ArrayList<>();
+    TextView messageView;
 
     static final float END_SCALE = 0.7f;
 
@@ -79,13 +80,14 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_calendar);
 
         scrollView = findViewById(R.id.calendarScrollView);
-//        dailyRecyclerView = findViewById(R.id.daily_calendar);
-//        nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
-
+        dailyRecyclerView = findViewById(R.id.daily_calendar);
+        nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
         drawerLayout = findViewById(R.id.drawer_layout_calendar);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.content_calendar);
+        messageView = findViewById(R.id.calendar_message);
+        messageView.setVisibility(View.GONE);
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -101,16 +103,19 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
                     StaticRVAdapter medFromDB = snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
                     
                     // Get the daily items
-                    for(int i = 0; i < medFromDB.getItems().size(); i++){
+                    for(int i = 1; i < medFromDB.getItems().size(); i++){
                         if(medFromDB.getItems().get(i).getTagDaily() == 1){
                             dailyItems.add(medFromDB.getItems().get(i));
+                            System.out.println("daily items: " + dailyItems.size());
                         }
                     }
 
                     // Get the non-daily items
-                    for(int i = 0; i < medFromDB.getItems().size(); i++){
+                    for(int i = 1; i < medFromDB.getItems().size(); i++){
                         if(medFromDB.getItems().get(i).getTagDaily() == 0){
+                            medFromDB.getItems().get(i).setDateVisible(true);
                             nonDailyItems.add(medFromDB.getItems().get(i));
+                            System.out.println("nondaily items: " + nonDailyItems.size());
                         }
                     }
                 }
@@ -121,9 +126,14 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
-
-        setDailyAdapter();
-//        setNonDailyAdapter();
+        if (dailyItems == null && nonDailyItems == null){
+            messageView.setVisibility(View.VISIBLE);
+        }
+        else {
+            messageView.setVisibility(View.GONE);
+            setDailyAdapter();
+            setNonDailyAdapter();
+        }
         navigationDrawer();
     }
 

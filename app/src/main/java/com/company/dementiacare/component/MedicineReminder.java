@@ -20,6 +20,11 @@ public class MedicineReminder {
 
     public MedicineReminder() {
         weekSchedule = new ArrayList<ArrayList<String>>();
+        ArrayList<String> arr = new ArrayList<String>();
+        arr.add("default");
+        for (int i = 0; i < 7; i++){
+            weekSchedule.add(arr);
+        }
     }
 
     public void setPatient(String patient) {this.patient = patient;}

@@ -365,25 +365,25 @@ public class AddActivity extends AppCompatActivity {
                     selectedColor = currentColor.getColorString();
 
                     if(currentColor.getColorString() == "red"){
-                        selectedCardColor = R.color.red;
+                        selectedCardColor = getResources().getColor(R.color.red);
                     }
                     else if (currentColor.getColorString() == "blue"){
-                        selectedCardColor = R.color.light_blue_600;
+                        selectedCardColor = getResources().getColor(R.color.light_blue_600);
                     }
                     else if (currentColor.getColorString() == "green"){
-                        selectedCardColor = R.color.green;
+                        selectedCardColor = getResources().getColor(R.color.green);
                     }
                     else if (currentColor.getColorString() == "yellow"){
-                        selectedCardColor = R.color.yellow;
+                        selectedCardColor = getResources().getColor(R.color.yellow);
                     }
                     else if (currentColor.getColorString() == "orange"){
-                        selectedCardColor = R.color.orange;
+                        selectedCardColor = getResources().getColor(R.color.orange);
                     }
                     else if (currentColor.getColorString() == "white"){
-                        selectedCardColor = R.color.white_op30;
+                        selectedCardColor = getResources().getColor(R.color.white_op30);
                     }
                     else if (currentColor.getColorString() == "black"){
-                        selectedCardColor = R.color.black_op30;
+                        selectedCardColor = getResources().getColor(R.color.black_op30);
                     }
                 }
 
