@@ -8,8 +8,8 @@
             android:title="Home"
             android:icon="@drawable/baseline_home_black_24dp"/>
         <item
-            android:id="@+id/nav_documentation"
-            android:title="Documentation"
+            android:id="@+id/nav_calendar"
+            android:title="Calendar"
             android:icon="@drawable/baseline_assignment_return_black_24dp" />
 
 

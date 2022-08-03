@@ -7,6 +7,16 @@
     tools:context=".ui.home.Homepage"
     android:id="@+id/drawer_layout_calendar">
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:theme="@style/navigationTheme"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/menu_header"
+        app:menu="@menu/main_menu"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -92,13 +102,4 @@
         </ScrollView>
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
-        android:theme="@style/navigationTheme"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/menu_header"
-        app:menu="@menu/main_menu"/>
 </androidx.drawerlayout.widget.DrawerLayout>

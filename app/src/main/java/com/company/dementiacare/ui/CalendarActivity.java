@@ -6,21 +6,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.StaticRVModel;
+import com.company.dementiacare.ui.add.AddClient;
+import com.company.dementiacare.ui.auth.Login;
+import com.company.dementiacare.ui.home.Homepage;
+import com.company.dementiacare.ui.profile.ClientProfile;
+import com.company.dementiacare.ui.profile.UserProfile;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,14 +42,22 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CalendarActivity extends AppCompatActivity {
+public class CalendarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     ScrollView scrollView;
     ArrayList<StaticRVModel> dailyItems = new ArrayList<>();
     ArrayList<StaticRVModel> nonDailyItems = new ArrayList<>();
+
+    static final float END_SCALE = 0.7f;
+
     private RecyclerView dailyRecyclerView;
     private RecyclerView nonDailyRecyclerView;
     private StaticRVAdapter staticRVAdapter;
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ImageView menuIcon;
+    LinearLayout contentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +67,12 @@ public class CalendarActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.calendarScrollView);
         dailyRecyclerView = findViewById(R.id.daily_calendar);
         nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
+
+        drawerLayout = findViewById(R.id.drawer_layout_calendar);
+        navigationView = findViewById(R.id.navigation_view);
+        menuIcon = findViewById(R.id.menu_icon);
+        contentView = findViewById(R.id.content_calendar);
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -83,6 +109,109 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
         setDailyAdapter();
+        navigationDrawer();
+    }
+
+    private void navigationDrawer() {
+        //Navigation Drawer
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_calendar);
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(drawerLayout.isDrawerVisible(GravityCompat.START)){
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else{
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+
+        animateNavigationDrawer();
+    }
+
+    //Some animation when you call or slide the vertical navigation
+    private void animateNavigationDrawer() {
+
+        drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
+
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                //Scale the View based on current slide offset
+                final float diffScaledOffset = slideOffset * (1 - END_SCALE);
+                final float offsetScale = 1 - diffScaledOffset;
+                contentView.setScaleX(offsetScale);
+                contentView.setScaleY(offsetScale);
+
+                //Translate the View, accounting for the scaled width
+                final float xOffset = drawerView.getWidth() * slideOffset;
+                final float xOffsetDiff = contentView.getWidth() * diffScaledOffset / 2;
+                final float xTranslation = xOffset - xOffsetDiff;
+                contentView.setTranslationX(xTranslation);
+            }
+        });
+    }
+
+    // The function when you click back pressed on the navigaiton drawer it will go back to the
+    // Profile instead of closing the apps
+    @Override
+    public void onBackPressed() {
+
+        if(drawerLayout.isDrawerVisible(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
+
+    // set new activity based on the click pages from the navigation
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        String username = getIntent().getStringExtra("username");
+        switch (item.getItemId()){
+            case R.id.nav_logout:
+                // navigate to the login page
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
+                break;
+            case R.id.nav_home:
+                // navigate to the home page
+                Intent intent1 = new Intent(getApplicationContext(), Homepage.class);
+                intent1.putExtra("username", username);
+                startActivity(intent1);
+                finish();
+                break;
+            case R.id.nav_profile:
+                // navigate to the profile page
+                Intent intent2 = new Intent(getApplicationContext(), UserProfile.class);
+                intent2.putExtra("username", username);
+                startActivity(intent2);
+                finish();
+                break;
+            case R.id.nav_add_client_profile:
+                // navigate to the profile page
+                Intent intent3 = new Intent(getApplicationContext(), AddClient.class);
+                intent3.putExtra("username", username);
+                startActivity(intent3);
+                finish();
+                break;
+            case R.id.nav_client_profile:
+                // navigate to the profile page
+                Intent intent4 = new Intent(getApplicationContext(), ClientProfile.class);
+                intent4.putExtra("username", username);
+                startActivity(intent4);
+                finish();
+                break;
+
+        }
+        return true;
     }
 
     private void setDailyAdapter(){

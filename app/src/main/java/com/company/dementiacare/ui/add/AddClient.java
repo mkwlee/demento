@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
 import com.company.dementiacare.UserHelper;
+import com.company.dementiacare.ui.CalendarActivity;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.ui.home.Homepage;
 import com.company.dementiacare.ui.profile.ClientProfile;
@@ -214,6 +215,12 @@ public class AddClient extends AppCompatActivity implements NavigationView.OnNav
                 Intent intent3 = new Intent(getApplicationContext(), ClientProfile.class);
                 intent3.putExtra("username", username);
                 startActivity(intent3);
+                finish();
+                break;
+            case R.id.nav_calendar:
+                Intent intent4 = new Intent(getApplicationContext(), CalendarActivity.class);
+                intent4.putExtra("username", username);
+                startActivity(intent4);
                 finish();
                 break;
 

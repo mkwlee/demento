@@ -36,11 +36,7 @@ public class StaticRVModel {
         this.arrTime = arrTime;
         this.unit = unit;
     }
-
-    public StaticRVModel() {
-    }
-
-
+    
     // get the image
     public int getImage() {
         return image;

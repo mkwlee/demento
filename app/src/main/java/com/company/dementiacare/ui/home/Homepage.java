@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.UserHelper;
+import com.company.dementiacare.ui.CalendarActivity;
 import com.company.dementiacare.ui.add.AddClient;
 import com.company.dementiacare.MainActivity;
 import com.company.dementiacare.UserHelper;
@@ -304,6 +305,13 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(intent3);
                 finish();
                 break;
+            case R.id.nav_calendar:
+                Intent intent4 = new Intent(getApplicationContext(), CalendarActivity.class);
+                intent4.putExtra("username", username);
+                startActivity(intent4);
+                finish();
+                break;
+
         }
         return true;
     }
