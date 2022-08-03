@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //Variables
@@ -70,6 +73,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     MaterialButton addButton;
     CardView card1, card2, card3;
     Animation leftAnim,rightAnim;
+    GifImageView ambulance;
 
     // End scale of drawer layout
     static final float END_SCALE = 0.7f;
@@ -98,6 +102,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
         card3 = findViewById(R.id.card3);
+        ambulance = findViewById(R.id.ambulance);
 
 
         //Animations for the logo and slogan
@@ -107,6 +112,31 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         card1.setAnimation(leftAnim);
         card2.setAnimation(rightAnim);
         card3.setAnimation(leftAnim);
+        ambulance.setAnimation(leftAnim);
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.alz.org/alzheimers-dementia/what-is-dementia"));
+                startActivity(browserIntent);
+            }
+        });
+
+        card2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.alzheimers.org.uk/"));
+                startActivity(browserIntent);
+            }
+        });
+
+        card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.alzheimers.gov/life-with-dementia/tips-caregivers"));
+                startActivity(browserIntent);
+            }
+        });
 
 
         // navigate to add page
