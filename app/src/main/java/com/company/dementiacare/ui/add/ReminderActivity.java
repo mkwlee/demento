@@ -520,6 +520,8 @@ public class ReminderActivity extends AppCompatActivity{
                             String medDes = medicineReminder.getDes();
                             String medStartDate = medicineReminder.getStartDate();
                             String medEndDate = medicineReminder.getEndDate();
+                            int medImage = medicineReminder.getImage();
+                            int medCardColor = medicineReminder.getCardColor();
 
                             int tagDaily = 0;
 
@@ -529,7 +531,7 @@ public class ReminderActivity extends AppCompatActivity{
 
                             // Add medicine data into internal database
 //                            AddNewMedicineLayer.AddMedicine(appData, tagDaily, medName, medDosage, medColor, medUnit, patient, medType, medDes, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
-                            StaticRVModel newMed = new StaticRVModel(R.drawable.outline_medication_black_24dp, tagDaily, medName, medStartDate, medDes, medDosage, medColor, medType, medUnit, medicineReminder.getWeekSchedule());
+                            StaticRVModel newMed = new StaticRVModel(medImage, tagDaily, medCardColor, medName, medStartDate, medDes, medDosage, medColor, medType, medUnit, medicineReminder.getWeekSchedule());
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 

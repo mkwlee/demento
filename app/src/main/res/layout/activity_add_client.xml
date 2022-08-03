@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/arimo_bold"
-                android:text="Demento"
+                android:text="New Patient"
                 android:textColor="#000"
                 android:textSize="24sp" />
 
@@ -64,12 +64,12 @@
                 android:id="@+id/client_profile_full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/righteous"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
-                android:text="Add new Client"
+                android:text="Add new Patient"
                 android:textColor="#000"
                 android:textSize="20dp" />
 
@@ -175,15 +175,23 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add"
-                    android:fontFamily="@font/righteous"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Add patient"
+                    android:fontFamily="@font/arimo_regular"
+                    android:backgroundTint="@color/teal_200"
                     android:textColor="#fff"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/add_client_update_button" />
+                    android:id="@+id/add_client_update_button"
+                    app:cornerRadius="8dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="8dp"
+                    />
 
 
             </LinearLayout>

@@ -57,8 +57,8 @@
 
             <ImageView
                 android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/baseline_face_black_24dp" />
 
@@ -67,9 +67,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_toEndOf="@+id/profile_image"
-                android:fontFamily="@font/righteous"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="John Wick"
                 android:textColor="#000"
@@ -80,9 +80,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/full_name_profile"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/profile_image"
-                android:fontFamily="@font/righteous"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:text="johnwick123"
                 android:textColor="#000"
@@ -157,16 +158,24 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:fontFamily="@font/righteous"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/teal_200"
                 android:textColor="#fff"
                 android:layout_marginTop="30dp"
                 android:id="@+id/update_button"
-                android:onClick="update"/>
+                android:onClick="update"
+                app:cornerRadius="8dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:iconGravity="textEnd"
+                app:iconPadding="8dp"
+                />
 
         </LinearLayout>
     </LinearLayout>

@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/arimo_bold"
-                android:text="Demento"
+                android:text="Your Patients"
                 android:textColor="#000"
                 android:textSize="24sp" />
 
@@ -50,14 +50,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="172dp"
+            android:layout_height="155dp"
             android:background="@drawable/layout_bg"
             android:padding="20dp">
 
             <ImageView
                 android:id="@+id/client_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/client_small_icon" />
 
@@ -66,9 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/client_profile_image"
-                android:gravity="center"
-                android:layout_marginLeft="20dp"/>
+                android:gravity="center" />
 
 
         </RelativeLayout>
@@ -172,16 +172,24 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Update"
-                    android:fontFamily="@font/righteous"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Update the patient"
+                    android:fontFamily="@font/arimo_regular"
+                    android:backgroundTint="@color/teal_200"
                     android:textColor="#fff"
                     android:layout_marginTop="30dp"
                     android:id="@+id/client_update_button"
-                    android:onClick="updateClientData"/>
+                    android:onClick="updateClientData"
+                    app:cornerRadius="8dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="8dp"
+                    />
 
 
             </LinearLayout>

@@ -334,7 +334,34 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                     StaticRVAdapter medFromDB =
                             snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
 
-                    for (int i = 0; i < medFromDB.getItemCount(); i++){
+                    for (int i = 0; i < medFromDB.getItemCount(); i++) {
+                        if(medFromDB.getItems().get(i).getColor() == "red"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.red);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "green"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.green);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "blue"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.light_blue_600);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "yellow"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.yellow);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "orange"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.orange);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "black"){
+                            medFromDB.getItems().get(i).setCardColor(R.color.black_op30);
+                        }
+
+                        else if(medFromDB.getItems().get(i).getColor() == "white") {
+                            medFromDB.getItems().get(i).setCardColor(R.color.white_op30);
+                        }
                         item.add(medFromDB.getItems().get(i));
                     }
                 }

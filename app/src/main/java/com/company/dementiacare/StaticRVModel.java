@@ -1,5 +1,7 @@
 package com.company.dementiacare;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 
 // modal for the static reminder list
@@ -8,6 +10,7 @@ public class StaticRVModel {
     // variables
     private int image;
     private int tagDaily;
+    private int cardColor;
     private String name;
     private String time;
     private String dosage;
@@ -23,7 +26,7 @@ public class StaticRVModel {
     }
 
     // constructor
-    public StaticRVModel(int image, int tagDaily, String name, String time, String description, String dosage, String color, String type, String unit, ArrayList<ArrayList<String>> arrTime) {
+    public StaticRVModel(int image, int tagDaily, int cardColor, String name, String time, String description, String dosage, String color, String type, String unit, ArrayList<ArrayList<String>> arrTime) {
         this.image = image;
         this.tagDaily = tagDaily;
         this.name = name;
@@ -35,6 +38,7 @@ public class StaticRVModel {
         this.type = type;
         this.arrTime = arrTime;
         this.unit = unit;
+        this.cardColor = cardColor;
     }
     
     // get the image
@@ -82,6 +86,23 @@ public class StaticRVModel {
     // get the visibility
     public boolean isVisible(){
         return visibility;
+    }
+
+    // set the image based on the type
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public int getCardColor() {
+        return cardColor;
+    }
+
+    public void setCardColor(int cardColor) {
+        this.cardColor = cardColor;
+    }
+
+    public void setColor(String color){
+        this.color = color;
     }
 
     // set the visibility

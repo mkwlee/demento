@@ -15,6 +15,8 @@ public class MedicineReminder {
     static private String startDate;
     static private String endDate;
     static private int isDaily;
+    static private int image;
+    static private int cardColor;
 
     public MedicineReminder() {
         weekSchedule = new ArrayList<ArrayList<String>>();
@@ -37,6 +39,8 @@ public class MedicineReminder {
     public void setUnit(String unit){ this.unit = unit;}
 
     public void setDes(String des){this.des = des;}
+
+    public void setImage(int image){this.image = image;}
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
@@ -82,6 +86,16 @@ public class MedicineReminder {
 
     public int getIsDaily() {
         return this.isDaily;
+    }
+
+    public int getImage() {return this.image;}
+
+    public int getCardColor() {
+        return this.cardColor;
+    }
+
+    public void setCardColor(int cardColor) {
+        this.cardColor = cardColor;
     }
     
     public ArrayList<ArrayList<String>> getWeekSchedule() {

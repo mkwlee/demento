@@ -9,6 +9,7 @@
 
 package com.company.dementiacare;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.google.android.material.card.MaterialCardView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 // The class for array of item (Adapter)
@@ -40,7 +42,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 
     public StaticRVAdapter(){
         items = new ArrayList<StaticRVModel>();
-        items.add(new StaticRVModel(R.drawable.outline_medication_black_24dp, 1,
+        items.add(new StaticRVModel(R.drawable.inhaler, 1, R.color.light_blue_600,
                 "Reminder 1", "Time", "Description", "dosage", "color", "type", "unit",
                 new ArrayList<ArrayList<String>>() {
                     {
@@ -113,6 +115,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         holder.timeView.setText(currentItem.getTime());
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
+        holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());
 
         // Set the listener for the item
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {

@@ -8,13 +8,12 @@
 
 package com.company.dementiacare.ui.add;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -31,22 +30,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.company.dementiacare.R;
-import com.company.dementiacare.TM_RecyclerViewAdaptor;
+import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.component.Colors;
 import com.company.dementiacare.component.MedicineReminder;
 import com.company.dementiacare.component.Type;
 import com.company.dementiacare.component.TypeModal;
-import com.company.dementiacare.component.WeekDay;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -100,7 +102,8 @@ public class AddActivity extends AppCompatActivity {
     String selectedUnit;
 
     // list of patients with random ame
-    private static final String[] patients = {"John", "Jane", "Jack", "Jill", "Joe", "Juan", "Jenny", "Juanita", "Juanito", "Juanita", "Juanito"};
+//    private static final String[] patients = {"John", "Jane", "Jack", "Jill", "Joe", "Juan", "Jenny", "Juanita", "Juanito", "Juanita", "Juanito"};
+
     String selectedPatient;
 
     // list of the colors
@@ -109,10 +112,14 @@ public class AddActivity extends AppCompatActivity {
     private final String[] types = {"drop", "tablet", "capsule", "liquid", "injection", "inhaler"};
 
 
-    // list of the images of the types of medicine
-    int [] typesImages = {R.drawable.outline_medication_black_24dp, R.drawable.outline_medication_black_24dp, R.drawable.outline_water_drop_white_24dp
-            , R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp
-    };
+//    // list of the images of the types of medicine
+//    private final int [] typesImages = {R.drawable.outline_water_drop_white_24dp, R.drawable.tablet, R.drawable.capsule
+//            , R.drawable.liquid, R.drawable.injection, R.drawable.inhaler
+//    };
+
+    int selectedImage;
+
+    int selectedCardColor;
 
     // next button
     MaterialButton nextButton;
@@ -161,25 +168,63 @@ public class AddActivity extends AppCompatActivity {
         // close activity when close button is clicked
         closeButton.setOnClickListener(v -> finish());
 
-        // Dropdown for patients picker and also patient name change
-//        patientName = findViewById(R.id.patient_name);
-        patientSpinner = findViewById(R.id.patient_picker);
-        //create an adapter to describe how the units are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> patientAdapter = new ArrayAdapter<>(this, R.layout.patient_spinner_item, patients);
-        // set the patient name to the first patient in the list and the patient spinner to the adapter
-//        patientName.setText(patients[0]);
-        patientSpinner.setAdapter(patientAdapter);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-        // set the selected patient to the patient that is selected in the spinner
-        patientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        String username = getIntent().getStringExtra("username");
+
+        Query checkUser = reference.orderByChild("username").equalTo(username);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedPatient = patients[i];
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+//                                        StaticRVAdapter medFromDB = snapshot.child("medicines").child("items").getValue();
+//                                        medFromDB.getItems().add(newMed);
+                    UserHelper user =
+                            snapshot.child(username).getValue(UserHelper.class);
+                    ArrayList<String> patients = new ArrayList<>();
+
+                    if (user.getClient() != null) {
+                        for (int i = 0; i < user.getClient().size(); i++) {
+                            patients.add(user.getClient().get(i).getName());
+                        }
+                        // Dropdown for patients picker and also patient name change
+//        patientName = findViewById(R.id.patient_name);
+                        patientSpinner = findViewById(R.id.patient_picker);
+                        //create an adapter to describe how the units are displayed, adapters are used in several places in android.
+                        //There are multiple variations of this, but this is the basic variant.
+                        ArrayAdapter<String> patientAdapter = new ArrayAdapter<String>(AddActivity.this,
+                                R.layout.patient_spinner_item, patients);
+                        // set the patient name to the first patient in the list and the patient spinner to the adapter
+//        patientName.setText(patients[0]);
+
+                        patientSpinner.setAdapter(patientAdapter);
+
+                        // set the selected patient to the patient that is selected in the spinner
+                        patientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                selectedPatient = patients.get(i);
+                            }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                selectedPatient = patients.get(0);
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please add a patient", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AddActivity.this, AddClient.class);
+                        String username = getIntent().getStringExtra("username");
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+                    }
+                }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                selectedPatient = patients[0];                
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
@@ -296,10 +341,50 @@ public class AddActivity extends AppCompatActivity {
                 // get the type selected
                 if (currentType != null){
                     selectedType = currentType.getTypeString();
+                    if (currentType.getTypeString() == "drop"){
+                        selectedImage = R.drawable.outline_water_drop_white_24dp;
+                    }
+                    else if (currentType.getTypeString() == "capsule"){
+                        selectedImage = R.drawable.capsule;
+                    }
+                    else if (currentType.getTypeString() == "tablet"){
+                        selectedImage = R.drawable.tablet;
+                    }
+                    else if (currentType.getTypeString() == "injection"){
+                        selectedImage = R.drawable.injection;
+                    }
+                    else if (currentType.getTypeString() == "liquid"){
+                        selectedImage = R.drawable.liquid;
+                    }
+                    else{
+                        selectedImage = R.drawable.inhaler;
+                    }
                 }
                 // get the color selected
                 if (currentColor != null) {
                     selectedColor = currentColor.getColorString();
+
+                    if(currentColor.getColorString() == "red"){
+                        selectedCardColor = R.color.red;
+                    }
+                    else if (currentColor.getColorString() == "blue"){
+                        selectedCardColor = R.color.light_blue_600;
+                    }
+                    else if (currentColor.getColorString() == "green"){
+                        selectedCardColor = R.color.green;
+                    }
+                    else if (currentColor.getColorString() == "yellow"){
+                        selectedCardColor = R.color.yellow;
+                    }
+                    else if (currentColor.getColorString() == "orange"){
+                        selectedCardColor = R.color.orange;
+                    }
+                    else if (currentColor.getColorString() == "white"){
+                        selectedCardColor = R.color.white_op30;
+                    }
+                    else if (currentColor.getColorString() == "black"){
+                        selectedCardColor = R.color.black_op30;
+                    }
                 }
 
                 if (!validMedicine){
@@ -322,6 +407,9 @@ public class AddActivity extends AppCompatActivity {
                     medicineReminder.setDosage(dosage);
                     medicineReminder.setUnit(selectedUnit);
                     medicineReminder.setDes(description);
+                    medicineReminder.setImage(R.drawable.outline_water_drop_white_24dp);
+                    medicineReminder.setImage(selectedImage);
+                    medicineReminder.setCardColor(selectedCardColor);
                     Intent i = new Intent(AddActivity.this, ReminderActivity.class);
                     String username = getIntent().getStringExtra("username");
                     i.putExtra("username", username);

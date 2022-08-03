@@ -46,59 +46,12 @@
                 android:text="Calendar"
                 android:textColor="#000"
                 android:textSize="24sp" />
-
         </RelativeLayout>
         <ScrollView
             android:id="@+id/calendarScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/arimo_bold"
-                        android:text="Daily Medicine calendar"
-                        android:textColor="#000" />
-                </RelativeLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/daily_calendar" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="30dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/arimo_bold"
-                            android:text="Non-Daily Medicine calendar"
-                            android:textColor="#000" />
-                    </RelativeLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/non_daily_calendar" />
-                </LinearLayout>
-            </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
