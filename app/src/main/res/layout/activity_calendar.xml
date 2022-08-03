@@ -5,27 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.Homepage"
-    android:id="@+id/drawer_layout_homepage">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:translationZ="1000dp"
-        android:gravity="bottom|right"
-        >
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_button"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/teal_200"
-            android:fontFamily="@font/arimo_bold"
-            android:text="Add medicine"
-            android:textSize="12dp"
-            app:cornerRadius="500dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="5dp"
-            />
-    </RelativeLayout>
+    android:id="@+id/drawer_layout_calendar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +13,7 @@
         android:background="#fff"
         android:orientation="vertical"
         android:padding="10dp"
-        android:id="@+id/content_homepage">
+        android:id="@+id/content_calendar">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,60 +33,38 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/arimo_bold"
-                android:text="Demento"
+                android:text="Calendar"
                 android:textColor="#000"
                 android:textSize="24sp" />
 
         </RelativeLayout>
-
         <ScrollView
+            android:id="@+id/calendarScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     >
-
-                    <TextView
-                        android:id="@+id/helloText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hello!"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/arimo_bold"/>
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Here are your logs for today."
-                        android:textSize="14sp"
-                        android:textColor="#000"/>
-                </LinearLayout>
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:cardCornerRadius="50dp"-->
-<!--                    app:cardElevation="10dp">-->
-
-<!--                    <CalendarView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:id="@+id/calendarView"-->
-<!--                        android:background="@color/light_blue_op30" />-->
-
-<!--                </androidx.cardview.widget.CardView>-->
-
+                        android:fontFamily="@font/arimo_bold"
+                        android:text="Daily Medicine calendar"
+                        android:textColor="#000" />
+                </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/daily_calendar" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,27 +76,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         >
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/arimo_bold"
-                            android:text="Today's Reminders"
+                            android:text="Non-Daily Medicine calendar"
                             android:textColor="#000" />
-
-                        <TextView
-                            android:id="@+id/viewAll"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:text="View All" />
-
                     </RelativeLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/reminder_recycle" />
+                        android:id="@+id/non_daily_calendar" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -153,6 +101,4 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/main_menu"/>
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

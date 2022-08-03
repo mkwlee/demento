@@ -46,15 +46,17 @@ import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.StaticRVModel;
 import com.company.dementiacare.UserHelper;
-import com.company.dementiacare.applayer.AddNewMedicineLayer;
+//import com.company.dementiacare.applayer.AddNewMedicineLayer;
 import com.company.dementiacare.component.DatePickerFragment;
 import com.company.dementiacare.component.MedicineReminder;
 import com.company.dementiacare.component.TimeEntry;
 import com.company.dementiacare.component.TimeListAdapter;
 import com.company.dementiacare.component.TimePickerFragment;
 import com.company.dementiacare.component.WeekDay;
-import com.company.dementiacare.database.AppDatabase;
+//import com.company.dementiacare.database.AppDatabase;
+//import com.company.dementiacare.notificaion.AlarmReceiver;
 import com.company.dementiacare.notificaion.AlarmReceiver;
+import com.company.dementiacare.notificaion.JavaMail;
 import com.company.dementiacare.ui.home.Homepage;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -89,7 +91,7 @@ public class ReminderActivity extends AppCompatActivity{
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
     String userEmail;
 
-    public AppDatabase appData;
+//    public AppDatabase appData;
     // call the medicineReminder to save reminder data
     private MedicineReminder medicineReminder;
 
@@ -403,7 +405,7 @@ public class ReminderActivity extends AppCompatActivity{
                 // check if no time was scheduled. In this case SAVE button will not perform saving
                 boolean administrationTimeIsScheduled = false;
 
-                if (radioOption == "daily" || oneTime == true) {
+                if (Objects.equals(radioOption, "daily") || oneTime) {
                     administrationTimeIsScheduled = !currentDay.getTimeEntriesList().isEmpty();
                 } else {
                     for (WeekDay weekDay : buttonIdStrToWeekDayMap.values()) {
@@ -422,7 +424,7 @@ public class ReminderActivity extends AppCompatActivity{
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (!scheduleDataIsValidForSaving) {
-                            saveButton.setEnabled(false);
+                            saveButton.setEnabled(true);
                             return false;
                         }
                         return false;
@@ -452,14 +454,14 @@ public class ReminderActivity extends AppCompatActivity{
                         }
                         // if we are in weekly mode, make each week day have the same, but
                         // independent time entries list
-                        if (radioOption == "daily" || oneTime == true) {
+                        if (Objects.equals(radioOption, "daily") || oneTime) {
                             for (WeekDay weekDay : buttonIdStrToWeekDayMap.values()) {
                                 ArrayList<TimeEntry> timeEntriesList = weekDay.getTimeEntriesList();
                                 for (TimeEntry timeEntry : currentDay.getTimeEntriesList())
                                     timeEntriesList.add(new TimeEntry(timeEntry.getHour(), timeEntry.getMinute()));
                             }
                         }
-                        if (radioOption == "daily" || oneTime == true) {
+                        if (Objects.equals(radioOption, "daily") || oneTime) {
                             medicineReminder.setIsDaily(1);
                         } else {
                             medicineReminder.setIsDaily(0);
@@ -489,7 +491,19 @@ public class ReminderActivity extends AppCompatActivity{
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                String patient = medicineReminder.getPatient();
+                                String medName = medicineReminder.getName();
+                                String medType = medicineReminder.getType();
+                                String medColor = medicineReminder.getColor();
+                                String medDosage = medicineReminder.getDosage();
+                                String medUnit = medicineReminder.getUnit();
+                                String medDes = medicineReminder.getDes();
+                                String medStartDate = medicineReminder.getStartDate();
+                                String medEndDate = medicineReminder.getEndDate();
+                                SendMail(medName, medDosage, medType, patient, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
                                 Intent i = new Intent(ReminderActivity.this, Homepage.class);
+                                String username = getIntent().getStringExtra("username");
+                                i.putExtra("username", username);
                                 startActivity(i);
 //                                overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
                             }
@@ -515,7 +529,7 @@ public class ReminderActivity extends AppCompatActivity{
 
                             // Add medicine data into internal database
 //                            AddNewMedicineLayer.AddMedicine(appData, tagDaily, medName, medDosage, medColor, medUnit, patient, medType, medDes, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
-                            StaticRVModel newMed = new StaticRVModel(R.drawable.outline_medication_black_24dp, medName);
+                            StaticRVModel newMed = new StaticRVModel(R.drawable.outline_medication_black_24dp, tagDaily, medName, medStartDate, medDes, medDosage, medColor, medType, medUnit, medicineReminder.getWeekSchedule());
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -527,8 +541,13 @@ public class ReminderActivity extends AppCompatActivity{
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if(snapshot.exists()){
-                                        StaticRVAdapter medFromDB = snapshot.child("medicines").getValue(StaticRVAdapter.class);
+//                                        StaticRVAdapter medFromDB = snapshot.child("medicines").child("items").getValue();
+//                                        medFromDB.getItems().add(newMed);
+                                        userEmail = snapshot.child(username).child("email").getValue(String.class);
+                                        StaticRVAdapter medFromDB = snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
                                         medFromDB.getItems().add(newMed);
+                                        //This function will send email to the user with the selected medication.
+                                        reference.child(username).child("medicines").setValue(medFromDB);
                                     }
                                 }
 
@@ -558,21 +577,19 @@ public class ReminderActivity extends AppCompatActivity{
                                 incrementDay++;                                /*Increementing dates*/
                             }
 
-                            int count = 0; /*Counter for keeping the _lst values for stationary untill all the timers are alarmed and done.*/
+                            int count = 0; /*Counter for keeping the _lst values for stationary until all the timers are alarmed and done.*/
                             /*This iteration gets the proper parsed formatted DATE. So that timely alarmed notifications can be called.*/
                             for (int k = 0; k <= 6; k++) {
                                 if (medicineReminder.getWeekSchedule().get(k).size() > 0) {
                                     int git = medicineReminder.getWeekSchedule().get(k).size();
                                     for (int j = 0; j < git; j++) {
                                         Date date = format.parse(_lst.get(count) + " " + medicineReminder.getWeekSchedule().get(k).get(j));
-                                        handleNotification(date.getTime(), medName);
+                                        handleNotification(date.getTime(), medName, medDosage, patient, medColor, medType, medUnit
+                                        );
                                     }
                                     count++;
                                 }
                             }
-                            //This function will send email to the user with the selected medication.
-                            SendMail(medName, medDosage, medType, patient, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -758,37 +775,16 @@ public class ReminderActivity extends AppCompatActivity{
         return false;
     }
 
-    //    private void addDay(){
-//        if (addDays < 7){
-//            dayTimesText = findViewById(R.id.dayTimes_text);
-//            daysText = findViewById(R.id.day_text);
-//            timesText = findViewById(R.id.day_text);
-//            daysText.setVisibility(View.VISIBLE);
-//            timesText.setVisibility(View.VISIBLE);
-//            addDays++;
-//            // convert the countDays to a string
-//            String countDaysStr = String.valueOf(addDays);
-//            dayTimesText.setText(countDaysStr);
-//            // set time to times when day is greater than 1
-//            if (addDays > 1){
-//                timesText = findViewById(R.id.times_text);
-//                timesText.setText(" times");
-//            }
-//            else {
-//                timesText = findViewById(R.id.times_text);
-//                timesText.setText(" time");
-//            }
-//        }
-//    }
-//  // remove day
-    public void subtractAddDays() {
-        addDays--;
-    }
 
     //region Handling notifications using receiver broadcast mechanism.
-    private void handleNotification(long intmill, String medname) {
-        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
-        alarmIntent.putExtra("medName", medname);
+    private void handleNotification(long intmill, String medname, String dosage, String patient, String medColor, String medType, String medUnit) {
+        Intent alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        alarmIntent.putExtra("dosage", dosage);
+        alarmIntent.putExtra("medname", medname);
+        alarmIntent.putExtra("patient", patient);
+        alarmIntent.putExtra("color", medColor);
+        alarmIntent.putExtra("type", medType);
+        alarmIntent.putExtra("unit", medUnit);
         final int _id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, _id, alarmIntent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -806,64 +802,15 @@ public class ReminderActivity extends AppCompatActivity{
     //region SENDING EMAIL.
     public void SendMail(String medName, String dosage, String type, String patient, String startDay, String
             endDay, ArrayList<ArrayList<String>> timeObject) {
-        final String username = "appdemento@gmail.com";
-        final String password = "Dementoapp10.";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        String email_to = userEmail;
+        String email_subject = "Medicine reminder for patient: " + patient + "has been set!";
+        StringBuilder listString = new StringBuilder();
+        listString.append(String.format(
+                "%s\n %s\n %s\n %s\n %s\n", medName, dosage, startDay, endDay, timeObject));
+        JavaMail javaMail = new JavaMail(this, email_to, email_subject, listString);
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(username, password);
-            }
-        });
+        javaMail.execute();
 
-        try {
-            String email_to = AddNewMedicineLayer.GetEmailId(appData);
-            StringBuilder listString = new StringBuilder();
-            listString.append(String.format(
-                    "%s\n %s\n %s\n %s\n %s\n", medName, dosage, type, patient, startDay, endDay, timeObject));
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email_to));
-            message.setSubject("Demento medicine reminder.");
-            message.setText("Hi : ,"
-                    + "\n\n" + listString);
-            new SendMailTask().execute(message);
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
     }
-    //region ASYNC CALL TO SEND EMAILS.
-    @SuppressLint("StaticFieldLeak")
-    private class SendMailTask extends AsyncTask<Message, String, String> {
-        private ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = ProgressDialog.show(ReminderActivity.this, null, "Sending mail", true, false);
-        }
-
-        @Override
-        protected String doInBackground(Message... messages) {
-            try {
-                Transport.send(messages[0]);
-                return "Success";
-            } catch (SendFailedException ee) {
-                if (progressDialog.isShowing())
-                    progressDialog.dismiss();
-                return "error1";
-            } catch (MessagingException e) {
-                if (progressDialog.isShowing())
-                    progressDialog.dismiss();
-                return "error2";
-            }
-        }
-    }
-    //endregion
 }

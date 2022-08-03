@@ -68,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
     // Card view list for colors
     public static CardView[] colorCard = new CardView[7];
     // Card view list for types
-    public static CardView[] typeCard = new CardView[3];
+    public static CardView[] typeCard = new CardView[6];
 
     // hash map for colors
     private HashMap<String, Colors> colorIdStrMap = new HashMap<>();
@@ -106,11 +106,13 @@ public class AddActivity extends AppCompatActivity {
     // list of the colors
     private final String[] colors = {"red", "green", "blue", "white", "black", "orange", "yellow"};
 
-    private final String[] types = {"drop", "tablet", "capsule"};
+    private final String[] types = {"drop", "tablet", "capsule", "liquid", "injection", "inhaler"};
 
 
     // list of the images of the types of medicine
-    int [] typesImages = {R.drawable.outline_medication_black_24dp, R.drawable.outline_medication_black_24dp, R.drawable.outline_water_drop_white_24dp};
+    int [] typesImages = {R.drawable.outline_medication_black_24dp, R.drawable.outline_medication_black_24dp, R.drawable.outline_water_drop_white_24dp
+            , R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp, R.drawable.outline_water_drop_white_24dp
+    };
 
     // next button
     MaterialButton nextButton;
@@ -321,6 +323,8 @@ public class AddActivity extends AppCompatActivity {
                     medicineReminder.setUnit(selectedUnit);
                     medicineReminder.setDes(description);
                     Intent i = new Intent(AddActivity.this, ReminderActivity.class);
+                    String username = getIntent().getStringExtra("username");
+                    i.putExtra("username", username);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }

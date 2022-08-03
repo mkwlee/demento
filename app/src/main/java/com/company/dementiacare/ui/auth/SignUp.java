@@ -1,13 +1,14 @@
 
 /*
  *      Sign Up Activity
- * 
+ *
  *  Description: This activity is used to register the user.
- * 
+ *
  *  updated: July 21, 2022
-*/
+ */
 package com.company.dementiacare.ui.auth;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,25 +17,30 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+//import com.company.dementiacare.ClientHelper;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.UserHelper;
-import com.company.dementiacare.ui.add.MedicineFire;
+import com.company.dementiacare.ui.home.Homepage;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
 
     //Variables
     TextInputLayout regName, regUsername, regEmail, regPhone, regPassword;
-    Button regBtn, regToLoginBtn;
+    MaterialButton regBtn, regToLoginBtn;
 
     // Firebase variables
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +95,7 @@ public class SignUp extends AppCompatActivity {
         String val = regUsername.getEditText().getText().toString();
         String noWhiteSpace = "\\A\\w{4,20}\\z";
 
+
         // Check if the value is null or empty
         if (val.isEmpty()){
             regUsername.setError("Field cannot be empty");
@@ -125,7 +132,6 @@ public class SignUp extends AppCompatActivity {
             return false;
         }
         else{
-            // Clear the error message
             regEmail.setError(null);
             regEmail.setErrorEnabled(false);
             return true;
@@ -172,29 +178,52 @@ public class SignUp extends AppCompatActivity {
     //Save data in firebase on button click
     public void registerUser(View view){
 
-        //Check all the information are validated
-        if (!validateName() | !validateUsername() | !validatePhone()
-                | !validatePassword() | !validateEmail()){
-            return;
-        }
-
-        //Get all the value from the text field from the user
-        String name = regName.getEditText().getText().toString().trim();
         String username = regUsername.getEditText().getText().toString().trim();
-        String email = regEmail.getEditText().getText().toString().trim();
-        String phone = regPhone.getEditText().getText().toString().trim();
-        String password = regPassword.getEditText().getText().toString().trim();
 
-        MedicineFire medicineFire = new MedicineFire();
-        StaticRVAdapter medicines = new StaticRVAdapter();
+        reference = FirebaseDatabase.getInstance().getReference("users");
 
-        //Storing Data in firebase
-        UserHelper helper = new UserHelper(name ,username, email, phone, password, medicines);
-        reference.child(username).setValue(helper);
+        Query checkUser = reference.orderByChild("username").equalTo(username);
 
-        // navigate to success page
-        Intent intent = new Intent(getApplicationContext(), SuccessSignUp.class);
-        startActivity(intent);
-        finish();
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists()){
+                    regUsername.setError("Username is already existed");
+                    regUsername.requestFocus();
+                }
+                else{
+                    regUsername.setError(null);
+                    regUsername.setErrorEnabled(false);
+                    //Check all the information are validated
+                    if (!validateName() | !validateUsername() | !validatePhone()
+                            | !validatePassword() | !validateEmail()){
+                        return;
+                    }
+
+                    //Get all the value from the text field from the user
+                    String name = regName.getEditText().getText().toString().trim();
+                    String email = regEmail.getEditText().getText().toString().trim();
+                    String phone = regPhone.getEditText().getText().toString().trim();
+                    String password = regPassword.getEditText().getText().toString().trim();
+
+                    StaticRVAdapter medicine = new StaticRVAdapter();
+
+                    //Storing Data in firebase
+                    UserHelper helper = new UserHelper(name ,username, email, phone, password, medicine);
+                    reference.child(username).setValue(helper);
+
+                    // navigate to success page
+                    Intent intent = new Intent(getApplicationContext(), SuccessSignUp.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
 }

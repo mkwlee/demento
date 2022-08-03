@@ -93,6 +93,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Homepage.this, AddActivity.class);
+                String username = getIntent().getStringExtra("username");
+                i.putExtra("username", username);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
 
@@ -114,7 +116,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     // greeting user based on the time
     private void greetUser() {
-        String name = getIntent().getStringExtra("name");
+        String name = getIntent().getStringExtra("username");
         // get the users current time
         Calendar calendar = Calendar.getInstance();
         // get the hour of the day
@@ -131,7 +133,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
     }
 
-    // Function show all or less the user's schedule
+//    // Function show all or less the user's schedule
     private void viewReminder() {
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,26 +1,23 @@
 /*
  *          user data
- * 
+ *
  *  Description: This activity is used to register the user.
- * 
- * 
+ *
+ *
  * updated: July 21, 2022
-*/
+ */
 
 
 package com.company.dementiacare;
+//
+//import com.company.dementiacare.ui.profile.ClientProfile;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(primaryKeys = {"name", "username", "email", "phone", "password"})
 public class UserHelper {
     // variables
-    @NonNull
     String name, username, email, phone, password;
     StaticRVAdapter medicines;
-    public boolean userPresent;
+    public UserHelper(){
+    }
 
     // constructor
     public UserHelper(String name, String username, String email, String phone, String password, StaticRVAdapter medicines) {
@@ -32,6 +29,9 @@ public class UserHelper {
         this.medicines = medicines;
     }
 
+    public StaticRVAdapter getMedicines() {
+        return medicines;
+    }
     // get the name
     public String getName() {
         return name;
