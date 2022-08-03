@@ -113,7 +113,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
                     // Get the non-daily items
                     for(int i = 1; i < medFromDB.getItems().size(); i++){
                         if(medFromDB.getItems().get(i).getTagDaily() == 0){
-                            medFromDB.getItems().get(i).setDateVisible(true);
+//                            medFromDB.getItems().get(i).setDateVisible(true);
                             nonDailyItems.add(medFromDB.getItems().get(i));
                             System.out.println("nondaily items: " + nonDailyItems.size());
                         }

@@ -163,7 +163,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         // set the item for the recycler view
         setItemInfo();
         // set the adapter for the recycler view
-//        setAdapter();
+        setAdapter();
 
         // navigation drawer
         navigationDrawer();
@@ -335,7 +335,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 if(snapshot.exists()){
                     StaticRVAdapter medFromDB =
                             snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
-                    for (int i = 0; i < medFromDB.getItemCount(); i++) {
+                    for (int i = 1; i < medFromDB.getItemCount(); i++) {
                         item.add(medFromDB.getItems().get(i));
                     }
                 }
