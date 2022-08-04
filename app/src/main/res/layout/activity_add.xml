@@ -213,7 +213,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="20dp"
-                        android:src="@drawable/baseline_qr_code_scanner_black_24dp"
+                        android:src="@drawable/scan"
+                        android:scaleY="0.5"
+                        android:scaleX="0.65"
                         />
                 </LinearLayout>
                 <LinearLayout

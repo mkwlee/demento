@@ -38,9 +38,11 @@ import com.company.dementiacare.component.Colors;
 import com.company.dementiacare.component.MedicineReminder;
 import com.company.dementiacare.component.Type;
 import com.company.dementiacare.component.TypeModal;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +51,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -448,28 +455,50 @@ public class AddActivity extends AppCompatActivity {
     // method to get the text from the image
     private void getTextFromImage (Bitmap bitmap){
         // create a new text recognizer
-        TextRecognizer recognizer = new TextRecognizer.Builder(this).build();
+//        TextRecognizer recognizer = new TextRecognizer.Builder(this).build();
+        TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
+        try{
+            InputImage image = InputImage.fromBitmap(bitmap, 0);
+            Task<Text> result = recognizer.process(image).addOnSuccessListener(new OnSuccessListener<Text>() {
+                @Override
+                public void onSuccess(Text text) {
+                    medicineLayout.getEditText().setText(text.getText());
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddActivity.this, "text not recognized! Please make sure the text is visible!", Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         // if the recognizer is not null
-        if (!recognizer.isOperational()){
-            Toast.makeText(AddActivity.this, "Error while scanning!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            // get the bitmap from the image
-            Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-            // get the text from the image
-            SparseArray<TextBlock> textBlockSparseArray = recognizer.detect(frame);
-            // make  a string builder to store the text
-            StringBuilder stringBuilder = new StringBuilder();
-            // for each text block in the sparse array
-            for (int i =0; i < textBlockSparseArray.size(); i++){
-                TextBlock textBlock = textBlockSparseArray.valueAt(i);
-                stringBuilder.append(textBlock.getValue());
-                stringBuilder.append("\n");
-            }
-            // set the medicine name to the string builder
-//            medicineName.setText(stringBuilder.toString());
-            medicineLayout.getEditText().setText(stringBuilder.toString());
-        }
+//        if (!recognizer.isOperational()){
+//            Toast.makeText(AddActivity.this, "Error while scanning!", Toast.LENGTH_LONG).show();
+//        }
+//        else {
+//            // get the bitmap from the image
+//            Frame frame = new Frame.Builder().setBitmap(bitmap).build();
+//            // get the text from the image
+//            SparseArray<TextBlock> textBlockSparseArray = recognizer.detect(frame);
+//            // make  a string builder to store the text
+//            StringBuilder stringBuilder = new StringBuilder();
+//            // for each text block in the sparse array
+//            for (int i =0; i < textBlockSparseArray.size(); i++){
+//                TextBlock textBlock = textBlockSparseArray.valueAt(i);
+//                stringBuilder.append(textBlock.getValue());
+//                stringBuilder.append("\n");
+//            }
+//            // set the medicine name to the string builder
+////            medicineName.setText(stringBuilder.toString());
+//            medicineLayout.getEditText().setText(stringBuilder.toString());
+//        }
     }
 
 //    // Description: This method is used to set up the type of medicine that the user can add.
