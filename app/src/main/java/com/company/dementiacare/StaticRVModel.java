@@ -20,7 +20,7 @@ public class StaticRVModel {
     private String description;
     boolean visibility;
     private String patient;
-//    private boolean isDateVisible;
+    private boolean isDateVisible;
 
     private ArrayList<ArrayList<String>> arrTime;
 
@@ -42,7 +42,7 @@ public class StaticRVModel {
         this.unit = unit;
         this.cardColor = cardColor;
         this.patient = patient;
-//        this.isDateVisible = false;
+        this.isDateVisible = false;
     }
     
     // get the image
@@ -113,8 +113,9 @@ public class StaticRVModel {
 
     public void setPatient(String patient) {this.patient = patient;}
 
-//    public void setDateVisible(boolean dateVisible) {this.isDateVisible = dateVisible;}
+    public void setDateVisible(boolean dateVisible) {this.isDateVisible = dateVisible;}
 
+    public boolean getDateVisible(){return  this.isDateVisible;}
     // set the visibility
     public void setVisibility(boolean visibility){
         this.visibility = visibility;

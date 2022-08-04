@@ -23,16 +23,10 @@ public class MedicineReminder {
 
     public MedicineReminder() {
         weekSchedule = new ArrayList<ArrayList<String>>();
-//        ArrayList<String> arr = new ArrayList<String>();
-//        arr.add("default");
-//        for (int i = 0; i < 7; i++){
-//            weekSchedule.add(arr);
-//        }
-            ArrayList<String> arr = new ArrayList<String>();
-            arr.add("default");
-            for (int i = 0; i < 1; i++){
-                weekSchedule.add(arr);
-
+        ArrayList<String> arr = new ArrayList<String>();
+        arr.add("default");
+        for (int i = 0; i < 7; i++){
+            weekSchedule.add(arr);
         }
     }
 

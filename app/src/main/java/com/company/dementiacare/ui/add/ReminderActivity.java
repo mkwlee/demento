@@ -70,6 +70,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -260,6 +261,21 @@ public class ReminderActivity extends AppCompatActivity{
                 // set the list adapter to the current day
                 setListViewAdapter(currentDay);
                 saveButton.setEnabled(true);
+
+                // set the today and tomorrow dates for the one time and medicine reminder
+                Date c = Calendar.getInstance().getTime();
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+                Date tomorrow = calendar.getTime();
+                SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+                String formattedDate = df.format(c);
+                // convert c to string
+                SimpleDateFormat dft = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+                String formattedDateT = df.format(tomorrow);
+                medicineReminder.setStartDate(formattedDate);
+                startDate.setText(formattedDate);
+                medicineReminder.setEndDate(formattedDate);
+                endDate.setText(formattedDateT);
             }
         });
 
@@ -588,7 +604,7 @@ public class ReminderActivity extends AppCompatActivity{
 
                             int count = 0; /*Counter for keeping the _lst values for stationary until all the timers are alarmed and done.*/
                             /*This iteration gets the proper parsed formatted DATE. So that timely alarmed notifications can be called.*/
-                            for (int k = 1; k <= 7; k++) {
+                            for (int k = 7; k <= 13; k++) {
                                 if (medicineReminder.getWeekSchedule().get(k).size() > 0) {
                                     int git = medicineReminder.getWeekSchedule().get(k).size();
                                     for (int j = 0; j < git; j++) {

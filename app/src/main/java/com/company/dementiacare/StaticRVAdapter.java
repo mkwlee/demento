@@ -28,8 +28,10 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -82,13 +84,9 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         // Set the text for the item
         holder.textView.setText(currentItem.getName());
         holder.desView.setText(currentItem.getDescription());
-//        String time = "";
-//        for (String _time:currentItem.getArrTime().get(0)){
-//            time +=_time + " ";
-//        }
         String time = "";
         if (currentItem.getTagDaily() == 1 ){
-            for (String _time:currentItem.getArrTime().get(1)){
+            for (String _time:currentItem.getArrTime().get(8)){
                 time +=_time + " ";
             }
         }
@@ -99,6 +97,19 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
         holder.patient.setText(currentItem.getPatient());
+        if (currentItem.getDateVisible() == true){
+            holder.dateView.setVisibility(View.VISIBLE);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date objDate = null;
+            try {
+                objDate = dateFormat.parse(currentItem.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("EEEE dd-MM-yyyy");
+            String finalDate = dateFormat2.format(objDate);
+            holder.dateView.setText(finalDate);
+        }
 //        String date = "";
 //        date = new SimpleDateFormat("EEEE dd - MM - yyyy").format(currentItem.getTime()).toString();
 
@@ -188,6 +199,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
             finishedBtn = itemView.findViewById(R.id.finishedBtn);
             unfinishedBtn = itemView.findViewById(R.id.unfinishedBtn);
             patient = itemView.findViewById(R.id.item_patient);
+            dateView = itemView.findViewById(R.id.item_date);
         }
     }
 

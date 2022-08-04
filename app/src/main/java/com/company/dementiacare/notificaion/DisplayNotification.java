@@ -45,10 +45,6 @@ public class DisplayNotification extends ContextWrapper {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-//            NotificationChannel channel = new NotificationChannel("id", "myChannel", NotificationManager.IMPORTANCE_DEFAULT );
-//
-//            NotificationManager manager = getSystemService(NotificationManager.c)
-
             // The id of the channel
             String id = "my_channel_01";
 
@@ -69,8 +65,8 @@ public class DisplayNotification extends ContextWrapper {
             mChannel.setLightColor(Color.RED);
             mChannel.setSound(mChannel.getSound(), mChannel.getAudioAttributes());
             mChannel.enableVibration(true);
+            mChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-
             /*Notification manager to fetch the context and the notification service*/
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.createNotificationChannel(mChannel);
@@ -96,7 +92,6 @@ public class DisplayNotification extends ContextWrapper {
                     , PendingIntent.FLAG_CANCEL_CURRENT);
             // Issuing the notification.
             mNotificationManager.notify(001, notification);
-
         }
 
         /*
