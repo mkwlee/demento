@@ -384,10 +384,10 @@ public class AddActivity extends AppCompatActivity {
                         selectedCardColor = getResources().getColor(R.color.orange);
                     }
                     else if (currentColor.getColorString() == "white"){
-                        selectedCardColor = getResources().getColor(R.color.white_op30);
+                        selectedCardColor = getResources().getColor(R.color.white_med);
                     }
                     else if (currentColor.getColorString() == "black"){
-                        selectedCardColor = getResources().getColor(R.color.black_op30);
+                        selectedCardColor = getResources().getColor(R.color.black);
                     }
                 }
 

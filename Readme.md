@@ -24,7 +24,7 @@
 
 ```
 
-## Notes and comments about version 0.2 of the app
+## Notes and comments about version 0.3 of the app
 
 - **New design and more user friendly** - The app is now more user friendly and has a new design. New colors and fonts have been added.
 

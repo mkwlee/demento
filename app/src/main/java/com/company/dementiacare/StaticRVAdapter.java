@@ -88,6 +88,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
         holder.patient.setText(currentItem.getPatient());
+        holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());
         if (currentItem.getDateVisible() == true){
             holder.dateView.setVisibility(View.VISIBLE);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

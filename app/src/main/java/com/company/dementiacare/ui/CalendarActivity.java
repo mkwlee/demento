@@ -34,6 +34,7 @@ import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.ui.home.Homepage;
 import com.company.dementiacare.ui.profile.ClientProfile;
 import com.company.dementiacare.ui.profile.UserProfile;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,11 +47,12 @@ import java.util.ArrayList;
 
 public class CalendarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    // variables
     ScrollView scrollView;
     ArrayList<StaticRVModel> dailyItems = new ArrayList<>();
     ArrayList<StaticRVModel> nonDailyItems = new ArrayList<>();
     TextView messageView;
-    Button button;
+    MaterialButton refreshButton;
 
     static final float END_SCALE = 0.7f;
 
@@ -68,6 +70,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        // hooks and find items
         scrollView = findViewById(R.id.calendarScrollView);
         dailyRecyclerView = findViewById(R.id.daily_calendar);
         nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
@@ -80,6 +83,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 //        button = findViewById(R.id.refresh_button);
 
 
+        // fetch data from firebase
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
         String username = getIntent().getStringExtra("username");
