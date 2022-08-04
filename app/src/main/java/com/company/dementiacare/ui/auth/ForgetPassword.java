@@ -151,6 +151,7 @@ public class ForgetPassword extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
+                        finish();
                     }else{
                         emailTextField.setError("Wrong Email");
                         emailTextField.requestFocus();

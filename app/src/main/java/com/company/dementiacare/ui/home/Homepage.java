@@ -164,10 +164,10 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         setItemInfo();
         // set the adapter for the recycler view
         setAdapter();
+        viewReminder();
 
         // navigation drawer
         navigationDrawer();
-        viewReminder();
     }
 
     // greeting user based on the time
@@ -197,7 +197,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 if (!checkViewAll) {
                     // if the user clicks on view all, show all the reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT + 1500;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     recyclerView.setLayoutParams(params);
                     viewAll.setText("View Less");
@@ -206,7 +206,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 else{
                     // if the user clicks on view less, show only the first 3 reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = 800;
+                    params.height = 300;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     recyclerView.setLayoutParams(params);
                     viewAll.setText("View All");
