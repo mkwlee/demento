@@ -160,11 +160,18 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         // greeting text
         greetUser();
 
-        // set the item for the recycler view
-        setItemInfo();
-        // set the adapter for the recycler view
-        setAdapter();
-        viewReminder();
+//        // set the item for the recycler view
+//        setItemInfo();
+//        // set the adapter for the recycler view
+//        setAdapter();
+//        viewReminder();
+        try {
+            setItemInfo();
+            setAdapter();
+            viewReminder();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         // navigation drawer
         navigationDrawer();
@@ -206,7 +213,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 else{
                     // if the user clicks on view less, show only the first 3 reminders
                     ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-                    params.height = 300;
+                    params.height = 500;
                     params.width = ViewGroup.LayoutParams.MATCH_PARENT;
                     recyclerView.setLayoutParams(params);
                     viewAll.setText("View All");

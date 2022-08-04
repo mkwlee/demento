@@ -50,37 +50,6 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
                         add(new ArrayList<String>() {
                             {
                                 add("8:00");
-                                add("8:30");
-                                add("9:00");
-                                add("9:30");
-                                add("10:00");
-                                add("10:30");
-                                add("11:00");
-                                add("11:30");
-                                add("12:00");
-                                add("12:30");
-                                add("13:00");
-                                add("13:30");
-                                add("14:00");
-                                add("14:30");
-                                add("15:00");
-                                add("15:30");
-                                add("16:00");
-                                add("16:30");
-                                add("17:00");
-                                add("17:30");
-                                add("18:00");
-                                add("18:30");
-                                add("19:00");
-                                add("19:30");
-                                add("20:00");
-                                add("20:30");
-                                add("21:00");
-                                add("21:30");
-                                add("22:00");
-                                add("22:30");
-                                add("23:00");
-                                add("23:30");
                             }
                         });
                     }}
@@ -119,7 +88,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 //        }
         String time = "";
         if (currentItem.getTagDaily() == 1 ){
-            for (String _time:currentItem.getArrTime().get(0)){
+            for (String _time:currentItem.getArrTime().get(1)){
                 time +=_time + " ";
             }
         }
@@ -129,11 +98,9 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         holder.timeView.setText(time);
         holder.colorView.setText(currentItem.getColor());
         holder.typeView.setText(currentItem.getType());
-        holder.colorViewCard.setCardBackgroundColor(currentItem.getCardColor());
         holder.patient.setText(currentItem.getPatient());
 //        String date = "";
 //        date = new SimpleDateFormat("EEEE dd - MM - yyyy").format(currentItem.getTime()).toString();
-        holder.dateView.setText(currentItem.getTime());
 
         // Set the listener for the item
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +188,6 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
             finishedBtn = itemView.findViewById(R.id.finishedBtn);
             unfinishedBtn = itemView.findViewById(R.id.unfinishedBtn);
             patient = itemView.findViewById(R.id.item_patient);
-            dateView = itemView.findViewById(R.id.item_date);
         }
     }
 

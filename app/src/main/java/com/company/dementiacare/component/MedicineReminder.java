@@ -1,5 +1,7 @@
 package com.company.dementiacare.component;
 
+import com.company.dementiacare.ui.add.ReminderActivity;
+
 import java.util.ArrayList;
 
 public class MedicineReminder {
@@ -17,6 +19,7 @@ public class MedicineReminder {
     static private int isDaily;
     static private int image;
     static private int cardColor;
+    ReminderActivity reminderActivity = new ReminderActivity();
 
     public MedicineReminder() {
         weekSchedule = new ArrayList<ArrayList<String>>();
@@ -25,6 +28,12 @@ public class MedicineReminder {
 //        for (int i = 0; i < 7; i++){
 //            weekSchedule.add(arr);
 //        }
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("default");
+            for (int i = 0; i < 1; i++){
+                weekSchedule.add(arr);
+
+        }
     }
 
     public void setPatient(String patient) {this.patient = patient;}

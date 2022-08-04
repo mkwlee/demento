@@ -116,6 +116,8 @@ public class ReminderActivity extends AppCompatActivity{
     // list of days added
     static int addDays = 0;
 
+    public int isDaily = 0;
+
     // list of days
     private final String[] weekDaysArr = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
             "Saturday", "Sunday"};
@@ -502,7 +504,7 @@ public class ReminderActivity extends AppCompatActivity{
                                 String medDes = medicineReminder.getDes();
                                 String medStartDate = medicineReminder.getStartDate();
                                 String medEndDate = medicineReminder.getEndDate();
-                                SendMail(medName, medDosage, medType, patient, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
+//                                SendMail(medName, medDosage, medType, patient, medStartDate, medEndDate, medicineReminder.getWeekSchedule());
                                 Intent i = new Intent(ReminderActivity.this, Homepage.class);
                                 String username = getIntent().getStringExtra("username");
                                 i.putExtra("username", username);
@@ -527,9 +529,11 @@ public class ReminderActivity extends AppCompatActivity{
                             int medCardColor = medicineReminder.getCardColor();
 
                             int tagDaily = 0;
+                            isDaily = 0;
 
                             if (Objects.equals(radioOption, "daily") || oneTime) {
                                 tagDaily = 1;
+                                isDaily = 1;
                             }
 
                             // Add medicine data into internal database
@@ -584,7 +588,7 @@ public class ReminderActivity extends AppCompatActivity{
 
                             int count = 0; /*Counter for keeping the _lst values for stationary until all the timers are alarmed and done.*/
                             /*This iteration gets the proper parsed formatted DATE. So that timely alarmed notifications can be called.*/
-                            for (int k = 0; k <= 6; k++) {
+                            for (int k = 1; k <= 7; k++) {
                                 if (medicineReminder.getWeekSchedule().get(k).size() > 0) {
                                     int git = medicineReminder.getWeekSchedule().get(k).size();
                                     for (int j = 0; j < git; j++) {
@@ -805,17 +809,17 @@ public class ReminderActivity extends AppCompatActivity{
     }
 
     //region SENDING EMAIL.
-    public void SendMail(String medName, String dosage, String type, String patient, String startDay, String
-            endDay, ArrayList<ArrayList<String>> timeObject) {
-
-        String email_to = userEmail;
-        String email_subject = "Medicine reminder for patient: " + patient + "has been set!";
-        StringBuilder listString = new StringBuilder();
-        listString.append(String.format(
-                "%s\n %s\n %s\n %s\n %s\n", medName, dosage, startDay, endDay, timeObject));
-        JavaMail javaMail = new JavaMail(this, email_to, email_subject, listString);
-
-        javaMail.execute();
-
-    }
+//    public void SendMail(String medName, String dosage, String type, String patient, String startDay, String
+//            endDay, ArrayList<ArrayList<String>> timeObject) {
+//
+//        String email_to = userEmail;
+//        String email_subject = "Medicine reminder for patient: " + patient + "has been set!";
+//        StringBuilder listString = new StringBuilder();
+//        listString.append(String.format(
+//                "%s\n %s\n %s\n %s\n %s\n", medName, dosage, startDay, endDay, timeObject));
+//        JavaMail javaMail = new JavaMail(this, email_to, email_subject, listString);
+//
+//        javaMail.execute();
+//
+//    }
 }

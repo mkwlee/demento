@@ -26,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -62,6 +63,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
     ArrayList<StaticRVModel> dailyItems = new ArrayList<>();
     ArrayList<StaticRVModel> nonDailyItems = new ArrayList<>();
     TextView messageView;
+    Button button;
 
     static final float END_SCALE = 0.7f;
 
@@ -81,13 +83,14 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 
         scrollView = findViewById(R.id.calendarScrollView);
         dailyRecyclerView = findViewById(R.id.daily_calendar);
-        nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
+//        nonDailyRecyclerView = findViewById(R.id.non_daily_calendar);
         drawerLayout = findViewById(R.id.drawer_layout_calendar);
         navigationView = findViewById(R.id.navigation_view);
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.content_calendar);
         messageView = findViewById(R.id.calendar_message);
         messageView.setVisibility(View.GONE);
+        button = findViewById(R.id.refresh_button);
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -110,14 +113,14 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
                         }
                     }
 
-                    // Get the non-daily items
-                    for(int i = 1; i < medFromDB.getItems().size(); i++){
-                        if(medFromDB.getItems().get(i).getTagDaily() == 0){
-//                            medFromDB.getItems().get(i).setDateVisible(true);
-                            nonDailyItems.add(medFromDB.getItems().get(i));
-                            System.out.println("nondaily items: " + nonDailyItems.size());
-                        }
-                    }
+//                    // Get the non-daily items
+//                    for(int i = 1; i < medFromDB.getItems().size(); i++){
+//                        if(medFromDB.getItems().get(i).getTagDaily() == 0){
+////                            medFromDB.getItems().get(i).setDateVisible(true);
+//                            nonDailyItems.add(medFromDB.getItems().get(i));
+//                            System.out.println("nondaily items: " + nonDailyItems.size());
+//                        }
+//                    }
                 }
             }
 
@@ -126,14 +129,25 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
-        if (dailyItems == null && nonDailyItems == null){
-            messageView.setVisibility(View.VISIBLE);
-        }
-        else {
-            messageView.setVisibility(View.GONE);
-            setDailyAdapter();
-            setNonDailyAdapter();
-        }
+
+//        if (dailyItems == null && nonDailyItems == null){
+//            messageView.setVisibility(View.VISIBLE);
+//        }
+//        else {
+//            messageView.setVisibility(View.GONE);
+//            setDailyAdapter();
+//            setNonDailyAdapter();
+//        }
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup.LayoutParams params = dailyRecyclerView.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT + 1500;
+                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                dailyRecyclerView.setLayoutParams(params);
+            }
+        });
+        setDailyAdapter();
         navigationDrawer();
     }
 
@@ -245,11 +259,11 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         dailyRecyclerView.setLayoutManager(new LinearLayoutManager(CalendarActivity.this, LinearLayoutManager.VERTICAL, false));
         dailyRecyclerView.setAdapter(staticRVAdapter);
     }
-
-    private void setNonDailyAdapter(){
-        // set the adapter for the recycler view
-        staticRVAdapter = new StaticRVAdapter(nonDailyItems);
-        nonDailyRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        nonDailyRecyclerView.setAdapter(staticRVAdapter);
-    }
+//
+//    private void setNonDailyAdapter(){
+//        // set the adapter for the recycler view
+//        staticRVAdapter = new StaticRVAdapter(nonDailyItems);
+//        nonDailyRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        nonDailyRecyclerView.setAdapter(staticRVAdapter);
+//    }
 }
