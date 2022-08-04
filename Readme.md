@@ -19,34 +19,38 @@
 // through the android studio.
 ```
 
+```
 ## bugs and issues
 
-- **The daily reminder feature is not working properly.** user has to first pick a specific day to set the reminder.
+```
 
 ## Notes and comments about version 0.2 of the app
 
 - **New design and more user friendly** - The app is now more user friendly and has a new design. New colors and fonts have been added.
-- **New authentication system** - Users now can reset their password if they have forgotten it. They are able to change their password if they know their username and email address they registered with.
 
-- **New Navigation system** - The app now has a new navigation system using a drawer. The drawer can be opened by swiping from the left side of the screen. User can navigate to the different sections of the app.
+- **New Client(Patient) screen** - The app now has a new screen for the client. This screen is where the user(caretaker) can view their patient (Client) information and update their information.
 
-- **New Home screen** - The app now has a new home screen. The home screen has a new design and a new background. Users can now see their reminders about the day. Users can also see a calendar with the reminders. (Will be implemented in Sprint 3)
+- **New add Client(Patient) screen** - The app now has a new screen for the client. This screen is where the user(caretaker) can add a new patient (Client) to the app.
 
-- **New Reminder screen** - The app now has a new reminder screen. User can now add a new reminder through the Home screen. Reminder screen will give this ability to user to scan the name the medicine with their phone! they can pick type of the medicine and color of the medicine. Set the reminder time based on the time they want to take the medicine.
+- **New Calendar screen** - The calendar in home page is now replaced with the calendar screen. This screen is where the user(caretaker) can view their patient (Clients) medication list.
 
-- **New Profile screen** - The profile screen has a new design and a new background. User can now see their profile and update them in real time.
+- **New Resources feature** - The app now has a new feature called Resources. This feature is where the user(caretaker) can view and visit the website of the dementia news. It will get updated every day.
+
+- **New Camera feature** - The app now has a new feature called Camera. This feature is where the user(caretaker) can take a picture of the medicine name and add it to the medication list.
+
+- **Notification feature** - The app now has a new feature called Notification. This feature is where the user(caretaker) can get notified when the patient(Client) is taking the medicine.
+
+- **New Reminder Card Design** - The app now has a new design for the reminder card.
+
+- **Bugs fixed** - The app now has bugs fixed. The one time reminder feature is now working. the specific date reminder feature is now working. The daily reminder feature is now working but it has to get activated by selecting specific days option first and then daily reminder option.
 
 ## PostPonded Features
 
--**OnBoarding screen**
+-**Documentation Screen**
 
--**Report screen**
+-**DIN API**
 
--**Save reminder function**
-
--**Medication list screen**
-
--**Medication API integration**
+-**List of missed medicines**
 
 <!--
 - **Please make sure you have the _latest version_ of the app** before you start working on it. This will help you to avoid any conflicts and bugs. Please fetch the latest version from the GitLab repository.
@@ -65,3 +69,5 @@
 - **Android Users**: If you are looking for a way to run the app on an emulator I would suggest to use Android emulator from [Android Studio](https://developer.android.com/studio/index.html), otherwise you can use [Genymotion](https://www.genymotion.com/) as well or any Android emulator.
 
 - Please make sure that your git commits summary are **_minimized_** and **_short_** and commits descriptions are **_clear_** and **_consistent_**. -->
+
+## Contributing TA
