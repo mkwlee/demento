@@ -73,7 +73,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     TextView helloText, viewAll;
     private RecyclerView recyclerView;
     private StaticRVAdapter staticRVAdapter;
-    private List<StaticRVModel> item;
+    private ArrayList<StaticRVModel> item = new ArrayList<>();
     MaterialButton addButton;
     CardView card1, card2, card3;
     Animation leftAnim,rightAnim;
@@ -335,9 +335,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 if(snapshot.exists()){
                     StaticRVAdapter medFromDB =
                             snapshot.child(username).child("medicines").getValue(StaticRVAdapter.class);
-                    // for (int i = 1; i < medFromDB.getItemCount(); i++) {
-                    //     item.add(medFromDB.getItems().get(i));
-                    // }
+                    for (int i = 1; i < medFromDB.getItemCount(); i++) {
+                        item.add(medFromDB.getItems().get(i));
+                    }
                 }
             }
 

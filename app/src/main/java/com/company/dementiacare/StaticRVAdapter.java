@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AlertDialog;
@@ -31,10 +30,6 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Objects;
 
 
@@ -43,132 +38,11 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
 
 
     // The array of item
-    public List<StaticRVModel> items;
+    public ArrayList<StaticRVModel> items;
     int row_index = -1;  //Check the item selected or not
 
     public StaticRVAdapter(){
-        items = new List<StaticRVModel>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(@Nullable Object o) {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<StaticRVModel> iterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(@NonNull T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(StaticRVModel staticRVModel) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(@Nullable Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(@NonNull Collection<? extends StaticRVModel> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, @NonNull Collection<? extends StaticRVModel> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(@NonNull Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public StaticRVModel get(int index) {
-                return null;
-            }
-
-            @Override
-            public StaticRVModel set(int index, StaticRVModel element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, StaticRVModel element) {
-
-            }
-
-            @Override
-            public StaticRVModel remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<StaticRVModel> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<StaticRVModel> listIterator(int index) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<StaticRVModel> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-        };
+        items = new ArrayList<StaticRVModel>();
         items.add(new StaticRVModel(R.drawable.inhaler, 1, R.color.light_blue_600, "patient",
                 "Reminder 1", "Time", "Description", "dosage", "color", "type", "unit",
                 new ArrayList<ArrayList<String>>() {
@@ -217,7 +91,7 @@ public class StaticRVAdapter extends RecyclerView.Adapter<StaticRVAdapter.Static
         this.items = items;
     }
 
-    public List<StaticRVModel> getItems() {
+    public ArrayList<StaticRVModel> getItems() {
         return items;
     }
 
