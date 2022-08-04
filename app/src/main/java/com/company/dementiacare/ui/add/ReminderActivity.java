@@ -469,16 +469,18 @@ public class ReminderActivity extends AppCompatActivity{
 
                         //not setting start and end dates here. They are set in date picker
                         for (int weekDayIndex = 0; weekDayIndex < weekDaysArr.length; ++weekDayIndex) {
-                            int weekDayId = getResources().getIdentifier(weekDaysArr[weekDayIndex], "id",
-                                    getApplicationContext().getPackageName());
-                            timeEntriesStrings = new ArrayList<>();
+                            if (weekDaysArr[weekDayIndex] != null){
+                                int weekDayId = getResources().getIdentifier(weekDaysArr[weekDayIndex], "id",
+                                        getApplicationContext().getPackageName());
+                                timeEntriesStrings = new ArrayList<>();
 
-                            for (TimeEntry timeEntry : buttonIdStrToWeekDayMap.get(Integer.toString(weekDayId)).getTimeEntriesList()) {
-                                String time = String.format("%02d", timeEntry.getHour()) + ":" +
-                                        String.format("%02d", timeEntry.getMinute());
-                                timeEntriesStrings.add(time);
+                                for (TimeEntry timeEntry : buttonIdStrToWeekDayMap.get(Integer.toString(weekDayId)).getTimeEntriesList()) {
+                                    String time = String.format("%02d", timeEntry.getHour()) + ":" +
+                                            String.format("%02d", timeEntry.getMinute());
+                                    timeEntriesStrings.add(time);
+                                }
+                                medicineReminder.getWeekSchedule().add(timeEntriesStrings); //ArrayList<Arraylist<Strings>> builds here.
                             }
-                            medicineReminder.getWeekSchedule().add(timeEntriesStrings); //ArrayList<Arraylist<Strings>> builds here.
                         }
 //                        String savingMessage = "Saving";
 //                        SpannableString spannableString = new SpannableString(savingMessage);
@@ -505,6 +507,7 @@ public class ReminderActivity extends AppCompatActivity{
                                 String username = getIntent().getStringExtra("username");
                                 i.putExtra("username", username);
                                 startActivity(i);
+                                finish();
 //                                overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
                             }
                         }, 1500);
