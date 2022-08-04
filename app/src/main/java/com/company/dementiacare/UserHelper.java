@@ -9,10 +9,6 @@
 
 
 package com.company.dementiacare;
-//
-//import com.company.dementiacare.ui.profile.ClientProfile;
-
-import com.company.dementiacare.ui.profile.ClientProfile;
 
 import java.util.ArrayList;
 

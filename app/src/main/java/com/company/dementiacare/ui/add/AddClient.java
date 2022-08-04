@@ -1,3 +1,11 @@
+/*
+ *          Add new Client
+ *
+ *  Description: An activity to add new client to the user's data
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.ui.add;
 
 import androidx.annotation.NonNull;

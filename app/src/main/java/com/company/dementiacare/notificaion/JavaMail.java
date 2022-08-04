@@ -1,3 +1,11 @@
+/*
+ *          Mailing
+ *
+ *  Description: A model of mailing
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.notificaion;
 import android.app.ProgressDialog;
 import android.content.Context;

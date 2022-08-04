@@ -1,3 +1,11 @@
+/*
+ *          Displaying notification
+ *
+ *  Description: A model of the notification messages
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.notificaion;
 
 import static android.provider.Settings.System.DEFAULT_NOTIFICATION_URI;

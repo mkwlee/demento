@@ -1,3 +1,11 @@
+/*
+ *          Client's data
+ *
+ *  Description: A model of client
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare;
 
 public class ClientHelper {

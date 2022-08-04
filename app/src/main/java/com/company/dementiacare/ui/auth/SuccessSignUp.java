@@ -1,3 +1,11 @@
+/*
+ *          Success Sign Up
+ *
+ *  Description: An activity to show that user's successful changing password after the forget password activity
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;

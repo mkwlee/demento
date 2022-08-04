@@ -1,3 +1,11 @@
+/*
+ *          Flash light Activity
+ *
+ *  Description: An activity to activate flash light when the reminder's notification coming
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.notificaion;
 import android.annotation.TargetApi;
 import android.content.Context;

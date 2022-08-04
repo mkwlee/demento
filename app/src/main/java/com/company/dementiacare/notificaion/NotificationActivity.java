@@ -1,17 +1,16 @@
+/*
+ *          Notification
+ *
+ *  Description: An activity of showing the notification of reminders
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.notificaion;
 
-import android.annotation.SuppressLint;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowInsets;
 import android.widget.TextView;
 
 import com.company.dementiacare.R;

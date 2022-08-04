@@ -32,18 +32,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.company.dementiacare.ClientHelper;
-import com.company.dementiacare.MainActivity;
-import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.ui.CalendarActivity;
 import com.company.dementiacare.ui.add.AddClient;
-import com.company.dementiacare.MainActivity;
-import com.company.dementiacare.UserHelper;
 import com.company.dementiacare.ui.auth.Login;
 import com.company.dementiacare.R;
 import com.company.dementiacare.StaticRVAdapter;
 import com.company.dementiacare.StaticRVModel;
-import com.company.dementiacare.ui.auth.SuccessSignUp;
 import com.company.dementiacare.ui.profile.ClientProfile;
 import com.company.dementiacare.ui.profile.UserProfile;
 import com.company.dementiacare.ui.add.AddActivity;
@@ -58,7 +52,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 

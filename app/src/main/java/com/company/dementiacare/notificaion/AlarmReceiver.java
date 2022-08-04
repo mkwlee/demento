@@ -1,3 +1,11 @@
+/*
+ *          Alarm receiver
+ *
+ *  Description: A function to send the notification to the user when the reminder upcoming
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.notificaion;
 
 import android.content.BroadcastReceiver;

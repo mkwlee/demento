@@ -1,6 +1,12 @@
+/*
+ *          Medicine's reminder data
+ *
+ *  Description: A model of a medicine's reminder
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare;
-
-import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 /*
 *               Add Activity Class
 *   
-*     Description: This class is used to display and add a new medicine for a patient.
+*     Description: This class is used to display and add a new reminder's medicine for a patient.
 *
 *      Updated: July 17, 2022  
 * */
@@ -23,7 +23,6 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,8 +40,6 @@ import com.company.dementiacare.component.TypeModal;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;

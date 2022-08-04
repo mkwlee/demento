@@ -1,3 +1,11 @@
+/*
+ *          Success Forget Password
+ *
+ *  Description: An activity to show that user's successful creating
+ *
+ *
+ * updated: August 3rd 2022
+ */
 package com.company.dementiacare.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
